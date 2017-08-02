@@ -21,7 +21,7 @@
   "location": "moon",
   "finaldate": {
     "date": 20170831,
-    "time": {"from": 900, "to": 1200}
+    "time": { "from": 900, "to": 1200 }
   },
   "deadline": 20170820,
   "ended": false,
@@ -35,7 +35,7 @@
       "dates": [
         {
           "date": 20170729,
-          "time": [{"from": 930, "to": 1200}, {"from": 1500, "to": 1800}]
+          "time": [{"from": 930, "to": 1200}, {"from": 1500, "to": 1800 }]
         }
       ]
     }
