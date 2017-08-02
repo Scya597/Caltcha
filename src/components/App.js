@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div className="title">
-        Boilerplate by YU-AN CHAN
+        Boilerplate by YU-AN LAN
         {this.renderNumbers()}
       </div>
     );

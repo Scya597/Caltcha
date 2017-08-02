@@ -1,9 +1,11 @@
 import PostsController from './controllers/posts_controller';
 
 module.exports = (server) => {
-  server.post('/api/posts', PostsController.create);
-  server.put('/api/posts/:id', PostsController.edit);
-  server.delete('/api/posts/:id', PostsController.delete);
-  server.get('/api/posts', PostsController.getposts);
-  server.get('/api/posts/:id', PostsController.getpost);
+  server.get('/api/profile/:userId', PostsController.getteamanduser);
+  server.get('/api/project/data/:userId', PostsController.getprojects);
+  server.post('/api/project/new/', PostsController.createnewproject);
+  server.post('/api/project/update/:userId', PostsController.updateproject);
+  server.get('/api/project/stats/:projectId/:userId', PostsController.getstats);
+  server.post('/api/project/vote/:userId', PostsController.uservote);
+  server.delete('/api/project/remove/:userId', PostsController.rmproject);
 };
