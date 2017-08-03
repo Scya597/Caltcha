@@ -63,6 +63,39 @@ class Project {
       console.log(error);
     });
   }
+  update(userId, deadline) {
+    axios.post(`/api/project/update/${userId}`, {
+      projectId: this.id,
+      ended: false,
+      deadline,
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+  remove(userId) {
+    axios.delete(`/api/project/remove/${userId}`, {
+      projectId: this.id,
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+  getStats(userId) {
+    axios.get(`/api/project/stats/${this.id}/${userId}`)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
 }
 
 export default Project;
