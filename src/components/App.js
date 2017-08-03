@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+
 import testData from '../testData/testData.json';
 import '../scss/title.scss';
 
@@ -27,6 +28,7 @@ class App extends Component {
       <div className="title">
         Boilerplate by YU-AN LAN
         {this.renderNumbers()}
+        <Test />
       </div>
     );
   }
