@@ -12,6 +12,7 @@ module.exports = {
     let sendteam = [];
     let senduser;
     const userId = req.params.userId;
+    console.log(userId);
     for (let i = 0; i < teams.length; i++) {
       for (let j = 0; j < teams[i].members.length; j++) {
         if (userId === teams[i].members[j]) {
@@ -22,10 +23,11 @@ module.exports = {
     for (let i = 0; i < users.length; i++) {
       if (userId === users[i].id) {
         senduser = users[i];
+        console.log(senduser);
+        console.log(sendteam);
       }
     }
-    console.log(senduser);
-    res.send({ teams: sendteam, user: senduser });
+    res.send({ teams: sendteam, user: senduser});
   },
 
   getprojects(req, res) {
@@ -53,7 +55,7 @@ module.exports = {
   createnewproject(req, res) {
     const newproject = req.body;
     projects.push(newproject);
-    res.send(`Create ${newproject.title} Successfully`)
+    res.send(`Create ${newproject.title} Successfully`);
   },
 
   updateproject(req, res) {
@@ -73,63 +75,28 @@ module.exports = {
   },
 
   getstats(req, res) {
-  //   const projectId = req.params.projectId;
-  //   const userId = req.params.userId;
-  //   let stats = [];
-  //   for (let i = 0;i < projects.length;i++) {
-  //     if (projectId === projects[i].id) {
-  //       if (userId !== projects[i].superuser) {
-  //         res.send('You are not superuser, so you cannot examine the vote!');
-  //       } else {
-  //         let c = 0;
-  //         let nornotvote = [];
-  //         let nordates = [];
-  //         for (let j = 0;j < projects[i].normaluser.length;j++) {
-  //           for (let k = 0;k < projects[i].votes.length;k++) {
-  //             if (projects[i].normaluser[j] === projects[i].votes[k].userid) {
-  //               nordates.push(projects[i].votes[k].dates);
-  //             } else {
-  //               c++;
-  //             }
-  //           }
-  //           if (c === projects[i].votes.length) {
-  //             nornotvote.push(projects[i].normaluser[j]);
-  //           }
-  //         }
-  //         if (nordates.length !== projects[i].normaluser.length) {
-  //           res.send({
-  //             warn: 'There are some normalusers have not voted',
-  //             normalusernovote: nornotvote
-  //           });
-  //         } else {
-  //           for () {
-  //
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // },
-  //
-  // uservote(req, res) {
-  //   const request = req.body;
-  //   const userId = req.params.userId;
-  //   let b = 1;
-  //   for (let i = 0; i < projects.length; i++) {
-  //     if (projects[i].id === request.projectId) {
-  //       for (let j = 0; j < projects[i].votes.length; j++) {
-  //         if (projects[i].votes[j].userid === userId) {
-  //           projects[i].votes[j].dates = request.dates;
-  //           b = 0;
-  //           res.send('You have voted successfully!!')
-  //         }
-  //       }
-  //       if (b) {
-  //         projects[i].votes.push({ userid: userId, dates: request.dates });
-  //         res.send('You have voted successfully!!')
-  //       }
-  //     }
-  //   }
+
+  },
+
+  uservote(req, res) {
+    const request = req.body;
+    const userId = req.params.userId;
+    let b = 1;
+    for (let i = 0; i < projects.length; i++) {
+      if (projects[i].id === request.projectId) {
+        for (let j = 0; j < projects[i].votes.length; j++) {
+          if (projects[i].votes[j].userid === userId) {
+            projects[i].votes[j].dates = request.dates;
+            b = 0;
+            res.send('You have voted successfully!!')
+          }
+        }
+        if (b) {
+          projects[i].votes.push({ userid: userId, dates: request.dates });
+          res.send('You have voted successfully!!')
+        }
+      }
+    }
   },
   rmproject(req, res) {
     const request = req.body;
@@ -138,7 +105,7 @@ module.exports = {
       if (projects[i].id === request.projectId) {
         if (projects[i].superuser === userId) {
           projects.splice(i, 1);
-          res.send(`You have removed ${projects[i].title} successfully!!`)
+          res.send(`You have removed ${projects[i].title} successfully!!`);
         } else {
           res.send('You are not superuser, so you cannot delete this project!');
         }

@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import testData from '../testData/testData.json';
 import '../scss/title.scss';
+import Test from './testPage';
 
 class App extends Component {
   constructor() {
