@@ -1,21 +1,21 @@
 import express from 'express';
 import passport from 'passport';
-import passportLocal from 'passport-local';
+// import passportLocal from 'passport-local';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import session from 'express-session';
-import storage from '../test.json';
+//
 import config from './config';
 // import apiRouter from './api/routes';
 
 const server = express();
 const path = require('path');
 
-const LocalStrategy = passportLocal.Strategy;
+// const LocalStrategy = passportLocal.Strategy;
 server.use(cookieParser());
 server.use(bodyParser.urlencoded({ extended: true }));
-
+/*
 passport.use(new LocalStrategy(
   (username, password, done) => {
     const user = storage.team.members.find(item => (item === username));
@@ -26,7 +26,7 @@ passport.use(new LocalStrategy(
     }
   },
 ));
-
+*/
 passport.serializeUser((user, done) => {
   done(null, user);
 });

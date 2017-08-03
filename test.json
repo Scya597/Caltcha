@@ -1,40 +1,50 @@
-data: {
-  "team": [{
-    "id": "teamid",
-    "name": "Autumn",
-    "members": ["userid", "Jennifer", "Scarlett", "Maximus", "Samuel"],
-    "projects": ["projectid", "hihi", "testproject"]
-  }],
-  "user": [{
-    "id": "userid",
-    "username": "Benson",
-    "realname": "Superman",
-    "email": "superman@gmail.com",
-    "team": ["Autumn", "Facebook"]
-  }],
-  "project": [{
-    "team": "teamid",
-    "id": "projectid",
-    "title": "testproject",
-    "minDuration": 3,
-    "description": "testdescription",
-    "location": "moon",
-    "finaldate": {
-      "date": 20170831,
-      "timeblocks": [1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17]
-    },
-    "deadline": 20170820,
-    "ended": false,
-    "superuser": "userid",
-    "normaluser": ["Jennifer", "Scarlett"],
-    "optionaluser": ["Maximus"],
-    "closeduser": ["Samuel"],
-    "votes": [{
-      "userid": "Jennifer",
-      "dates": [{
-        "date": 20170729,
-        "timeblocks": [1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15]
-      }]
-    }]
-  }]
+{
+  "team": [
+    {
+      "id": "teamid",
+      "name": "Autumn",
+      "members": ["userid", "Jennifer", "Scarlett", "Maximus", "Samuel"],
+      "projects": ["projectid", "hihi", "testproject"]
+    }
+  ],
+  "user": [
+    {
+      "id": "userid",
+      "username": "Benson",
+      "realname": "Superman",
+      "email": "superman@gmail.com",
+      "team": ["Autumn", "Facebook"]
+    }
+  ],
+  "project": [
+    {
+      "team": "teamid",
+      "id": "projectid",
+      "title": "testproject",
+      "minDuration": 3,
+      "description": "testdescription",
+      "location": "moon",
+      "finaldate": {
+        "date": 20170831,
+        "timeblocks": [1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17]
+      },
+      "deadline": 20170820,
+      "ended": false,
+      "superuser": "userid",
+      "normaluser": ["Jennifer", "Scarlett"],
+      "optionaluser": ["Maximus"],
+      "closeduser": ["Samuel"],
+      "votes": [
+        {
+          "userid": "Jennifer",
+          "dates": [
+            {
+              "date": 20170729,
+              "timeblocks": [1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
