@@ -25,7 +25,7 @@ class Project {
     this.superuser = project.superuser;
     this.normaluser = project.normaluser;
     this.optionaluser = project.optionaluser;
-    this.closedUser = project.closedUser;
+    this.closeduser = project.closeduser;
     this.votes = project.votes;
   }
   newOne() {
@@ -42,7 +42,7 @@ class Project {
       superuser: this.superuser,
       normaluser: this.normaluser,
       optionaluser: this.optionaluser,
-      closedUser: this.closedUser,
+      closeduser: this.closeduser,
       votes: this.votes,
     })
     .then((response) => {

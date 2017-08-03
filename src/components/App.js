@@ -8,14 +8,8 @@ import Test from './testPage';
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      numbers: [1, 2, 3],
-    };
+    this.state = { numbers: 0 };
     this.renderNumbers = this.renderNumbers.bind(this);
-  }
-
-  componentDidMount() {
-    console.log(testData);
   }
 
   renderNumbers() {
@@ -26,9 +20,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="title">
-        Boilerplate by YU-AN LAN
-        {this.renderNumbers()}
+      <div>
+        <img src="http://a1.att.hudong.com/38/17/300001008759128923176593463.jpg" />
         <Test />
       </div>
     );
