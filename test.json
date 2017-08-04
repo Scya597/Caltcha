@@ -3,16 +3,25 @@
     {
       "id": "teamid",
       "name": "Autumn",
-      "members": ["userid", "Jennifer", "Scarlett", "Maximus", "Samuel"],
+      "members": ["7724465649", "6975711782", "7840273219", "8948983993", "5794283116"],
       "projects": ["projectid", "hihi", "testproject"]
     }
   ],
   "user": [
     {
-      "id": "userid",
-      "username": "Benson",
+      "id": "7724465649",
+      "username": "benson",
+      "password": "baby",
       "realname": "Superman",
       "email": "superman@gmail.com",
+      "team": ["Autumn", "Facebook"]
+    },
+    {
+      "id": "6975711782",
+      "username": "jennifer",
+      "password": "12345",
+      "realname": "Superwoman",
+      "email": "superwoman@gmail.com",
       "team": ["Autumn", "Facebook"]
     }
   ],

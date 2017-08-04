@@ -10,9 +10,10 @@ router.get('/login', (req, res) => {
 });
 router.post('/login', (req, res) => {
   console.log(`${req.body.username} is trying to login.(auth.js)`);
-  const user = storage.team.members.find(item => (item === req.body.username));
-  if (user) {
-    req.logIn(user, () => {
+  const userData = storage.user.find(item => (item.username === req.body.username));
+  if (userData && (req.body.password === userData.password)) {
+    userData.password = 'undefined';
+    req.logIn(userData, () => {
       res.redirect('/');
     });
   } else {
@@ -20,7 +21,7 @@ router.post('/login', (req, res) => {
   }
 });
 router.get('/logout', (req, res) => {
-  console.log(`${req.user} logout.(auth.js)`);
+  console.log(`${req.user.username} logout.(auth.js)`);
   req.logOut();
   res.redirect('/login');
 });

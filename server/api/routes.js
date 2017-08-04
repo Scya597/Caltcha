@@ -3,7 +3,7 @@ import PostsController from './controllers/posts_controller';
 
 function isAuth(req, res, next) {
   if (req.isAuthenticated()) {
-    console.log(`Authenticated user ${req.user} is calling APIs(routes.js).`);
+    console.log(`Authenticated user ${req.user.username} is calling APIs(routes.js).`);
     next();
   } else {
     res.redirect('/login');
