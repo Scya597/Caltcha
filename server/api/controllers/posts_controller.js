@@ -11,9 +11,13 @@ const projects = test.project;
 
 module.exports = {
   getteamanduser(req, res) {
-    const sendteam = [];
-    let senduser;
-    const userId = req.params.userId;
+    console.log(`${req.user.id} call /api/profile`);
+    const sendteam = teams.filter((team) => {
+      return (typeof req.user.team.find(item => (item === team.id)) !== 'undefined');
+    });
+    const senduser = req.user;
+    senduser.password = 'undefined';
+    /*
     console.log(userId);
     for (let i = 0; i < teams.length; i += 1) {
       for (let j = 0; j < teams[i].members.length; j += 1) {
@@ -27,12 +31,13 @@ module.exports = {
         senduser = users[i];
       }
     }
+    */
     res.send({ teams: sendteam, user: senduser });
   },
 
   getprojects(req, res) {
     const sendproject = [];
-    const userId = req.params.userId;
+    const userId = req.user.idId;
     for (let i = 0; i < projects.length; i += 1) {
       if (userId === projects[i].superuser) {
         sendproject.push(projects[i]);
@@ -60,7 +65,7 @@ module.exports = {
 
   updateproject(req, res) {
     const request = req.body;
-    const userId = req.params.userId;
+    const userId = req.user.idId;
     for (let i = 0; i < projects.length; i += 1) {
       if (projects[i].id === request.projectId) {
         if (projects[i].superuser === userId) {
@@ -76,7 +81,7 @@ module.exports = {
 
   getstats(req, res) {
     const projectId = req.params.projectId;
-    const userId = req.params.userId;
+    const userId = req.user.idId;
     const stats = [];
     for (let i = 0; i < projects.length; i += 1) {
       if (projectId === projects[i].id) {
@@ -179,7 +184,7 @@ module.exports = {
 
   uservote(req, res) {
     const request = req.body;
-    const userId = req.params.userId;
+    const userId = req.user.idId;
     let b = 1;
     for (let i = 0; i < projects.length; i += 1) {
       if (projects[i].id === request.projectId) {
@@ -199,7 +204,7 @@ module.exports = {
   },
   rmproject(req, res) {
     const request = req.body;
-    const userId = req.params.userId;
+    const userId = req.user.idId;
     for (let i = 0; i < projects.length; i += 1) {
       if (projects[i].id === request.projectId) {
         if (projects[i].superuser === userId) {

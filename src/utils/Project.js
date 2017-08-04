@@ -3,10 +3,10 @@
 class Project {
 constructor(Object project) {};
 newOne();
-vote(String userId, Array dates);
-update(String userId, Number deadline);
-remove(String userId);
-getStats(String userId);
+vote(Array dates);
+update(Number deadline);
+remove();
+getStats();
 }
 */
 import axios from 'axios';
@@ -53,7 +53,7 @@ class Project {
     });
   }
   vote(userId, dates) {
-    axios.post(`/api/project/vote/${userId}`, {
+    axios.post('/api/project/vote/', {
       projectId: this.id,
       dates,
     })
@@ -64,8 +64,8 @@ class Project {
       console.log(error);
     });
   }
-  update(userId, deadline) {
-    axios.post(`/api/project/update/${userId}`, {
+  update(deadline) {
+    axios.post('/api/project/update/', {
       projectId: this.id,
       ended: false,
       deadline,
@@ -77,8 +77,8 @@ class Project {
       console.log(error);
     });
   }
-  remove(userId) {
-    axios.delete(`/api/project/remove/${userId}`, {
+  remove() {
+    axios.delete('/api/project/remove/', {
       projectId: this.id,
     })
     .then((response) => {
@@ -88,8 +88,8 @@ class Project {
       console.log(error);
     });
   }
-  getStats(userId) {
-    axios.get(`/api/project/stats/${this.id}/${userId}`)
+  getStats() {
+    axios.get(`/api/project/stats/${this.id}/`)
     .then((response) => {
       console.log(response);
     })
