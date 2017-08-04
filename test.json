@@ -39,13 +39,13 @@
       },
       "deadline": 20170820,
       "ended": false,
-      "superuser": "userid",
-      "normaluser": ["Jennifer", "Scarlett"],
-      "optionaluser": ["Maximus"],
-      "closeduser": ["Samuel"],
+      "superuser": "7724465649",
+      "normaluser": ["6975711782", "7840273219"],
+      "optionaluser": ["8948983993"],
+      "closeduser": ["5794283116"],
       "votes": [
         {
-          "userid": "Jennifer",
+          "userid": "6975711782",
           "dates": [
             {
               "date": 20170729,

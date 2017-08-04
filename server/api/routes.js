@@ -13,12 +13,12 @@ function isAuth(req, res, next) {
 }
 
 const router = server.Router();
-router.get('/profile/:userId', isAuth, PostsController.getteamanduser);
-router.get('/project/data/:userId', isAuth, PostsController.getprojects);
+router.get('/profile', isAuth, PostsController.getteamanduser);
+router.get('/project/data', isAuth, PostsController.getprojects);
 router.post('/project/new/', isAuth, PostsController.createnewproject);
-router.post('/project/update/:userId', isAuth, PostsController.updateproject);
-router.get('/project/stats/:projectId/:userId', isAuth, PostsController.getstats);
-router.post('/project/vote/:userId', isAuth, PostsController.uservote);
-router.delete('/project/remove/:userId', isAuth, PostsController.rmproject);
+router.post('/project/update', isAuth, PostsController.updateproject);
+router.get('/project/stats/:projectId', isAuth, PostsController.getstats);
+router.post('/project/vote', isAuth, PostsController.uservote);
+router.delete('/project/remove', isAuth, PostsController.rmproject);
 
 module.exports = router;
