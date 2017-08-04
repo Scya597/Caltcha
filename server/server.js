@@ -14,7 +14,7 @@ const path = require('path');
 
 // const LocalStrategy = passportLocal.Strategy;
 server.use(cookieParser());
-server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json());
 /*
 passport.use(new LocalStrategy(
   (username, password, done) => {
@@ -83,8 +83,6 @@ mongoose.Promise = global.Promise;
 if (process.env.NODE_ENV !== 'test') {
   mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/blog');
 }
-
-server.use(bodyParser.json());
 
 server.use((err, req, res, next) => {
   res.status(422).send({ error: err.message });

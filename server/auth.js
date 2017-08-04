@@ -1,9 +1,12 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import storage from '../test.json';
 
 const path = require('path');
 
 const router = express.Router();
+
+router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../login.html'));

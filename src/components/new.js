@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import uuid from 'uuid/v4';
-import _ from 'lodash';
-import '../scss/title.scss';
 import { Link } from 'react-router-dom';
+// import _ from 'lodash';
+import '../scss/title.scss';
+
 
 class New extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class New extends Component {
       user: {},
       teams: [],
       newProject: {
+        id: uuid(),
         finaldate: 0,
         ended: false,
       },
@@ -26,24 +28,8 @@ class New extends Component {
     .catch((err) => {
       console.log(err);
     });
-  }
-
-  renderTeamList() {
-    console.log(this.state.teams);
-    if (typeof this.state.user.team === 'undefined' || this.state.user.team.length === 0) {
-      return <option>You are a single dog!</option>;
-    } else {
-      return this.state.user.team.map(item => <option value={item} key={item}>{this.state.teams.find(team => team.id === item).name}</option>);
-    }
-  }
-
-  renderMemberList() {
-    if (typeof this.state.newProject.team === 'undefined' || this.state.newProject.team === '') {
-      return <option>Select a team first!</option>;
-    } else {
-      const selectedTeamObj =  this.state.teams.find(team => team.id === this.state.newProject.team);
-      return selectedTeamObj.members.map(item => <li>{item}</li>);
-    }
+    this.saveNewProject = this.saveNewProject.bind(this);
+    this.syncData = this.syncData.bind(this);
   }
 
   saveNewProject() {
@@ -69,26 +55,45 @@ class New extends Component {
     });
   }
 
+  renderMemberList() {
+    if (typeof this.state.newProject.team === 'undefined' || this.state.newProject.team === '') {
+      return <option>Select a team first!</option>;
+    } else {
+      const selectedTeamObj =  this.state.teams.find(team => team.id === this.state.newProject.team);
+      return selectedTeamObj.members.map(item => <li>{item}</li>);
+    }
+  }
+
+  renderTeamList() {
+    console.log(this.state.teams);
+    if (typeof this.state.user.team === 'undefined' || this.state.user.team.length === 0) {
+      return <option>You are a single dog!</option>;
+    } else {
+      return this.state.user.team.map(item => <option value={item} key={item}>{this.state.teams.find(team => team.id === item).name}</option>);
+    }
+  }
+
   render() {
     return (
       <div>
-        <h2>New Project</h2>
-        <form>
-          <p>Title</p><input type="text" onChange={(event) => this.syncData('title', event.target.value)} />
-          <p>Description</p><textarea onChange={(event) => this.syncData('description', event.target.value)} />
-          <p>minDuration</p><input type="number" name="minDuration" min="1" onChange={(event) => this.syncData('minDuration', event.target.value)} />
-          <p>deadline</p><input type="number" onChange={(event) => this.syncData('deadline', event.target.value)} />
-          <p>location</p><input type="text" onChange={(event) => this.syncData('location', event.target.value)} />
+        <form onSubmit={this.saveNewProject}>
+          <h2>New Project</h2>
+          <p>Title</p><input type="text" onChange={event => this.syncData('title', event.target.value)} />
+          <p>Description</p><textarea onChange={event => this.syncData('description', event.target.value)} />
+          <p>minDuration</p><input type="number" name="minDuration" min="1" onChange={event => this.syncData('minDuration', event.target.value)} />
+          <p>deadline</p><input type="number" onChange={event => this.syncData('deadline', event.target.value)} />
+          <p>location</p><input type="text" onChange={event => this.syncData('location', event.target.value)} />
           <p>Team</p>
-          <select onChange={(event) => this.syncData('team', event.target.value)}>
-            <option value="" key="0" selected></option>
+          <select onChange={event => this.syncData('team', event.target.value)}>
+            <option value="" key="0" selected />
             {this.renderTeamList()}
           </select>
           <ul>
             {this.renderMemberList()}
           </ul>
+          <button type="submit">OK</button>
         </form>
-        <button onClick={this.saveNewProject()}>OK</button>
+        <Link to="/">Back</Link>
       </div>
     );
   }
