@@ -37,7 +37,7 @@ passport.deserializeUser((user, done) => {
 
 server.use(session({
   secret: ',DBj2%*N;Q"?(T9{mS{EVWvZ2G3,3BG$I)n,?mZ_3@0*?pwT2,lh@SC"jocVdbs',
-  cookie: { maxAge: 60 * 1000 },
+  cookie: { maxAge: 6000 * 1000 },
   resave: true,
   saveUninitialized: false,
   name: 'caltcha-sid',

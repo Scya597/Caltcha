@@ -4,7 +4,6 @@ import axios from 'axios';
 import User from '../utils/User';
 import Project from '../utils/Project';
 
-const userId = 'userid';
 
 export default class Test extends Component {
   constructor(props) {
@@ -14,14 +13,14 @@ export default class Test extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/profile/${userId}`).then((res) => {
+    axios.get('/api/profile').then((res) => {
       const user = new User(res.data.user);
       this.setState({ user: user });
     }).catch((err) => {
       console.log(err);
     });
 
-    axios.get(`/api/project/data/${userId}`).then((res) => {
+    axios.get('/api/project/data').then((res) => {
       const projects = res.data.projects.map(project => new Project(project));
       this.setState({ projects: projects });
     }).catch((err) => {
@@ -39,6 +38,7 @@ export default class Test extends Component {
       <div>
         <p>User: {this.state.user.username}</p>
         {this.renderPj()}
+        <a href="/logout">LOGOUT</a>
       </div>
     );
   }
