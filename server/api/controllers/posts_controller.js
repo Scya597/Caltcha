@@ -134,7 +134,7 @@ module.exports = {
                   }
                 }
               }
-              if (center !== []) {
+              if (center.length !== 0) {
                 optarr.push(center);
               }
             }
@@ -169,7 +169,7 @@ module.exports = {
                     }
                   }
                 }
-                if (copt === projects[i].minDuration) {
+                if (copt == projects[i].minDuration) {
                   coopt += 1;
                 }
               }

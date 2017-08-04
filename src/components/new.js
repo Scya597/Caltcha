@@ -35,7 +35,7 @@ class New extends Component {
             team: '',
             superuser: res.data.user.id,
             normaluser: ['nviuernvungernberui'],
-            optionaluser: ['nvifnvbnbrnobnorenobmey'],
+            optionaluser: ['nvifnvbnbrnobnorenobmey','asd'],
             votes: [
               {
                 userid: res.data.user.id,
