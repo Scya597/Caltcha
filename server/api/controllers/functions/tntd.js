@@ -1,6 +1,6 @@
 module.exports = (obj) => {
   let shit;
-  const a = Math.ceiling(obj.contidays[0] / 48);
+  const a = Math.ceil(obj.contidays[0] / 48);
   const b = obj.contidays[0] % 48;
   let q;
   if (b === 0) {
@@ -9,8 +9,8 @@ module.exports = (obj) => {
     q = b;
   }
   const c = a % 1461;
-  const d = Math.ceiling(a / 1461);
-  const e = Math.ceiling(c / 365);
+  const d = Math.ceil(a / 1461);
+  const e = Math.ceil(c / 365);
   const f = c % 365;
   let days = 20160000;
   if (e === 5) {
