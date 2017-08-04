@@ -21,7 +21,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <img src="http://a1.att.hudong.com/38/17/300001008759128923176593463.jpg" />
+        <img src="https://s-media-cache-ak0.pinimg.com/originals/42/92/f9/4292f90fe4dea47e8a01efc4ec73c099.jpg" />
+        <h1>EAT SHIT ASSHOLE</h1>
         <Test />
       </div>
     );
