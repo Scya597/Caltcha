@@ -134,7 +134,9 @@ module.exports = {
                   }
                 }
               }
-              optarr.push(center);
+              if (center !== []) {
+                optarr.push(center);
+              }
             }
             const basic = blocksarr[0];
             const finalblocks = [];
