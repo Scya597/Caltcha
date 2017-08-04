@@ -3,7 +3,7 @@ import _ from 'lodash';
 import '../scss/title.scss';
 import { Link } from 'react-router-dom';
 
-class MainPage extends Component {
+class Vote extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -12,12 +12,10 @@ class MainPage extends Component {
   render() {
     return (
       <div>
-        <h1>Caltcha</h1>
-        <Link to="/new">new</Link>
-        <Link to="/vote">vote</Link>
+        <h1>vote</h1>
       </div>
 
     );
   }
 }
-export default MainPage;
+export default Vote;
