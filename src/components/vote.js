@@ -33,6 +33,7 @@ export default class Vote extends Component {
     .catch((error) => {
       console.log(error);
     });
+    this.props.history.push('/');
   }
 
   render() {
@@ -41,6 +42,7 @@ export default class Vote extends Component {
         <img src="http://www.motherjones.com/wp-content/uploads/silicon-valley.jpg" />
         <h1>vote</h1>
         <button onClick={this.vote}>VOTE</button>
+        <Link to="/">Back to Main Page</Link>
       </div>
     );
   }
