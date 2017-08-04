@@ -34,8 +34,8 @@ class New extends Component {
             ended: false,
             team: '',
             superuser: res.data.user.id,
-            normaluser: [],
-            optionaluser: [],
+            normaluser: ['nviuernvungernberui'],
+            optionaluser: ['nvifnvbnbrnobnorenobmey'],
             votes: [
               {
                 userid: res.data.user.id,
@@ -47,6 +47,28 @@ class New extends Component {
                   {
                     date: 20170930,
                     timeblocks: [1, 2, 3, 8, 9, 10, 14, 15, 16],
+                  },
+                ],
+              },
+              {
+                userid: 'nviuernvungernberui',
+                dates: [
+                  {
+                    date: 20171007,
+                    timeblocks: [2, 6, 7, 8, 13, 14, 15],
+                  },
+                ],
+              },
+              {
+                userid: 'nvifnvbnbrnobnorenobmey',
+                dates: [
+                  {
+                    date: 20170930,
+                    timeblocks: [2, 6, 7, 8, 13, 14, 15],
+                  },
+                  {
+                    date: 20171007,
+                    timeblocks: [2, 3, 7, 8, 14, 15],
                   },
                 ],
               },
