@@ -13,7 +13,7 @@ module.exports = {
   getteamanduser(req, res) {
     const sendteam = [];
     let senduser;
-    const userId = req.user.id;
+    const userId = req.params.userId;
     console.log(userId);
     for (let i = 0; i < teams.length; i += 1) {
       for (let j = 0; j < teams[i].members.length; j += 1) {
@@ -32,7 +32,7 @@ module.exports = {
 
   getprojects(req, res) {
     const sendproject = [];
-    const userId = req.user.id;
+    const userId = req.params.userId;
     for (let i = 0; i < projects.length; i += 1) {
       if (userId === projects[i].superuser) {
         sendproject.push(projects[i]);
@@ -60,7 +60,7 @@ module.exports = {
 
   updateproject(req, res) {
     const request = req.body;
-    const userId = req.user.id;
+    const userId = req.params.userId;
     for (let i = 0; i < projects.length; i += 1) {
       if (projects[i].id === request.projectId) {
         if (projects[i].superuser === userId) {
@@ -76,8 +76,8 @@ module.exports = {
 
   getstats(req, res) {
     const projectId = req.params.projectId;
-    const userId = req.user.id;
-    let stats = [];
+    const userId = req.params.userId;
+    const stats = [];
     for (let i = 0; i < projects.length; i += 1) {
       if (projectId === projects[i].id) {
         if (userId !== projects[i].superuser) {
@@ -109,11 +109,26 @@ module.exports = {
             for (let j = 0; j < nordates.length; j += 1) {
               middle = [];
               for (let k = 0; k < nordates[j].length; k += 1) {
-                for (let m = 0; m < nordates[j][k].time.length; m += 1) {
-                  middle.push((tdtn(nordates[j][k].date) * 48) + nordates[j][k].time[m]);
+                for (let m = 0; m < nordates[j][k].timeblocks.length; m += 1) {
+                  middle.push((tdtn(nordates[j][k].date) * 48) + nordates[j][k].timeblocks[m]);
                 }
               }
               blocksarr.push(middle);
+            }
+            const optarr = [];
+            let center = [];
+            for (let j = 0; j < projects[i].optionaluser.length; j += 1) {
+              center = [];
+              for (let k = 0; k < projects[i].votes.length; k += 1) {
+                if (projects[i].optionaluser[j] === projects[i].votes[k].userid) {
+                  for (let m = 0; m < projects[i].votes[k].dates.length; m += 1) {
+                    for (let n = 0; n < projects[i].votes[k].dates[m].timeblocks.length; n += 1) {
+                      center.push((tdtn(projects[i].votes[k].dates[m].date) * 48) + projects[i].votes[k].dates[m].timeblocks[n]);
+                    }
+                  }
+                }
+              }
+              optarr.push(center);
             }
             const basic = blocksarr[0];
             const finalblocks = [];
@@ -132,6 +147,30 @@ module.exports = {
               }
             }
             const contiblocks = conti(finalblocks, projects[i].minDuration);
+            const conobj = [];
+            let copt;
+            let coopt;
+            for (let j = 0; j < contiblocks.length; j += 1) {
+              coopt = 0;
+              for (let m = 0; m < optarr.length; m += 1) {
+                copt = 0;
+                for (let k = 0; k < projects[i].minDuration; k += 1) {
+                  for (let n = 0; n < optarr[m].length; n += 1) {
+                    if (contiblocks[j][k] === optarr[m][n]) {
+                      copt += 1;
+                    }
+                  }
+                }
+                if (copt === projects[i].minDuration) {
+                  coopt += 1;
+                }
+              }
+              conobj.push({ contidays: contiblocks[j], optnum: coopt });
+            }
+            for (let j = 0; j < conobj.length; j += 1) {
+              stats.push(tntd(conobj[j]));
+            }
+            res.send({ stats });
           }
         }
       }
@@ -140,7 +179,7 @@ module.exports = {
 
   uservote(req, res) {
     const request = req.body;
-    const userId = req.user.id;
+    const userId = req.params.userId;
     let b = 1;
     for (let i = 0; i < projects.length; i += 1) {
       if (projects[i].id === request.projectId) {
@@ -160,7 +199,7 @@ module.exports = {
   },
   rmproject(req, res) {
     const request = req.body;
-    const userId = req.user.id;
+    const userId = req.params.userId;
     for (let i = 0; i < projects.length; i += 1) {
       if (projects[i].id === request.projectId) {
         if (projects[i].superuser === userId) {
