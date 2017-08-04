@@ -17,12 +17,10 @@ class New extends Component {
     this.saveNewProject = this.saveNewProject.bind(this);
     this.syncData = this.syncData.bind(this);
     this.fetchuser = this.fetchuser.bind(this);
-    this.initNewProj = this.initNewProj.bind(this);
   }
 
   componentDidMount() {
     this.fetchuser();
-    this.initNewProj();
   }
   fetchuser = () => {
     axios.get('/api/profile')
@@ -30,24 +28,35 @@ class New extends Component {
         this.setState({
           user: res.data.user,
           teams: res.data.teams,
+          newProject: {
+            id: uuid(),
+            finaldate: 0,
+            ended: false,
+            team: '',
+            superuser: res.data.user.id,
+            normaluser: [],
+            optionaluser: [],
+            votes: [
+              {
+                userid: res.data.user.id,
+                dates: [
+                  {
+                    date: 20171007,
+                    timeblocks: [2, 3, 6, 7, 8, 13, 14, 15],
+                  },
+                  {
+                    date: 20170930,
+                    timeblocks: [1, 2, 3, 8, 9, 10, 14, 15, 16],
+                  },
+                ],
+              },
+            ],
+          },
         });
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-  initNewProj = () => {
-    this.setState({
-      newProject: {
-        id: uuid(),
-        finaldate: 0,
-        ended: false,
-        team: '',
-        superuser: this.state.user.id,
-        normaluser: [],
-        optionaluser: [],
-      },
-    });
   }
 
   saveNewProject() {
@@ -84,7 +93,6 @@ class New extends Component {
   }
 
   renderTeamList() {
-    console.log(this.state.teams);
     if (typeof this.state.user.team === 'undefined' || this.state.user.team.length === 0) {
       return <option>You are a single dog!</option>;
     } else {
