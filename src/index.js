@@ -1,32 +1,26 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './components/App';
+import { AppContainer } from 'react-hot-loader';
 import './scss/style.scss';
+import routes from './routes';
+import Root from './Root';
 
 const rootElement = document.getElementById('root');
 
-let app;
-if (module.hot) {
-  const { AppContainer } = require('react-hot-loader');
-  app = (
+const renderApp = appRoutes => {
+  render(
     <AppContainer>
-      <App />
-    </AppContainer>
+      <Root routes={appRoutes} />
+    </AppContainer>,
+    rootElement,
   );
+};
 
-  module.hot.accept('./components/App', () => {
-    const NewApp = require('./components/App').default;
-    render(
-      <AppContainer>
-        <NewApp />
-      </AppContainer>,
-      rootElement,
-    );
+renderApp(routes);
+
+if (module.hot) {
+  module.hot.accept('./routes', () => {
+    const newRoutes = require('./routes').default;
+    renderApp(newRoutes);
   });
-} else {
-  app = <App />;
 }
-
-// const app = <App />;
-
-render(app, rootElement);
