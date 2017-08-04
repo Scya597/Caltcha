@@ -37,7 +37,7 @@ module.exports = {
 
   getprojects(req, res) {
     const sendproject = [];
-    const userId = req.user.idId;
+    const userId = req.user.id;
     for (let i = 0; i < projects.length; i += 1) {
       if (userId === projects[i].superuser) {
         sendproject.push(projects[i]);
@@ -65,7 +65,7 @@ module.exports = {
 
   updateproject(req, res) {
     const request = req.body;
-    const userId = req.user.idId;
+    const userId = req.user.id;
     for (let i = 0; i < projects.length; i += 1) {
       if (projects[i].id === request.projectId) {
         if (projects[i].superuser === userId) {
@@ -81,7 +81,7 @@ module.exports = {
 
   getstats(req, res) {
     const projectId = req.params.projectId;
-    const userId = req.user.idId;
+    const userId = req.user.id;
     const stats = [];
     for (let i = 0; i < projects.length; i += 1) {
       if (projectId === projects[i].id) {
@@ -184,7 +184,7 @@ module.exports = {
 
   uservote(req, res) {
     const request = req.body;
-    const userId = req.user.idId;
+    const userId = req.user.id;
     let b = 1;
     for (let i = 0; i < projects.length; i += 1) {
       if (projects[i].id === request.projectId) {
@@ -204,7 +204,7 @@ module.exports = {
   },
   rmproject(req, res) {
     const request = req.body;
-    const userId = req.user.idId;
+    const userId = req.user.id;
     for (let i = 0; i < projects.length; i += 1) {
       if (projects[i].id === request.projectId) {
         if (projects[i].superuser === userId) {
