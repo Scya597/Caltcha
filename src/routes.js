@@ -11,7 +11,7 @@ const routes = () => {
     <BrowserRouter>
       <div>
         <Switch>
-          <Route path="/vote" component={Vote} />
+          <Route path="/vote/:id" component={Vote} />
           <Route path="/new" component={New} />
           <Route path="/" component={MainPage} />
         </Switch>
