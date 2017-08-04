@@ -37,6 +37,7 @@ class New extends Component {
       });
   }
   initNewProj = () => {
+    console.log(this.state.user.id);
     this.setState({
       newProject: {
         id: uuid(),
@@ -84,7 +85,6 @@ class New extends Component {
   }
 
   renderTeamList() {
-    console.log(this.state.teams);
     if (typeof this.state.user.team === 'undefined' || this.state.user.team.length === 0) {
       return <option>You are a single dog!</option>;
     } else {

@@ -58,7 +58,6 @@ module.exports = {
   },
 
   createnewproject(req, res) {
-    console.log(req.body);
     const newproject = req.body;
     console.log(newproject);
     projects.push(newproject);
@@ -192,9 +191,13 @@ module.exports = {
       if (projects[i].id === request.projectId) {
         for (let j = 0; j < projects[i].votes.length; j += 1) {
           if (projects[i].votes[j].userid === userId) {
-            projects[i].votes[j].dates = request.dates;
-            b = 0;
-            res.send('You have voted successfully!!');
+            if (j) {
+              projects[i].votes[j].dates = request.dates;
+              b = 0;
+              res.send('You have voted successfully!!');
+            } else {
+              res.send('You cannot change time, because you are superuser!!');
+            }
           }
         }
         if (b) {
