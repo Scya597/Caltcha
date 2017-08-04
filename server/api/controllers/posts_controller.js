@@ -58,6 +58,7 @@ module.exports = {
   },
 
   createnewproject(req, res) {
+    console.log(req.body);
     const newproject = req.body;
     console.log(newproject);
     projects.push(newproject);
