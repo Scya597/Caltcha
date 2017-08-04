@@ -11,9 +11,13 @@ const projects = test.project;
 
 module.exports = {
   getteamanduser(req, res) {
-    const sendteam = [];
-    let senduser;
-    const userId = req.user.id;
+    console.log(`${req.user.id} call /api/profile`);
+    const sendteam = teams.filter((team) => {
+      return (typeof req.user.team.find(item => (item === team.id)) !== 'undefined');
+    });
+    const senduser = req.user;
+    senduser.password = 'undefined';
+    /*
     console.log(userId);
     for (let i = 0; i < teams.length; i += 1) {
       for (let j = 0; j < teams[i].members.length; j += 1) {
@@ -27,6 +31,7 @@ module.exports = {
         senduser = users[i];
       }
     }
+    */
     res.send({ teams: sendteam, user: senduser });
   },
 

@@ -12,7 +12,7 @@ router.post('/login', (req, res) => {
   console.log(`${req.body.username} is trying to login.(auth.js)`);
   const userData = storage.user.find(item => (item.username === req.body.username));
   if (userData && (req.body.password === userData.password)) {
-    userData.password = 'undefined';
+    console.log('Username and password match.');
     req.logIn(userData, () => {
       res.redirect('/');
     });
@@ -20,8 +20,12 @@ router.post('/login', (req, res) => {
     res.redirect('/login');
   }
 });
-router.get('/logout', (req, res) => {
+router.get('/logout', (req, res, next) => {
   console.log(`${req.user.username} logout.(auth.js)`);
+  next();
+}, (req, res) => {
+  delete req.session;
+  res.clearCookie('caltcha-sid');
   req.logOut();
   res.redirect('/login');
 });

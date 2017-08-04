@@ -5,6 +5,12 @@
       "name": "Autumn",
       "members": ["7724465649", "6975711782", "7840273219", "8948983993", "5794283116"],
       "projects": ["projectid", "hihi", "testproject"]
+    },
+    {
+      "id": "Facebook",
+      "name": "Winter",
+      "members": ["7724465649", "7840273219", "8948983993"],
+      "projects": ["projectFB", "projectABC"]
     }
   ],
   "user": [
@@ -14,7 +20,7 @@
       "password": "baby",
       "realname": "Superman",
       "email": "superman@gmail.com",
-      "team": ["Autumn", "Facebook"]
+      "team": ["teamid", "Facebook"]
     },
     {
       "id": "6975711782",
@@ -22,7 +28,7 @@
       "password": "12345",
       "realname": "Superwoman",
       "email": "superwoman@gmail.com",
-      "team": ["Autumn", "Facebook"]
+      "team": ["teamid"]
     }
   ],
   "project": [
@@ -50,6 +56,35 @@
             {
               "date": 20170729,
               "timeblocks": [1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "team": "Facebook",
+      "id": "projectFB",
+      "title": "testproject2",
+      "minDuration": 5,
+      "description": "testdescription2",
+      "location": "mars",
+      "finaldate": {
+        "date": 20170922,
+        "timeblocks": [1, 2, 3, 4, 6, 13, 14, 15, 16, 17]
+      },
+      "deadline": 20170831,
+      "ended": true,
+      "superuser": "8948983993",
+      "normaluser": ["6975711782", "7840273219"],
+      "optionaluser": ["5794283116"],
+      "closeduser": [],
+      "votes": [
+        {
+          "userid": "8948983993",
+          "dates": [
+            {
+              "date": 20170922,
+              "timeblocks": [1, 2, 3, 4, 6, 7, 8, 12, 13, 14, 15]
             }
           ]
         }
