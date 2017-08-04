@@ -19,6 +19,9 @@ class MainPage extends Component {
   fetchuser = () => {
     axios.get('/api/profile')
       .then((res) => {
+        if (!res.data.user) {
+          window.location = '/login';
+        }
         const user = new User(res.data.user);
         this.setState({ user });
       })

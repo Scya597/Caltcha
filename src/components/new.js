@@ -12,24 +12,42 @@ class New extends Component {
     this.state = {
       user: {},
       teams: [],
+      newProject: {},
+    };
+    this.saveNewProject = this.saveNewProject.bind(this);
+    this.syncData = this.syncData.bind(this);
+    this.fetchuser = this.fetchuser.bind(this);
+    this.initNewProj = this.initNewProj.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchuser();
+    this.initNewProj();
+  }
+  fetchuser = () => {
+    axios.get('/api/profile')
+      .then((res) => {
+        this.setState({
+          user: res.data.user,
+          teams: res.data.teams,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  initNewProj = () => {
+    this.setState({
       newProject: {
         id: uuid(),
         finaldate: 0,
         ended: false,
+        team: '',
+        superuser: this.state.user.id,
+        normaluser: [],
+        optionaluser: [],
       },
-    };
-    axios.get('/api/profile')
-    .then((res) => {
-      this.setState({
-        user: res.data.user,
-        teams: res.data.teams,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
     });
-    this.saveNewProject = this.saveNewProject.bind(this);
-    this.syncData = this.syncData.bind(this);
   }
 
   saveNewProject() {
@@ -40,6 +58,7 @@ class New extends Component {
     .catch((err) => {
       console.log(err);
     });
+    this.props.history.push('/');
   }
 
   syncData(field, data) {
@@ -60,7 +79,7 @@ class New extends Component {
       return <option>Select a team first!</option>;
     } else {
       const selectedTeamObj =  this.state.teams.find(team => team.id === this.state.newProject.team);
-      return selectedTeamObj.members.map(item => <li>{item}</li>);
+      return selectedTeamObj.members.map(item => <li key={item}>{item}</li>);
     }
   }
 
@@ -85,7 +104,7 @@ class New extends Component {
           <p>location</p><input type="text" onChange={event => this.syncData('location', event.target.value)} />
           <p>Team</p>
           <select onChange={event => this.syncData('team', event.target.value)}>
-            <option value="" key="0" selected />
+            <option value="" key="0" />
             {this.renderTeamList()}
           </select>
           <ul>
