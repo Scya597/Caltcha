@@ -25,6 +25,14 @@
   ],
   "user": [
     {
+      "id": "5794283116",
+      "username": "monica",
+      "password": "12345",
+      "realname": "monica",
+      "email": "monica12567@gmail.com",
+      "team": ["00"]
+    },
+    {
       "id": "7724465649",
       "username": "benson",
       "password": "baby",
@@ -47,6 +55,14 @@
       "realname": "Superwoman",
       "email": "superwoman@gmail.com",
       "team": ["00"]
+    },
+    {
+      "id": "7840273219",
+      "username": "maximus",
+      "password": "12345",
+      "realname": "max",
+      "email": "mm89560@gmail.com",
+      "team": ["00", "01"]
     }
   ],
   "project": [

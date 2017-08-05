@@ -45,7 +45,7 @@ class navbar extends Component {
 
   renderMemberList(teamId) {
     const selectedTeamObj = this.props.teams.find(team => team.id === teamId);
-    return selectedTeamObj.members.map(item => <li key={item.id}>{item.username}</li>);
+    return selectedTeamObj.members.map(item => <li key={item.id}>{item.username} <a href={`mailto:${item.email}`}><u>{item.email}</u></a></li>);
   }
 
   render() {

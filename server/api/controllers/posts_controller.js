@@ -17,6 +17,12 @@ module.exports = {
     });
     const senduser = req.user;
     senduser.password = 'undefined';
+    sendteam.forEach(team => team.members.forEach(userObj => Object.defineProperty(userObj, 'email', {
+      value: users.find(user => user.id === userObj.id).email,
+      writable: true,
+      configurable: true,
+      enumerable: true,
+    })));
     /*
     console.log(userId);
     for (let i = 0; i < teams.length; i += 1) {
