@@ -211,16 +211,15 @@ module.exports = {
   },
   rmproject(req, res) {
     const request = req.body;
-    const userId = req.user.id;
+    console.log('asd');
+    console.log(request);
+    let b;
     for (let i = 0; i < projects.length; i += 1) {
-      if (projects[i].id === request.projectId) {
-        if (projects[i].superuser === userId) {
-          projects.splice(i, 1);
-          res.send(`You have removed ${projects[i].title} successfully!!`);
-        } else {
-          res.send('You are not superuser, so you cannot delete this project!');
-        }
+      if (request.projectId === projects[i].id) {
+        b = i;
+        res.send(`You have removed ${projects[i].title} successfully!!`);
       }
     }
+    projects.splice(b, 1);
   },
 };
