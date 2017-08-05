@@ -180,8 +180,8 @@ class MainPage extends Component {
           </div>
           <div className="col-md-8">
             <VoteList
-              unvotedProj={this.state.otherselectedpjs.filter(proj => typeof proj.votes.find(vote => vote.userid === this.state.user.id) !== 'undefined')}
-              votedProj={this.state.otherselectedpjs.filter(proj => typeof proj.votes.find(vote => vote.userid === this.state.user.id) === 'undefined')}
+              unvotedProj={this.state.otherselectedpjs.filter(proj => typeof proj.votes.find(vote => vote.userid === this.state.user.id) === 'undefined')}
+              votedProj={this.state.otherselectedpjs.filter(proj => typeof proj.votes.find(vote => vote.userid === this.state.user.id) !== 'undefined')}
               user={this.state.user}
             />
           </div>
