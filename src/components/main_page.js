@@ -18,6 +18,9 @@ class MainPage extends Component {
     this.fetchuser = this.fetchuser.bind(this);
     this.fetchprojects = this.fetchprojects.bind(this);
     this.setSelectedTeam = this.setSelectedTeam.bind(this);
+    this.super = this.super.bind(this);
+    this.voted = this.voted.bind(this);
+    this.novoted = this.novoted.bind(this);
   }
   componentDidMount() {
     this.fetchuser();
@@ -50,9 +53,46 @@ class MainPage extends Component {
       });
   }
   renderpjs = (arr) => {
+    const superarr = this.super(arr);
+    const votedarr = this.voted(arr);
+    const novotedarr = this.novoted(arr);
     return (
-      arr.map(this.rendertitle)
+      <div>
+        {this.rendersuper(superarr)}
+        {this.rendervoted(votedarr)}
+        {this.rendernovoted(novotedarr)}
+      </div>
     );
+  }
+  rendersuper = (superarr) => {
+    if (superarr.length !== 0) {
+      return (
+        <div>
+          <h4>Your project</h4>
+          <ul>{superarr.map(this.rendertitle)}</ul>
+        </div>
+      );
+    }
+  }
+  rendervoted = (votedarr) => {
+    if (votedarr.length !== 0) {
+      return (
+        <div>
+          <h4>You have voted</h4>
+          <ul>{votedarr.map(this.rendertitle)}</ul>
+        </div>
+      );
+    }
+  }
+  rendernovoted = (novotedarr) => {
+    if (novotedarr.length !== 0) {
+      return (
+        <div>
+          <h4>Your have not voted</h4>
+          <ul>{novotedarr.map(this.rendertitle)}</ul>
+        </div>
+      );
+    }
   }
   rendertitle = (obj) => {
     return (
@@ -63,11 +103,48 @@ class MainPage extends Component {
       </li>
     );
   }
+  super = (arr) => {
+    const superarr = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      if (this.state.user.id === arr[i].superuser) {
+        superarr.push(arr[i]);
+      }
+    }
+    return superarr;
+  }
+  voted = (arr) => {
+    const votedarr = [];
+    for (let i = 0; i < arr.length; i += 1) {
+      for (let j = 0; j < arr[i].votes.length; j += 1) {
+        if (this.state.user.id === arr[i].votes[j].userid && this.state.user.id !== arr[i].superuser) {
+          votedarr.push(arr[i]);
+        }
+      }
+    }
+    return votedarr;
+  }
+  novoted = (arr) => {
+    const novotedarr = [];
+    let b;
+    for (let i = 0; i < arr.length; i += 1) {
+      b = 1;
+      for (let j = 0; j < arr[i].votes.length; j += 1) {
+        if (this.state.user.id === arr[i].votes[j].userid) {
+          b = 0;
+        }
+      }
+      if (b) {
+        novotedarr.push(arr[i]);
+      }
+    }
+    return novotedarr;
+  }
+
   render() {
     return (
       <div>
         <Navbar user={this.state.user} teams={this.state.teams} setSelectedTeam={this.setSelectedTeam}/>
-        <ul>{this.renderpjs(this.state.projects)}</ul>
+        {this.renderpjs(this.state.projects)}
         <Link to="/new">Start a Project</Link>
       </div>
 
