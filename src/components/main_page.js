@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import User from '../utils/User';
 import Project from '../utils/Project';
 import Navbar from './navbar';
+import ManageList from './manage_list';
+import VoteList from './vote_list';
 import '../scss/title.scss';
 
 class MainPage extends Component {
@@ -170,15 +172,19 @@ class MainPage extends Component {
           selectedTeam={this.state.selectedTeam}
           setSelectedTeam={this.setSelectedTeam}
         />
-        <div className="row">
+        <div className="row text-center">
           <div className="col-md-4">
-            <Link to="/new"><button className="btn btn-primary">Start a Project</button></Link>
-            {/* {this.rendersuperpjs(this.state.selectedprojects)} */}
-            {/* {this.renderpjs(this.state.projects.filter(proj => proj.team === this.state.selectedTeam.id).filter(proj => proj.superuser === this.state.user.id))} */}
+            <ManageList
+              superProj={this.state.projects.filter(proj => proj.team === this.state.selectedTeam.id).filter(proj => proj.superuser === this.state.user.id)}
+              user={this.state.user}
+            />
           </div>
           <div className="col-md-8">
-            {/* {this.renderpjs(this.state.selectedprojects)} */}
-            {/* {this.renderpjs(this.state.projects.filter(proj => proj.team === this.state.selectedTeam.id).filter(proj => proj.superuser !== this.state.user.id))} */}
+            <VoteList
+              unvotedProj={this.state.projects.filter(proj => proj.team === this.state.selectedTeam.id).filter(proj => proj.superuser !== this.state.user.id)}
+              votedProj={this.state.projects.filter(proj => proj.team === this.state.selectedTeam.id).filter(proj => proj.superuser !== this.state.user.id)}
+              user={this.state.user}
+            />
           </div>
         </div>
       </div>
