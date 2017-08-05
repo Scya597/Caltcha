@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../scss/title.scss';
 import User from '../utils/User';
 import Project from '../utils/Project';
+import Navbar from './navbar';
 
 class MainPage extends Component {
   constructor(props) {
@@ -56,8 +57,7 @@ class MainPage extends Component {
   render() {
     return (
       <div>
-        <h1>Caltcha</h1>
-        <h3>{this.state.user.username}     <a href="/logout">LOGOUT</a></h3>
+        <Navbar user={this.state.user} />
         <ul>{this.renderpjs(this.state.projects)}</ul>
         <Link to="/new">Start a Project</Link>
       </div>

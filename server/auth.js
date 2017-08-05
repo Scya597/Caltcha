@@ -9,7 +9,11 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '../login.html'));
+  if (req.user) {
+    res.redirect('/');
+  } else {
+    res.sendFile(path.join(__dirname, '../login.html'));
+  }
 });
 router.post('/login', (req, res) => {
   console.log(`${req.body.username} is trying to login.(auth.js)`);
@@ -24,8 +28,12 @@ router.post('/login', (req, res) => {
   }
 });
 router.get('/logout', (req, res, next) => {
-  console.log(`${req.user.username} logout.(auth.js)`);
-  next();
+  if (!req.user) {
+    res.redirect('/login');
+  } else {
+    console.log(`${req.user.username} logout.(auth.js)`);
+    next();
+  }
 }, (req, res) => {
   delete req.session;
   res.clearCookie('caltcha-sid');
