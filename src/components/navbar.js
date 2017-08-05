@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import { DropdownButton, SplitButton, MenuItem, Popover, OverlayTrigger } from 'react-bootstrap';
-
-const popoverClickRootClose = (
-  <Popover id="popover-trigger-click-root-close" title="Popover bottom">
-    <strong>Holy guacamole!</strong> Check this info.
-  </Popover>
-);
+import { SplitButton, MenuItem, Popover, OverlayTrigger } from 'react-bootstrap';
 
 class navbar extends Component {
   constructor(props) {
@@ -13,21 +7,8 @@ class navbar extends Component {
     this.state = {
       selectedTeam: {},
     };
-  }
-
-  renderTeamList() {
-    if (typeof this.props.user.team === 'undefined' || this.props.user.team.length === 0) {
-      return <option>No team, haha.</option>;
-    } else {
-      return this.props.user.team.map(item => <MenuItem value={item} key={item} eventKey={item}>{this.props.teams.find(team => team.id === item).name}</MenuItem>);
-    }
-  }
-
-  renderMemberListPopover() {
-    return (
-      <Popover id="popover-trigger-click-root-close" title="Popover bottom">
-        <strong>{this.props.teams.find(team => team.id === this.state.selectedTeam.id).length}</strong> members
-      </Popover>
+    this.popover = (
+      <Popover id="popover-trigger-click-root-close" title="No Team Selected" />
     );
   }
 
@@ -35,6 +16,12 @@ class navbar extends Component {
     if (typeof this.props.teams === 'undefined' || this.props.teams.length === 0) {
     } else {
       const teamName = this.props.teams.find(team => team.id === teamId).name;
+      const teamMemberCnt = this.props.teams.find(team => team.id === teamId).members.length;
+      this.popover = (
+        <Popover id="popover-trigger-click-root-close" title={`${teamMemberCnt} members`}>
+          {this.renderMemberList(teamId)}
+        </Popover>
+      );
       this.setState({
         selectedTeam: {
           id: teamId,
@@ -48,6 +35,19 @@ class navbar extends Component {
     }
   }
 
+  renderTeamList() {
+    if (typeof this.props.user.team === 'undefined' || this.props.user.team.length === 0) {
+      return <option>No team, haha.</option>;
+    } else {
+      return this.props.user.team.map(item => <MenuItem value={item} key={item} eventKey={item}>{this.props.teams.find(team => team.id === item).name}</MenuItem>);
+    }
+  }
+
+  renderMemberList(teamId) {
+    const selectedTeamObj = this.props.teams.find(team => team.id === teamId);
+    return selectedTeamObj.members.map(item => <li key={item.id}>{item.username}</li>);
+  }
+
   render() {
     return (
       <div className="row text-center">
@@ -55,10 +55,10 @@ class navbar extends Component {
           <h2>caltcha</h2>
         </div>
         <div className="col-md-2 col-md-offset-2">
-          <OverlayTrigger id="nav-overlay" trigger="click" rootClose placement="bottom" overlay={popoverClickRootClose}>
-          <SplitButton title={this.state.selectedTeam.name || 'Select Team'} id="dropdown-team-sel" onSelect={event => this.selectTeam(event)}>
-            {this.renderTeamList()}
-          </SplitButton>
+          <OverlayTrigger id="nav-overlay" trigger="click" rootClose placement="bottom" overlay={this.popover} onEnter={this.renderPopover}>
+            <SplitButton title={this.state.selectedTeam.name || 'Select Team'} id="dropdown-team-sel" onSelect={event => this.selectTeam(event)}>
+              {this.renderTeamList()}
+            </SplitButton>
           </OverlayTrigger>
         </div>
         <div className="col-md-3">
