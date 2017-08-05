@@ -40,7 +40,7 @@ class MainPage extends Component {
     const superselectedpjs = [];
     const otherselectedpjs = [];
     for (let i = 0; i < selectedpjs.length; i += 1) {
-      if (this.state.user.id === selectedpjs[i]) {
+      if (this.state.user.id === selectedpjs[i].superuser) {
         superselectedpjs.push(selectedpjs[i]);
       } else {
         otherselectedpjs.push(selectedpjs[i]);
@@ -58,7 +58,6 @@ class MainPage extends Component {
         this.setState({
           user,
           teams: res.data.teams,
-          selectedTeam: { id: res.data.teams[0].id, name: res.data.teams[0].name }
         });
       })
       .catch((err) => {
@@ -175,14 +174,14 @@ class MainPage extends Component {
         <div className="row text-center">
           <div className="col-md-4">
             <ManageList
-              superProj={this.state.projects.filter(proj => proj.team === this.state.selectedTeam.id).filter(proj => proj.superuser === this.state.user.id)}
+              superProj={this.state.superselectedpjs}
               user={this.state.user}
             />
           </div>
           <div className="col-md-8">
             <VoteList
-              unvotedProj={this.state.projects.filter(proj => proj.team === this.state.selectedTeam.id).filter(proj => proj.superuser !== this.state.user.id)}
-              votedProj={this.state.projects.filter(proj => proj.team === this.state.selectedTeam.id).filter(proj => proj.superuser !== this.state.user.id)}
+              unvotedProj={this.state.otherselectedpjs.filter(proj => typeof proj.votes.find(vote => vote.userid === this.state.user.id) !== 'undefined')}
+              votedProj={this.state.otherselectedpjs.filter(proj => typeof proj.votes.find(vote => vote.userid === this.state.user.id) === 'undefined')}
               user={this.state.user}
             />
           </div>
