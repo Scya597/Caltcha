@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { ListGroupItem, ListGroup } from 'react-bootstrap';
 
 class voteList extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class voteList extends Component {
   render() {
     const unvotedProjJSX = this.props.unvotedProj.map((proj) => {
       return (
-        <div key={proj.id} className="col-md-3">
+        <div key={proj.id} className="col-md-3 unvoted-proj">
           <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`}>
             <h4>{proj.title}</h4>
             <h5>時程：{proj.minDuration*0.5} 小時</h5>
@@ -20,11 +21,11 @@ class voteList extends Component {
     });
     const votedProjJSX = this.props.votedProj.map((proj) => {
       return (
-        <div key={proj.id}>
+        <ListGroupItem key={proj.id}>
           <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`}>
-            <h5>{proj.title} 時程：{proj.minDuration*0.5} 小時</h5>
+            <h5><strong>{proj.title}</strong> Location: {proj.location} 時程：{proj.minDuration*0.5} 小時</h5>
           </Link>
-        </div>
+        </ListGroupItem>
       );
     });
     return (
@@ -34,7 +35,9 @@ class voteList extends Component {
           {unvotedProjJSX}
         </div>
         <h3>You have voted!</h3>
-        {votedProjJSX}
+        <ListGroup>
+          {votedProjJSX}
+        </ListGroup>
       </div>
     );
   }

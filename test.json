@@ -10,7 +10,7 @@
         {"username": "dick", "id": "8948983993"},
         {"username": "monica", "id": "5794283116"}
       ],
-      "projects": ["projectid", "hihi", "testproject"]
+      "projects": ["projectid", "ngovednrgiofjmoi", "testproject"]
     },
     {
       "id": "01",
@@ -68,6 +68,35 @@
   "project": [
     {
       "team": "00",
+      "id": "ngovednrgiofjmoi",
+      "title": "Meeting",
+      "minDuration": 5,
+      "description": "Discuss Proj",
+      "location": "Park",
+      "finaldate": {
+        "date": 0,
+        "timeblocks": []
+      },
+      "deadline": 20170920,
+      "ended": false,
+      "superuser": "7724465649",
+      "normaluser": ["6975711782", "5794283116"],
+      "optionaluser": ["8948983993"],
+      "closeduser": ["7840273219"],
+      "votes": [
+        {
+          "userid": "7724465649",
+          "dates": [
+            {
+              "date": 20170729,
+              "timeblocks": [1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "team": "00",
       "id": "projectid",
       "title": "testproject",
       "minDuration": 3,
@@ -119,6 +148,15 @@
             {
               "date": 20170922,
               "timeblocks": [1, 2, 3, 4, 6, 7, 8, 12, 13, 14, 15]
+            }
+          ]
+        },
+        {
+          "userid": "6975711782",
+          "dates": [
+            {
+              "date": 20170922,
+              "timeblocks": [1, 2, 4, 6, 7, 12, 13, 15]
             }
           ]
         }

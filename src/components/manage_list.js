@@ -10,7 +10,7 @@ class manageList extends Component {
   render() {
     const superProjJSX = this.props.superProj.map((proj) => {
       return (
-        <div key={proj.id}>
+        <div className="super-proj" key={proj.id}>
           <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`}>
             <h4>{proj.title}</h4>
             <h5>時程：{proj.minDuration*0.5} 小時</h5>
