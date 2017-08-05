@@ -9,13 +9,22 @@ import Navbar from './navbar';
 class MainPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: {}, projects: [] };
+    this.state = {
+      user: {},
+      teams: [],
+      projects: [],
+      selectedTeam: {},
+    };
     this.fetchuser = this.fetchuser.bind(this);
     this.fetchprojects = this.fetchprojects.bind(this);
+    this.setSelectedTeam = this.setSelectedTeam.bind(this);
   }
   componentDidMount() {
     this.fetchuser();
     this.fetchprojects();
+  }
+  setSelectedTeam(teamObj) {
+    this.setState({ selectedTeam: teamObj });
   }
   fetchuser = () => {
     axios.get('/api/profile')
@@ -24,7 +33,7 @@ class MainPage extends Component {
           window.location = '/login';
         }
         const user = new User(res.data.user);
-        this.setState({ user });
+        this.setState({ user, teams: res.data.teams });
       })
       .catch((err) => {
         console.log(err);
@@ -57,7 +66,7 @@ class MainPage extends Component {
   render() {
     return (
       <div>
-        <Navbar user={this.state.user} />
+        <Navbar user={this.state.user} teams={this.state.teams} setSelectedTeam={this.setSelectedTeam}/>
         <ul>{this.renderpjs(this.state.projects)}</ul>
         <Link to="/new">Start a Project</Link>
       </div>
