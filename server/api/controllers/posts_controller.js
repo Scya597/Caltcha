@@ -211,8 +211,6 @@ module.exports = {
   },
   rmproject(req, res) {
     const request = req.body;
-    console.log('asd');
-    console.log(request);
     let b;
     for (let i = 0; i < projects.length; i += 1) {
       if (request.projectId === projects[i].id) {
@@ -221,5 +219,13 @@ module.exports = {
       }
     }
     projects.splice(b, 1);
+  },
+  getproject(req, res) {
+    const projectId = req.params.projectId;
+    for (let i = 0; i < projects.length; i += 1) {
+      if (projectId === projects[i].id) {
+        res.send(projects[i]);
+      }
+    }
   },
 };

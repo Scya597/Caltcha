@@ -55,7 +55,7 @@ export default class Vote extends Component {
       );
     } else {
       return (
-        <Super projectId={fuck.pjid} history={this.props.history} />
+        <Super projectId={fuck.pjid} history={this.props.history} match={this.props.match} />
       );
     }
   }

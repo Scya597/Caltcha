@@ -20,5 +20,6 @@ router.post('/project/update', isAuth, PostsController.updateproject);
 router.get('/project/stats/:projectId', isAuth, PostsController.getstats);
 router.post('/project/vote', isAuth, PostsController.uservote);
 router.post('/project/remove', isAuth, PostsController.rmproject);
+router.get('/project/:projectId', isAuth, PostsController.getproject);
 
 module.exports = router;
