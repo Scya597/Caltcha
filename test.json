@@ -1,15 +1,25 @@
 {
   "team": [
     {
-      "id": "teamid",
+      "id": "00",
       "name": "Autumn",
-      "members": ["7724465649", "6975711782", "7840273219", "8948983993", "5794283116"],
+      "members": [
+        {"username": "benson", "id": "7724465649"},
+        {"username": "jennifer", "id": "6975711782"},
+        {"username": "maximus", "id": "7840273219"},
+        {"username": "dick", "id": "8948983993"},
+        {"username": "monica", "id": "5794283116"}
+      ],
       "projects": ["projectid", "hihi", "testproject"]
     },
     {
-      "id": "Facebook",
-      "name": "Winter",
-      "members": ["7724465649", "7840273219", "8948983993"],
+      "id": "01",
+      "name": "Facebook",
+      "members": [
+        {"username": "benson", "id": "7724465649"},
+        {"username": "maximus", "id": "7840273219"},
+        {"username": "dick", "id": "8948983993"}
+      ],
       "projects": ["projectFB", "projectABC"]
     }
   ],
@@ -20,7 +30,15 @@
       "password": "baby",
       "realname": "Superman",
       "email": "superman@gmail.com",
-      "team": ["teamid", "Facebook"]
+      "team": ["00", "01"]
+    },
+    {
+      "id": "8948983993",
+      "username": "dick",
+      "password": "12345",
+      "realname": "LongDick",
+      "email": "dicky@gmail.com",
+      "team": ["00", "01"]
     },
     {
       "id": "6975711782",
@@ -28,12 +46,12 @@
       "password": "12345",
       "realname": "Superwoman",
       "email": "superwoman@gmail.com",
-      "team": ["teamid"]
+      "team": ["00"]
     }
   ],
   "project": [
     {
-      "team": "teamid",
+      "team": "00",
       "id": "projectid",
       "title": "testproject",
       "minDuration": 3,
@@ -62,7 +80,7 @@
       ]
     },
     {
-      "team": "Facebook",
+      "team": "01",
       "id": "projectFB",
       "title": "testproject2",
       "minDuration": 5,

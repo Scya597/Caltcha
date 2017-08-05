@@ -34,8 +34,8 @@ class New extends Component {
             ended: false,
             team: '',
             superuser: res.data.user.id,
-            normaluser: ['nviuernvungernberui'],
-            optionaluser: ['nvifnvbnbrnobnorenobmey','asd'],
+            normaluser: ['5794283116'],
+            optionaluser: ['nvifnvbnbrnobnorenobmey', 'asd'],
             votes: [
               {
                 userid: res.data.user.id,
@@ -110,7 +110,7 @@ class New extends Component {
       return <option>Select a team first!</option>;
     } else {
       const selectedTeamObj =  this.state.teams.find(team => team.id === this.state.newProject.team);
-      return selectedTeamObj.members.map(item => <li key={item}>{item}</li>);
+      return selectedTeamObj.members.map(item => <li key={item.id}>{item.username}</li>);
     }
   }
 
