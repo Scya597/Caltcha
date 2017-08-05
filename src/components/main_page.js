@@ -31,22 +31,49 @@ class MainPage extends Component {
     this.fetchprojects();
   }
   setSelectedTeam(teamObj) {
-    const selectedpjs = [];
-    for (let i = 0; i < this.state.projects.length; i += 1) {
-      if (this.state.projects[i].team === teamObj.id) {
-        selectedpjs.push(this.state.projects[i]);
+    if (this.state.projects.length === 0) {
+      let projects;
+      axios.get('/api/project/data')
+        .then((res) => {
+          projects = res.data.projects;
+          const selectedpjs = [];
+          for (let i = 0; i < projects.length; i += 1) {
+            if (projects[i].team === teamObj.id) {
+              selectedpjs.push(projects[i]);
+            }
+          }
+          const superselectedpjs = [];
+          const otherselectedpjs = [];
+          for (let i = 0; i < selectedpjs.length; i += 1) {
+            if (this.state.user.id === selectedpjs[i].superuser) {
+              superselectedpjs.push(selectedpjs[i]);
+            } else {
+              otherselectedpjs.push(selectedpjs[i]);
+            }
+          }
+          this.setState({ selectedTeam: teamObj, superselectedpjs, otherselectedpjs });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      const selectedpjs = [];
+      for (let i = 0; i < this.state.projects.length; i += 1) {
+        if (this.state.projects[i].team === teamObj.id) {
+          selectedpjs.push(this.state.projects[i]);
+        }
       }
-    }
-    const superselectedpjs = [];
-    const otherselectedpjs = [];
-    for (let i = 0; i < selectedpjs.length; i += 1) {
-      if (this.state.user.id === selectedpjs[i].superuser) {
-        superselectedpjs.push(selectedpjs[i]);
-      } else {
-        otherselectedpjs.push(selectedpjs[i]);
+      const superselectedpjs = [];
+      const otherselectedpjs = [];
+      for (let i = 0; i < selectedpjs.length; i += 1) {
+        if (this.state.user.id === selectedpjs[i].superuser) {
+          superselectedpjs.push(selectedpjs[i]);
+        } else {
+          otherselectedpjs.push(selectedpjs[i]);
+        }
       }
+      this.setState({ selectedTeam: teamObj, superselectedpjs, otherselectedpjs });
     }
-    this.setState({ selectedTeam: teamObj, superselectedpjs, otherselectedpjs });
   }
   fetchuser = () => {
     axios.get('/api/profile')
@@ -59,6 +86,7 @@ class MainPage extends Component {
           user,
           teams: res.data.teams,
         });
+        this.setSelectedTeam({ id: res.data.teams[0].id, name: res.data.teams[0].name });
       })
       .catch((err) => {
         console.log(err);
