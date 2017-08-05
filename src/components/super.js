@@ -68,8 +68,17 @@ export default class Super extends Component {
       </div>
     );
   }
-
-  render() {
+  ifexist = (obj) => {
+    if (obj.title === undefined) {
+      return (
+        <div>
+          <h1>This page doesn't exist</h1>
+          <button onClick={this.back}>
+            Back to index
+          </button>
+        </div>
+      );
+    }
     return (
       <div>
         <button onClick={this.updatepj}>
@@ -81,7 +90,15 @@ export default class Super extends Component {
         <button onClick={this.back}>
           Back to index
         </button>
-        {this.renderinfo(this.state)}
+        {this.renderinfo(obj)}
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {this.ifexist(this.state)}
       </div>
     );
   }
