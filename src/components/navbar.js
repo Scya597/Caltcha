@@ -4,15 +4,19 @@ import { SplitButton, MenuItem, Popover, OverlayTrigger } from 'react-bootstrap'
 class navbar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedTeam: {},
-    };
+    this.state = {};
     this.popover = (
       <Popover id="popover-trigger-click-root-close" title="No Team Selected" />
     );
+    this.selectTeam = this.selectTeam.bind(this);
   }
 
-  selectTeam(teamId) {
+  componentDidMount() {
+    this.selectTeam(this.props.selectedTeam.id);
+    console.log(this.props.selectedTeam);
+  }
+
+  selectTeam = (teamId) => {
     if (typeof this.props.teams === 'undefined' || this.props.teams.length === 0) {
     } else {
       const teamName = this.props.teams.find(team => team.id === teamId).name;
@@ -22,12 +26,6 @@ class navbar extends Component {
           {this.renderMemberList(teamId)}
         </Popover>
       );
-      this.setState({
-        selectedTeam: {
-          id: teamId,
-          name: teamName,
-        },
-      });
       this.props.setSelectedTeam({
         id: teamId,
         name: teamName,
@@ -55,8 +53,8 @@ class navbar extends Component {
           <h2>caltcha</h2>
         </div>
         <div className="col-md-2 col-md-offset-2">
-          <OverlayTrigger id="nav-overlay" trigger="click" rootClose placement="bottom" overlay={this.popover} onEnter={this.renderPopover}>
-            <SplitButton title={this.state.selectedTeam.name || 'Select Team'} id="dropdown-team-sel" onSelect={event => this.selectTeam(event)}>
+          <OverlayTrigger id="nav-overlay" trigger="click" rootClose placement="bottom" overlay={this.popover}>
+            <SplitButton title={this.props.selectedTeam.name || 'Select Team'} id="dropdown-team-sel" onSelect={event => this.selectTeam(event)}>
               {this.renderTeamList()}
             </SplitButton>
           </OverlayTrigger>

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import '../scss/title.scss';
 import User from '../utils/User';
 import Project from '../utils/Project';
 import Navbar from './navbar';
+import '../scss/title.scss';
 
 class MainPage extends Component {
   constructor(props) {
@@ -36,7 +36,11 @@ class MainPage extends Component {
           window.location = '/login';
         }
         const user = new User(res.data.user);
-        this.setState({ user, teams: res.data.teams });
+        this.setState({
+          user,
+          teams: res.data.teams,
+          selectedTeam: { id: res.data.teams[0].id, name: res.data.teams[0].name }
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -143,9 +147,21 @@ class MainPage extends Component {
   render() {
     return (
       <div>
-        <Navbar user={this.state.user} teams={this.state.teams} setSelectedTeam={this.setSelectedTeam}/>
-        {this.renderpjs(this.state.projects)}
-        <Link to="/new">Start a Project</Link>
+        <Navbar
+          user={this.state.user}
+          teams={this.state.teams}
+          selectedTeam={this.state.selectedTeam}
+          setSelectedTeam={this.setSelectedTeam}
+        />
+        <div className="row">
+          <div className="col-md-4">
+            <Link to="/new"><button className="btn btn-primary">Start a Project</button></Link>
+            {this.renderpjs(this.state.projects.filter(proj => proj.team === this.state.selectedTeam.id).filter(proj => proj.superuser === this.state.user.id))}
+          </div>
+          <div className="col-md-8">
+            {this.renderpjs(this.state.projects.filter(proj => proj.team === this.state.selectedTeam.id).filter(proj => proj.superuser !== this.state.user.id))}
+          </div>
+        </div>
       </div>
 
     );
