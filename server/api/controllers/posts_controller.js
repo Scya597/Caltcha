@@ -95,38 +95,7 @@ module.exports = {
         if (userId !== projects[i].superuser) {
           res.send('You are not superuser, so you cannot examine the vote!');
         } else {
-          let c = 0;
-          const nornotvote = [];
-          const nordates = [];
-          for (let j = 0; j < projects[i].normaluser.length; j += 1) {
-            for (let k = 0; k < projects[i].votes.length; k += 1) {
-              if (projects[i].normaluser[j] === projects[i].votes[k].userid) {
-                nordates.push(projects[i].votes[k].dates);
-              } else {
-                c += 1;
-              }
-            }
-            if (c === projects[i].votes.length) {
-              nornotvote.push(projects[i].normaluser[j]);
-            }
-          }
-          if (nordates.length !== projects[i].normaluser.length) {
-            res.send({
-              warn: 'There are some normalusers have not voted',
-              normalusernovote: nornotvote,
-            });
-          } else {
-            const blocksarr = [];
-            let middle = [];
-            for (let j = 0; j < nordates.length; j += 1) {
-              middle = [];
-              for (let k = 0; k < nordates[j].length; k += 1) {
-                for (let m = 0; m < nordates[j][k].timeblocks.length; m += 1) {
-                  middle.push((tdtn(nordates[j][k].date) * 48) + nordates[j][k].timeblocks[m]);
-                }
-              }
-              blocksarr.push(middle);
-            }
+          if (projects[i].normaluser.length === 0) {
             const optarr = [];
             let center = [];
             for (let j = 0; j < projects[i].optionaluser.length; j += 1) {
@@ -144,19 +113,19 @@ module.exports = {
                 optarr.push(center);
               }
             }
-            const basic = blocksarr[0];
+            const basic = optarr[0];
             const finalblocks = [];
             let count;
             for (let m = 0; m < basic.length; m += 1) {
               count = 0;
-              for (let j = 0; j < blocksarr.length; j += 1) {
-                for (let k = 0; k < blocksarr[j].length; k += 1) {
-                  if (basic[m] === blocksarr[j][k]) {
+              for (let j = 0; j < optarr.length; j += 1) {
+                for (let k = 0; k < optarr[j].length; k += 1) {
+                  if (basic[m] === optarr[j][k]) {
                     count += 1;
                   }
                 }
               }
-              if (count === blocksarr.length) {
+              if (count === optarr.length) {
                 finalblocks.push(basic[m]);
               }
             }
@@ -185,6 +154,98 @@ module.exports = {
               stats.push(tntd(conobj[j]));
             }
             res.send({ stats });
+          } else {
+            let c = 0;
+            const nornotvote = [];
+            const nordates = [];
+            for (let j = 0; j < projects[i].normaluser.length; j += 1) {
+              for (let k = 0; k < projects[i].votes.length; k += 1) {
+                if (projects[i].normaluser[j] === projects[i].votes[k].userid) {
+                  nordates.push(projects[i].votes[k].dates);
+                } else {
+                  c += 1;
+                }
+              }
+              if (c === projects[i].votes.length) {
+                nornotvote.push(projects[i].normaluser[j]);
+              }
+            }
+            if (nordates.length !== projects[i].normaluser.length) {
+              res.send({
+                warn: 'There are some normalusers have not voted',
+                normalusernovote: nornotvote,
+              });
+            } else {
+              const blocksarr = [];
+              let middle = [];
+              for (let j = 0; j < nordates.length; j += 1) {
+                middle = [];
+                for (let k = 0; k < nordates[j].length; k += 1) {
+                  for (let m = 0; m < nordates[j][k].timeblocks.length; m += 1) {
+                    middle.push((tdtn(nordates[j][k].date) * 48) + nordates[j][k].timeblocks[m]);
+                  }
+                }
+                blocksarr.push(middle);
+              }
+              const optarr = [];
+              let center = [];
+              for (let j = 0; j < projects[i].optionaluser.length; j += 1) {
+                center = [];
+                for (let k = 0; k < projects[i].votes.length; k += 1) {
+                  if (projects[i].optionaluser[j] === projects[i].votes[k].userid) {
+                    for (let m = 0; m < projects[i].votes[k].dates.length; m += 1) {
+                      for (let n = 0; n < projects[i].votes[k].dates[m].timeblocks.length; n += 1) {
+                        center.push((tdtn(projects[i].votes[k].dates[m].date) * 48) + projects[i].votes[k].dates[m].timeblocks[n]);
+                      }
+                    }
+                  }
+                }
+                if (center.length !== 0) {
+                  optarr.push(center);
+                }
+              }
+              const basic = blocksarr[0];
+              const finalblocks = [];
+              let count;
+              for (let m = 0; m < basic.length; m += 1) {
+                count = 0;
+                for (let j = 0; j < blocksarr.length; j += 1) {
+                  for (let k = 0; k < blocksarr[j].length; k += 1) {
+                    if (basic[m] === blocksarr[j][k]) {
+                      count += 1;
+                    }
+                  }
+                }
+                if (count === blocksarr.length) {
+                  finalblocks.push(basic[m]);
+                }
+              }
+              const contiblocks = conti(finalblocks, projects[i].minDuration);
+              const conobj = [];
+              let copt;
+              let coopt;
+              for (let j = 0; j < contiblocks.length; j += 1) {
+                coopt = 0;
+                for (let m = 0; m < optarr.length; m += 1) {
+                  copt = 0;
+                  for (let k = 0; k < projects[i].minDuration; k += 1) {
+                    for (let n = 0; n < optarr[m].length; n += 1) {
+                      if (contiblocks[j][k] === optarr[m][n]) {
+                        copt += 1;
+                      }
+                    }
+                  }
+                  if (copt == projects[i].minDuration) {
+                    coopt += 1;
+                  }
+                }
+                conobj.push({ contidays: contiblocks[j], optnum: coopt });
+              }
+              for (let j = 0; j < conobj.length; j += 1) {
+                stats.push(tntd(conobj[j]));
+              }
+              res.send({ stats });
+            }
           }
         }
       }
