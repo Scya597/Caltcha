@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
+import Super from './super';
 import '../scss/title.scss';
 
 export default class Vote extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
+    this.state = { userid: '', pjid: '', superid: '' };
+    this.fetchuserandpj = this.fetchuserandpj.bind(this);
     this.vote = this.vote.bind(this);
   }
-
+  componentDidMount() {
+    this.fetchuserandpj();
+  }
+  fetchuserandpj() {
+    const { userid } = this.props.match.params;
+    const { pjid } = this.props.match.params;
+    const { superid } = this.props.match.params;
+    this.setState({ userid, pjid, superid });
+  }
   vote() {
     const tmpDates = [
       {
@@ -24,25 +32,38 @@ export default class Vote extends Component {
       },
     ];
     axios.post('/api/project/vote/', {
-      projectId: this.props.match.params.id,
+      projectId: this.state.pjid,
       dates: tmpDates,
     })
-    .then((response) => {
-      console.log(response);
+    .then((res) => {
+      console.log(res);
     })
     .catch((error) => {
       console.log(error);
     });
     this.props.history.push('/');
   }
+  ifsuper (fuck) {
+    if (fuck.userid !== fuck.superid) {
+      return (
+        <div>
+          <img src="http://www.motherjones.com/wp-content/uploads/silicon-valley.jpg" />
+          <h1>vote</h1>
+          <button onClick={this.vote}>VOTE</button>
+          <Link to="/">Back to Main Page</Link>
+        </div>
+      );
+    } else {
+      return (
+        <Super projectId={fuck.pjid} history={this.props.history} />
+      );
+    }
+  }
 
   render() {
     return (
       <div>
-        <img src="http://www.motherjones.com/wp-content/uploads/silicon-valley.jpg" />
-        <h1>vote</h1>
-        <button onClick={this.vote}>VOTE</button>
-        <Link to="/">Back to Main Page</Link>
+        {this.ifsuper(this.state)}
       </div>
     );
   }

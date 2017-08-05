@@ -19,6 +19,6 @@ router.post('/project/new/', isAuth, PostsController.createnewproject);
 router.post('/project/update', isAuth, PostsController.updateproject);
 router.get('/project/stats/:projectId', isAuth, PostsController.getstats);
 router.post('/project/vote', isAuth, PostsController.uservote);
-router.delete('/project/remove', isAuth, PostsController.rmproject);
+router.post('/project/remove', isAuth, PostsController.rmproject);
 
 module.exports = router;

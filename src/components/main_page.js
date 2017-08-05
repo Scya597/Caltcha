@@ -47,7 +47,7 @@ class MainPage extends Component {
   rendertitle = (obj) => {
     return (
       <li key={obj.id}>
-        <Link to={`/vote/${obj.id}`}>
+        <Link to={`/vote/${obj.id}/${this.state.user.id}/${obj.superuser}`}>
           {obj.title}
         </Link>
       </li>
