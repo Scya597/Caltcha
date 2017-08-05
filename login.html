@@ -1,13 +1,234 @@
-<form action="/login" method="post">
-  <div>
-    <label>Username:</label>
-    <input type="text" name="username"/>
-  </div>
-  <div>
-    <label>Password:</label>
-    <input type="password" name="password"/>
-  </div>
-  <div>
-    <input type="submit" value="Log In"/>
-  </div>
-</form>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+    .wave-one {
+      width: 700px;
+      height: 819px;
+      background: url("http://www.katharinefriedgen.com/wp-content/uploads/2015/06/waves_one.png");
+      background-repeat: repeat-y;
+      float: left;
+      position: relative;
+      top: 0;
+      left: 0;
+      z-index: 7;
+      overflow: hidden;
+    }
+
+    .wave-two {
+      width: 700px;
+      height: 819px;
+      background: url("http://www.katharinefriedgen.com/wp-content/uploads/2015/06/waves_two.png") no-repeat;
+      float: left;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    .wave-three {
+      width: 700px;
+      height: 819px;
+      background: url("http://www.katharinefriedgen.com/wp-content/uploads/2015/06/waves_three.png") no-repeat;
+      position: absolute;
+      z-index: 2;
+      top: 0px;
+      left: 0px;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    .wave-threeb {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      float: left;
+      overflow: hidden;
+      background: url("http://www.katharinefriedgen.com/wp-content/uploads/2015/06/waves_three.png") no-repeat;
+    }
+
+    .floating {
+      animation-name: floating;
+      -webkit-animation-name: floating;
+
+      animation-duration: 10s;
+      -webkit-animation-duration: 10s;
+
+      animation-iteration-count: infinite;
+      -webkit-animation-iteration-count: infinite;
+    }
+
+    @keyframes floating {
+      0% {
+        transform: translateX(0%);
+      }
+      20% {
+        transform: translateX(60%);
+      }
+      80% {
+        transform: translateX(20%)
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+
+    @-webkit-keyframes floating {
+      0% {
+        -webkit-transform: translateX(0%);
+      }
+      50% {
+        transform: translateX(100%);
+      }
+      80% {
+        transform: translateX(150%);
+      }
+      100% {
+        -webkit-transform: translateX(0%);
+      }
+    }
+
+    .floating2 {
+      animation-name: floating;
+      -webkit-animation-name: floating;
+
+      animation-duration: 12s;
+      -webkit-animation-duration: 12s;
+
+      animation-iteration-count: infinite;
+      -webkit-animation-iteration-count: infinite;
+    }
+
+    @keyframes floating2 {
+      0% {
+        transform: translateX(0%);
+      }
+      20% {
+        transform: translateX(80%);
+      }
+      80% {
+        transform: translateX(40%)
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+
+    @-webkit-keyframes floating2 {
+      0% {
+        -webkit-transform: translateX(0%);
+      }
+      20% {
+        transform: translateX(80%);
+      }
+      80% {
+        transform: translateX(40%);
+      }
+      100% {
+        -webkit-transform: translateX(0%);
+      }
+    }
+
+    .floating3 {
+      animation-name: floating;
+      -webkit-animation-name: floating;
+
+      animation-duration: 8s;
+      -webkit-animation-duration: 8s;
+
+      animation-iteration-count: infinite;
+      -webkit-animation-iteration-count: infinite;
+    }
+
+    @keyframes floating3 {
+      0% {
+        transform: translateX(0%);
+      }
+      40% {
+        transform: translateX(50%);
+      }
+      80% {
+        transform: translateX(100%)
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+
+    @-webkit-keyframes floating3 {
+      0% {
+        -webkit-transform: translateX(0%);
+      }
+      40% {
+        transform: translateX(50%);
+      }
+      80% {
+        transform: translateX(100%);
+      }
+      100% {
+        -webkit-transform: translateX(0%);
+      }
+    }
+
+    .floating4 {
+      animation-name: floating;
+      -webkit-animation-name: floating;
+
+      animation-duration: 25s;
+      -webkit-animation-duration: 25s;
+
+      animation-iteration-count: infinite;
+      -webkit-animation-iteration-count: infinite;
+    }
+
+    @keyframes floating4 {
+      0% {
+        transform: translateX(0%);
+      }
+      50% {
+        transform: translateX(100%)
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+
+    @-webkit-keyframes floating4 {
+      0% {
+        -webkit-transform: translateX(0%);
+      }
+      50% {
+        transform: translateX(50%);
+      }
+      100% {
+        -webkit-transform: translateX(0%);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <form action="/login" method="post">
+    <div>
+      <label>Username:</label>
+      <input type="text" name="username" class="form-control" />
+    </div>
+    <div>
+      <label>Password:</label>
+      <input type="password" name="password" class="form-control" />
+    </div>
+    <div>
+      <input type="submit" value="Log In" class="btn btn-primary" />
+    </div>
+  </form>
+  <div class="wave-one floating"></div>
+  <div class="wave-two floating3"></div>
+  <div class="wave-three floating4"></div>
+</body>
+
+</html>
