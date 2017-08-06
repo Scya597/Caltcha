@@ -64,6 +64,11 @@ class navbar extends Component {
   renderemail = (item) => {
     return <li key={item.id}>{item.username} <a href={`mailto:${item.email}`}><u>{item.email}</u></a></li>;
   }
+
+  handleNavLink() {
+    window.location = '/logout';
+  }
+
   render() {
     return (
       <Navbar collapseOnSelect>
