@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { SplitButton, MenuItem, Popover, OverlayTrigger } from 'react-bootstrap';
 
 class navbar extends Component {
@@ -18,6 +19,20 @@ class navbar extends Component {
 
   selectTeam = (teamId) => {
     if (typeof this.props.teams === 'undefined' || this.props.teams.length === 0) {
+      axios.get('/api/profile')
+        .then((res) => {
+          let team;
+          team = res.data.teams[0];
+          const teamMemberCnt = res.data.teams[0].members.length;
+          this.popover = (
+            <Popover id="popover-trigger-click-root-close" title={`${teamMemberCnt} members`}>
+              {team.members.map(this.renderemail)}
+            </Popover>
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       const teamName = this.props.teams.find(team => team.id === teamId).name;
       const teamMemberCnt = this.props.teams.find(team => team.id === teamId).members.length;
@@ -44,8 +59,11 @@ class navbar extends Component {
   renderMemberList(teamId) {
     const selectedTeamObj = this.props.teams.find(team => team.id === teamId);
     return selectedTeamObj.members.map(item => <li key={item.id}>{item.username} <a href={`mailto:${item.email}`}><u>{item.email}</u></a></li>);
-  }
 
+  }
+  renderemail = (item) => {
+    return <li key={item.id}>{item.username} <a href={`mailto:${item.email}`}><u>{item.email}</u></a></li>;
+  }
   render() {
     return (
       <div className="row text-center">
