@@ -80,6 +80,6 @@ module.exports = (obj) => {
   for (let i = 0; i < obj.contidays.length; i += 1) {
     timeblock.push(q + i);
   }
-  shit = { date: days, timeblocks: timeblock, optionalUserNum: obj.optnum };
+  shit = { date: days, timeblocks: timeblock, optionaluser: obj.optnum };
   return shit;
 };

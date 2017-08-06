@@ -98,29 +98,31 @@ module.exports = {
           if (projects[i].normaluser.length === 0) {
             const optarr = [];
             let center = [];
+            let center2 = {};
             for (let j = 0; j < projects[i].optionaluser.length; j += 1) {
               center = [];
               for (let k = 0; k < projects[i].votes.length; k += 1) {
                 if (projects[i].optionaluser[j] === projects[i].votes[k].userid) {
                   for (let m = 0; m < projects[i].votes[k].dates.length; m += 1) {
                     for (let n = 0; n < projects[i].votes[k].dates[m].timeblocks.length; n += 1) {
-                      center.push((tdtn(projects[i].votes[k].dates[m].date) * 48) + projects[i].votes[k].dates[m].timeblocks[n]);
+                      center.push(
+                        (tdtn(projects[i].votes[k].dates[m].date) * 48) + projects[i].votes[k].dates[m].timeblocks[n]
+                      );
                     }
                   }
+                  center2 = { name: projects[i].optionaluser[j], vote: center };
+                  optarr.push(center2);
                 }
               }
-              if (center.length !== 0) {
-                optarr.push(center);
-              }
             }
-            const basic = optarr[0];
+            const basic = optarr[0].vote;
             const finalblocks = [];
             let count;
             for (let m = 0; m < basic.length; m += 1) {
               count = 0;
               for (let j = 0; j < optarr.length; j += 1) {
-                for (let k = 0; k < optarr[j].length; k += 1) {
-                  if (basic[m] === optarr[j][k]) {
+                for (let k = 0; k < optarr[j].vote.length; k += 1) {
+                  if (basic[m] === optarr[j].vote[k]) {
                     count += 1;
                   }
                 }
@@ -134,18 +136,18 @@ module.exports = {
             let copt;
             let coopt;
             for (let j = 0; j < contiblocks.length; j += 1) {
-              coopt = 0;
+              coopt = [];
               for (let m = 0; m < optarr.length; m += 1) {
                 copt = 0;
                 for (let k = 0; k < projects[i].minDuration; k += 1) {
-                  for (let n = 0; n < optarr[m].length; n += 1) {
-                    if (contiblocks[j][k] === optarr[m][n]) {
+                  for (let n = 0; n < optarr[m].vote.length; n += 1) {
+                    if (contiblocks[j][k] === optarr[m].vote[n]) {
                       copt += 1;
                     }
                   }
                 }
                 if (copt == projects[i].minDuration) {
-                  coopt += 1;
+                  coopt.push(optarr[m].name);
                 }
               }
               conobj.push({ contidays: contiblocks[j], optnum: coopt });
@@ -189,19 +191,21 @@ module.exports = {
               }
               const optarr = [];
               let center = [];
+              let center2 = {};
               for (let j = 0; j < projects[i].optionaluser.length; j += 1) {
                 center = [];
                 for (let k = 0; k < projects[i].votes.length; k += 1) {
                   if (projects[i].optionaluser[j] === projects[i].votes[k].userid) {
                     for (let m = 0; m < projects[i].votes[k].dates.length; m += 1) {
                       for (let n = 0; n < projects[i].votes[k].dates[m].timeblocks.length; n += 1) {
-                        center.push((tdtn(projects[i].votes[k].dates[m].date) * 48) + projects[i].votes[k].dates[m].timeblocks[n]);
+                        center.push(
+                          (tdtn(projects[i].votes[k].dates[m].date) * 48) + projects[i].votes[k].dates[m].timeblocks[n]
+                        );
                       }
                     }
+                    center2 = { name: projects[i].optionaluser[j], vote: center };
+                    optarr.push(center2);
                   }
-                }
-                if (center.length !== 0) {
-                  optarr.push(center);
                 }
               }
               const basic = blocksarr[0];
@@ -225,18 +229,18 @@ module.exports = {
               let copt;
               let coopt;
               for (let j = 0; j < contiblocks.length; j += 1) {
-                coopt = 0;
+                coopt = [];
                 for (let m = 0; m < optarr.length; m += 1) {
                   copt = 0;
                   for (let k = 0; k < projects[i].minDuration; k += 1) {
-                    for (let n = 0; n < optarr[m].length; n += 1) {
-                      if (contiblocks[j][k] === optarr[m][n]) {
+                    for (let n = 0; n < optarr[m].vote.length; n += 1) {
+                      if (contiblocks[j][k] === optarr[m].vote[n]) {
                         copt += 1;
                       }
                     }
                   }
                   if (copt == projects[i].minDuration) {
-                    coopt += 1;
+                    coopt.push(optarr[m].name);
                   }
                 }
                 conobj.push({ contidays: contiblocks[j], optnum: coopt });
