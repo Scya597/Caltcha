@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SplitButton, MenuItem, Popover, OverlayTrigger } from 'react-bootstrap';
 
-class navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -79,11 +79,11 @@ class navbar extends Component {
           <h5>{this.props.user.username}</h5>
         </div>
         <div className="col-md-1">
-          <a href="/logout"><button className="btn btn-danger">Logout</button></a>
+          <a href="/logout"><button className="btn btn-secondary">Logout</button></a>
         </div>
       </div>
     );
   }
 }
 
-export default navbar;
+export default Navbar;

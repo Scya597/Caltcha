@@ -7,6 +7,7 @@ import '../scss/title.scss';
 export default class Vote extends Component {
   constructor(props) {
     super(props);
+
     this.state = { userid: '', pjid: '', superid: '' };
     this.fetchuserandpj = this.fetchuserandpj.bind(this);
     this.vote = this.vote.bind(this);
