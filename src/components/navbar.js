@@ -50,7 +50,17 @@ class navbar extends Component {
     return (
       <div className="row text-center">
         <div className="col-md-3">
-          <h2>caltcha</h2>
+          <h2>
+            <span className="logo">
+              <span className="letter">c</span>
+              a
+              <span className="cool">l</span>
+              t
+              <span className="letter">c</span>
+              <span className="cool">h</span>
+              a
+            </span>
+          </h2>
         </div>
         <div className="col-md-2 col-md-offset-2">
           <OverlayTrigger id="nav-overlay" trigger="click" rootClose placement="bottom" overlay={this.popover}>
