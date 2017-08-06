@@ -89,6 +89,7 @@ class New extends Component {
     .catch((err) => {
       console.log(err);
     });
+    console.log(this.state.newProject.team);
     this.props.history.push('/');
   }
 
