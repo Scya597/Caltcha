@@ -125,7 +125,7 @@ class New extends Component {
 
   render() {
     return (
-      <div className="all-proj-container">
+      <div className="new-proj-container">
         <h2>New Project</h2>
         <form onSubmit={this.saveNewProject}>
           <Col md={6}>
