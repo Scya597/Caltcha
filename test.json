@@ -30,7 +30,8 @@
       "password": "12345",
       "realname": "monica",
       "email": "monica12567@gmail.com",
-      "team": ["00"]
+      "team": ["00"],
+      "selectedteam" : { "id": "", "name": "" }
     },
     {
       "id": "7724465649",
@@ -38,7 +39,8 @@
       "password": "baby",
       "realname": "Superman",
       "email": "superman@gmail.com",
-      "team": ["00", "01"]
+      "team": ["00", "01"],
+      "selectedteam" : { "id": "", "name": "" }
     },
     {
       "id": "8948983993",
@@ -46,7 +48,8 @@
       "password": "12345",
       "realname": "LongDick",
       "email": "dicky@gmail.com",
-      "team": ["00", "01"]
+      "team": ["00", "01"],
+      "selectedteam" : { "id": "", "name": "" }
     },
     {
       "id": "6975711782",
@@ -54,7 +57,8 @@
       "password": "12345",
       "realname": "Superwoman",
       "email": "superwoman@gmail.com",
-      "team": ["00"]
+      "team": ["00"],
+      "selectedteam" : { "id": "", "name": "" }
     },
     {
       "id": "7840273219",
@@ -62,7 +66,8 @@
       "password": "12345",
       "realname": "max",
       "email": "mm89560@gmail.com",
-      "team": ["00", "01"]
+      "team": ["00", "01"],
+      "selectedteam" : { "id": "", "name": "" }
     }
   ],
   "project": [

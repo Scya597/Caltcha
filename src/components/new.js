@@ -82,6 +82,27 @@ class New extends Component {
   }
 
   saveNewProject() {
+    axios.get('/api/profile')
+      .then((res) => {
+        const teamid = this.state.newProject.team;
+        const teams = res.data.teams;
+        let teamname;
+        for (let i = 0; i < teams.length; i += 1) {
+          if (teams[i].id === teamid) {
+            teamname = teams[i].name;
+          }
+        }
+        axios.post('/api/team/select', { id: teamid, name: teamname })
+          .then((resp) => {
+            console.log(resp);
+          })
+          .catch((erro) => {
+            console.log(erro);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     axios.post('/api/project/new', this.state.newProject)
     .then((res) => {
       console.log(res);
@@ -89,7 +110,6 @@ class New extends Component {
     .catch((err) => {
       console.log(err);
     });
-    console.log(this.state.newProject.team);
     this.props.history.push('/');
   }
 
