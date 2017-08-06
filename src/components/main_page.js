@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import User from '../utils/User';
 import Project from '../utils/Project';
@@ -106,29 +107,27 @@ class MainPage extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="text-center">
         <Navbar
           user={this.state.user}
           teams={this.state.teams}
           selectedTeam={this.state.selectedTeam}
           setSelectedTeam={this.setSelectedTeam}
         />
-        <div className="row text-center all-proj-container">
-          <div className="col-md-4">
-            <ManageList
-              superProj={this.state.superselectedpjs}
-              user={this.state.user}
-            />
-          </div>
-          <div className="col-md-8">
-            <VoteList
-              teams={this.state.teams}
-              unvotedProj={this.state.otherselectedpjs.filter(proj => typeof proj.votes.find(vote => vote.userid === this.state.user.id) === 'undefined')}
-              votedProj={this.state.otherselectedpjs.filter(proj => typeof proj.votes.find(vote => vote.userid === this.state.user.id) !== 'undefined')}
-              user={this.state.user}
-            />
-          </div>
-        </div>
+        <Col md={4}>
+          <ManageList
+            superProj={this.state.superselectedpjs}
+            user={this.state.user}
+          />
+        </Col>
+        <Col md={8}>
+          <VoteList
+            teams={this.state.teams}
+            unvotedProj={this.state.otherselectedpjs.filter(proj => typeof proj.votes.find(vote => vote.userid === this.state.user.id) === 'undefined')}
+            votedProj={this.state.otherselectedpjs.filter(proj => typeof proj.votes.find(vote => vote.userid === this.state.user.id) !== 'undefined')}
+            user={this.state.user}
+          />
+        </Col>
       </div>
 
     );

@@ -24,7 +24,7 @@ class manageList extends Component {
     return (
       <div>
         <h3>Your Projects</h3>
-        <Link to="/new"><Button bsStyle="primary" bsSize="large">Add Event</Button></Link>
+        <Link to="/new"><Button bsStyle="primary" bsSize="large" block>Add Event</Button></Link>
         <div className="manage-list-container">
           {superProjJSX}
         </div>
