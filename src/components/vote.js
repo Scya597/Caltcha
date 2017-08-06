@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+
 import Super from './super';
 import '../scss/title.scss';
 
@@ -8,19 +9,15 @@ export default class Vote extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { userid: '', pjid: '', superid: '' };
-    this.fetchuserandpj = this.fetchuserandpj.bind(this);
+    const { userid, pjid, superid } = this.props.match.params;
+    this.state = {
+      userId: userid,
+      projectId: pjid,
+      superUserId: superid,
+    };
     this.vote = this.vote.bind(this);
   }
-  componentDidMount() {
-    this.fetchuserandpj();
-  }
-  fetchuserandpj() {
-    const { userid } = this.props.match.params;
-    const { pjid } = this.props.match.params;
-    const { superid } = this.props.match.params;
-    this.setState({ userid, pjid, superid });
-  }
+
   vote() {
     const tmpDates = [
       {
@@ -44,26 +41,43 @@ export default class Vote extends Component {
     });
     this.props.history.push('/');
   }
-  ifsuper (fuck) {
-    if (fuck.userid !== fuck.superid) {
+
+  ifsuper(user) {
+    if (user.userId !== user.superUserId) {
       return (
         <div>
-          <img src="http://www.motherjones.com/wp-content/uploads/silicon-valley.jpg" />
           <h1>vote</h1>
           <button onClick={this.vote}>VOTE</button>
-          <Link to="/">Back to Main Page</Link>
         </div>
       );
     } else {
       return (
-        <Super projectId={fuck.pjid} history={this.props.history} match={this.props.match} />
+        <Super projectId={user.projectId} history={this.props.history} match={this.props.match} />
       );
     }
   }
 
   render() {
     return (
-      <div>
+      <div className="col-md-12">
+        <div className="col-md-6">
+          <div className="row">
+            <Link className="btn btn-default col-md-1" to="/">
+              Back
+            </Link>
+            <p className="com-md-5">3 days left</p>
+          </div>
+          <div>
+            <h2>Title: 吃小龍蝦</h2>
+            <h4>Location: 二餐</h4>
+            <h4>Duration: 3小時</h4>
+            <h5>Description: 大雨大雨一直下</h5>
+          </div>
+          <button className="btn btn-danger">
+            I don't feel like joining this event
+          </button>
+        </div>
+
         {this.ifsuper(this.state)}
       </div>
     );

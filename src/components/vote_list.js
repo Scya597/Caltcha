@@ -21,7 +21,7 @@ class voteList extends Component {
     });
     const votedProjJSX = this.props.votedProj.map((proj) => {
       return (
-        <ListGroupItem key={proj.id}>
+        <ListGroupItem key={proj.id} >
           <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`}>
             <h5><strong>{proj.title}</strong> Location: {proj.location} 時程：{proj.minDuration*0.5} 小時</h5>
           </Link>
