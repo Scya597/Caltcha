@@ -14,7 +14,6 @@ class navbar extends Component {
 
   componentDidMount() {
     this.selectTeam(this.props.selectedTeam.id);
-    console.log(this.props.selectedTeam);
   }
 
   selectTeam = (teamId) => {
@@ -71,7 +70,7 @@ class navbar extends Component {
 
   render() {
     return (
-      <Navbar collapseOnSelect>
+      <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
             <h2 className="logo">
