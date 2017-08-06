@@ -71,6 +71,7 @@ class navbar extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <Navbar collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
@@ -118,6 +119,42 @@ class navbar extends Component {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+=======
+      <div className="row text-center nav">
+        <div className="col-md-3">
+          <h2>
+            <span className="logo">
+              <span className="letter">c</span>
+              a
+              <span className="cool">l</span>
+              t
+              <span className="letter">c</span>
+              <span className="cool">h</span>
+              a
+            </span>
+          </h2>
+        </div>
+        <div className="col-md-2 col-md-offset-2">
+          <OverlayTrigger id="nav-overlay" trigger="click" rootClose placement="bottom" overlay={this.popover}>
+            <SplitButton title={this.props.selectedTeam.name || 'Select Team'} id="dropdown-team-sel" onSelect={event => this.selectTeam(event)}>
+              {this.renderTeamList()}
+            </SplitButton>
+          </OverlayTrigger>
+        </div>
+        <div className="col-md-3">
+          <div className="input-group">
+            <span className="input-group-addon"><i className="glyphicon glyphicon-search" /></span>
+            <input type="text" className="form-control" />
+          </div>
+        </div>
+        <div className="col-md-1">
+          <h5>{this.props.user.username}</h5>
+        </div>
+        <div className="col-md-1">
+          <a href="/logout"><button className="btn btn-secondary">Logout</button></a>
+        </div>
+      </div>
+>>>>>>> Maximus
     );
   }
 }

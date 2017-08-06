@@ -59,10 +59,10 @@ export default class Vote extends Component {
 
   render() {
     return (
-      <div className="col-md-12">
+      <div className="container-fluid">
         <div className="col-md-6">
           <div className="row">
-            <Link className="btn btn-default col-md-1" to="/">
+            <Link className="btn btn-default col-md-1 back-button" to="/">
               Back
             </Link>
             <p className="com-md-5">3 days left</p>
@@ -73,7 +73,7 @@ export default class Vote extends Component {
             <h4>Duration: 3小時</h4>
             <h5>Description: 大雨大雨一直下</h5>
           </div>
-          <button className="btn btn-danger">
+          <button className="btn btn-danger col-md-6">
             I don't feel like joining this event
           </button>
         </div>
