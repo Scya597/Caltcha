@@ -70,17 +70,17 @@ class navbar extends Component {
 
   render() {
     return (
-      <Navbar>
+      <Navbar className="nav">
         <Navbar.Header>
           <Navbar.Brand>
             <h2 className="logo">
-              <span className="wtf">c</span>
+              <span className="letter">c</span>
               <span className="awesome">a</span>
-              <span className="letter">l</span>
-              <span className="awesome">t</span>
-              <span className="cool">c</span>
+              <span className="wtf">l</span>
+              <span className="cool">t</span>
+              <span className="awesome">c</span>
               <span className="letter">h</span>
-              <span className="awesome">a</span>
+              <span className="wtf">a</span>
             </h2>
           </Navbar.Brand>
           <Navbar.Toggle />
