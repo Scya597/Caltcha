@@ -30,7 +30,7 @@ export default class Vote extends Component {
       },
     ];
     axios.post('/api/project/vote/', {
-      projectId: this.state.pjid,
+      projectId: this.state.projectId,
       dates: tmpDates,
     })
     .then((res) => {

@@ -109,7 +109,7 @@ class MainPage extends Component {
           selectedTeam={this.state.selectedTeam}
           setSelectedTeam={this.setSelectedTeam}
         />
-        <div className="row text-center">
+        <div className="row text-center all-proj-container">
           <div className="col-md-4">
             <ManageList
               superProj={this.state.superselectedpjs}
