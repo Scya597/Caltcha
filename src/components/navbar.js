@@ -70,17 +70,17 @@ class navbar extends Component {
 
   render() {
     return (
-      <Navbar className="nav">
+      <Navbar className="nav-not-react">
         <Navbar.Header>
           <Navbar.Brand>
             <h2 className="logo">
-              <span className="letter">c</span>
-              <span className="awesome">a</span>
-              <span className="wtf">l</span>
-              <span className="cool">t</span>
-              <span className="awesome">c</span>
-              <span className="letter">h</span>
-              <span className="wtf">a</span>
+              <span className="letter letter-width">c</span>
+              <span className="awesome letter-width">a</span>
+              <span className="wtf letter-width">l</span>
+              <span className="cool letter-width">t</span>
+              <span className="awesome letter-width">c</span>
+              <span className="letter letter-width">h</span>
+              <span className="wtf letter-width">a</span>
             </h2>
           </Navbar.Brand>
           <Navbar.Toggle />
