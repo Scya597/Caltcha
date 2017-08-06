@@ -74,16 +74,14 @@ class navbar extends Component {
       <Navbar collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <h2>
-              <span className="logo">
-                <span className="letter">c</span>
-                a
-                <span className="cool">l</span>
-                t
-                <span className="letter">c</span>
-                <span className="cool">h</span>
-                a
-              </span>
+            <h2 className="logo">
+              <span className="wtf">c</span>
+              <span className="awesome">a</span>
+              <span className="letter">l</span>
+              <span className="awesome">t</span>
+              <span className="cool">c</span>
+              <span className="letter">h</span>
+              <span className="awesome">a</span>
             </h2>
           </Navbar.Brand>
           <Navbar.Toggle />
