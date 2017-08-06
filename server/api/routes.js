@@ -21,5 +21,7 @@ router.get('/project/stats/:projectId', isAuth, PostsController.getstats);
 router.post('/project/vote', isAuth, PostsController.uservote);
 router.post('/project/remove', isAuth, PostsController.rmproject);
 router.get('/project/:projectId', isAuth, PostsController.getproject);
+router.get('/team/select', isAuth, PostsController.getselectedteam);
+router.post('/team/select', isAuth, PostsController.postselectedteam);
 
 module.exports = router;

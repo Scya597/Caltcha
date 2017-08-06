@@ -21,69 +21,58 @@ class MainPage extends Component {
     };
     this.fetchuser = this.fetchuser.bind(this);
     this.fetchprojects = this.fetchprojects.bind(this);
+    this.setinitteam = this.setinitteam.bind(this);
     this.setSelectedTeam = this.setSelectedTeam.bind(this);
   }
   componentDidMount() {
     this.fetchuser();
     this.fetchprojects();
+    this.setinitteam();
   }
   setSelectedTeam(teamObj) {
-    if (this.state.projects.length === 0) {
-      let projects;
-      axios.get('/api/project/data')
-        .then((res) => {
-          projects = res.data.projects;
-          const selectedpjs = [];
-          for (let i = 0; i < projects.length; i += 1) {
-            if (projects[i].team === teamObj.id) {
-              selectedpjs.push(projects[i]);
-            }
-          }
-          const superselectedpjs = [];
-          const otherselectedpjs = [];
-          for (let i = 0; i < selectedpjs.length; i += 1) {
-            if (this.state.user.id === selectedpjs[i].superuser) {
-              superselectedpjs.push(selectedpjs[i]);
-            } else {
-              otherselectedpjs.push(selectedpjs[i]);
-            }
-          }
-          this.setState({ selectedTeam: teamObj, superselectedpjs, otherselectedpjs });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      const selectedpjs = [];
-      for (let i = 0; i < this.state.projects.length; i += 1) {
-        if (this.state.projects[i].team === teamObj.id) {
-          selectedpjs.push(this.state.projects[i]);
-        }
+    const selectedpjs = [];
+    for (let i = 0; i < this.state.projects.length; i += 1) {
+      if (this.state.projects[i].team === teamObj.id) {
+        selectedpjs.push(this.state.projects[i]);
       }
-      const superselectedpjs = [];
-      const otherselectedpjs = [];
-      for (let i = 0; i < selectedpjs.length; i += 1) {
-        if (this.state.user.id === selectedpjs[i].superuser) {
-          superselectedpjs.push(selectedpjs[i]);
-        } else {
-          otherselectedpjs.push(selectedpjs[i]);
-        }
-      }
-      this.setState({ selectedTeam: teamObj, superselectedpjs, otherselectedpjs });
     }
-  }
-  fetchuser = () => {
-    axios.get('/api/profile')
+    const superselectedpjs = [];
+    const otherselectedpjs = [];
+    for (let i = 0; i < selectedpjs.length; i += 1) {
+      if (this.state.user.id === selectedpjs[i].superuser) {
+        superselectedpjs.push(selectedpjs[i]);
+      } else {
+        otherselectedpjs.push(selectedpjs[i]);
+      }
+    }
+    this.setState({ selectedTeam: teamObj, superselectedpjs, otherselectedpjs });
+    axios.post('/api/team/select', teamObj)
       .then((res) => {
-        if (!res.data.user) {
-          window.location = '/login';
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  setinitteam = () => {
+    axios.get('/api/team/select')
+      .then((res) => {
+        const selectedteam = res.data;
+        console.log(selectedteam);
+        if (selectedteam.id.length === 0) {
+          console.log('sdf');
+          axios.get('/api/profile')
+            .then((resp) => {
+              const team = resp.data.teams[0];
+              this.setSelectedTeam({ id: team.id, name: team.name });
+            })
+            .catch((erro) => {
+              console.log(erro);
+            });
+        } else {
+          console.log('dfg');
+          this.setSelectedTeam(selectedteam);
         }
-        const user = new User(res.data.user);
-        this.setState({
-          user,
-          teams: res.data.teams,
-        });
-        this.setSelectedTeam({ id: res.data.teams[0].id, name: res.data.teams[0].name });
       })
       .catch((err) => {
         console.log(err);
@@ -99,7 +88,22 @@ class MainPage extends Component {
         console.log(err);
       });
   }
-
+  fetchuser = () => {
+    axios.get('/api/profile')
+      .then((res) => {
+        if (!res.data.user) {
+          window.location = '/login';
+        }
+        const user = new User(res.data.user);
+        this.setState({
+          user,
+          teams: res.data.teams,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   render() {
     return (
       <div>

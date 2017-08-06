@@ -44,7 +44,7 @@ export default class Vote extends Component {
     });
     this.props.history.push('/');
   }
-  ifsuper (fuck) {
+  ifsuper(fuck) {
     if (fuck.userid !== fuck.superid) {
       return (
         <div>

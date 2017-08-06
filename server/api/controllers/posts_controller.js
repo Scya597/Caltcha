@@ -295,4 +295,26 @@ module.exports = {
       }
     }
   },
+  getselectedteam(req, res) {
+    const userId = req.user.id;
+    let selectedteam;
+    for (let i = 0; i < users.length; i += 1) {
+      if (userId === users[i].id) {
+        selectedteam = users[i].selectedteam;
+      }
+    }
+    res.send(selectedteam);
+  },
+  postselectedteam(req, res) {
+    const userId = req.user.id;
+    const request = req.body;
+    for (let i = 0; i < users.length; i += 1) {
+      if (userId === users[i].id) {
+        users[i].selectedteam = request;
+        res.send('update selectedteam success');
+        console.log('post');
+        console.log(users[i].selectedteam);
+      }
+    }
+  },
 };
