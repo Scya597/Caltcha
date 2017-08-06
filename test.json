@@ -31,7 +31,7 @@
       "realname": "monica",
       "email": "monica12567@gmail.com",
       "team": ["00"],
-      "selectedteam" : { "id": "", "name": "" }
+      "selectedteam" : { "id": "00", "name": "Autumn" }
     },
     {
       "id": "7724465649",
@@ -40,7 +40,7 @@
       "realname": "Superman",
       "email": "superman@gmail.com",
       "team": ["00", "01"],
-      "selectedteam" : { "id": "", "name": "" }
+      "selectedteam" : { "id": "01", "name": "Facebook" }
     },
     {
       "id": "8948983993",
@@ -49,7 +49,7 @@
       "realname": "LongDick",
       "email": "dicky@gmail.com",
       "team": ["00", "01"],
-      "selectedteam" : { "id": "", "name": "" }
+      "selectedteam" : { "id": "01", "name": "Facebook" }
     },
     {
       "id": "6975711782",
@@ -58,7 +58,7 @@
       "realname": "Superwoman",
       "email": "superwoman@gmail.com",
       "team": ["00"],
-      "selectedteam" : { "id": "", "name": "" }
+      "selectedteam" : { "id": "00", "name": "Autumn" }
     },
     {
       "id": "7840273219",
@@ -67,7 +67,7 @@
       "realname": "max",
       "email": "mm89560@gmail.com",
       "team": ["00", "01"],
-      "selectedteam" : { "id": "", "name": "" }
+      "selectedteam" : { "id": "00", "name": "Autumn" }
     }
   ],
   "project": [

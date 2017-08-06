@@ -20,6 +20,7 @@
     "ejs": "^2.5.6",
     "express": "^4.15.3",
     "express-session": "^1.15.5",
+    "moment": "^2.18.1",
     "mongodb": "^2.2.27",
     "mongoose": "^4.10.3",
     "passport": "^0.3.2",
@@ -27,6 +28,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.2",
+    "react-datetime": "^2.9.0",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1"
