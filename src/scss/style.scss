@@ -1,6 +1,7 @@
 .logo {
   color: #66DD00;
   font-size: 50px;
+  margin-left: 20px;
 }
 
 .letter {
@@ -22,18 +23,10 @@ h2 {
 
 .container {
   width: 100%;
+  padding: 0px;
 }
 
-.super-proj {
-  color: #1565C0;
-  border: #1565C0 1px solid;
-  border-radius: 8px;
-  margin: 5px;
-}
-
-.unvoted-proj {
-  color: #C62828;
-  border: #C62828 1px solid;
-  border-radius: 8px;
-  margin: 5px;
+a .navbar-form {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }

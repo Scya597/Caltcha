@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Button, Panel } from 'react-bootstrap';
 
 class manageList extends Component {
   constructor(props) {
@@ -10,18 +11,20 @@ class manageList extends Component {
   render() {
     const superProjJSX = this.props.superProj.map((proj) => {
       return (
-        <div className="super-proj" key={proj.id}>
-          <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`}>
-            <h4>{proj.title}</h4>
-            <h5>時程：{proj.minDuration*0.5} 小時</h5>
-          </Link>
-        </div>
+        <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`} key={proj.id}>
+          <Panel bsStyle="primary">
+              <h3>{proj.title}</h3>
+              <h5>Duration: {proj.minDuration*0.5} hrs</h5>
+              <h5>Location: {proj.location}</h5>
+              <h5>Deadline: {proj.deadline}</h5>
+          </Panel>
+        </Link>
       );
     });
     return (
       <div>
         <h3>Your Projects</h3>
-        <Link to="/new"><button className="btn btn-primary">Add Event</button></Link>
+        <Link to="/new"><Button bsStyle="primary" bsSize="large">Add Event</Button></Link>
         {superProjJSX}
       </div>
     );

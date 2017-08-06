@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { ListGroupItem, ListGroup } from 'react-bootstrap';
+import { ListGroupItem, ListGroup, Panel } from 'react-bootstrap';
 
 class voteList extends Component {
   constructor(props) {
@@ -11,10 +11,13 @@ class voteList extends Component {
   render() {
     const unvotedProjJSX = this.props.unvotedProj.map((proj) => {
       return (
-        <div key={proj.id} className="col-md-3 unvoted-proj">
+        <div className="col-md-3" key={proj.id}>
           <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`}>
-            <h4>{proj.title}</h4>
-            <h5>時程：{proj.minDuration*0.5} 小時</h5>
+            <Panel bsStyle="danger" header={proj.title}>
+              <h5>Created by @{this.props.teams.find(team => team.id === proj.team).members.find(member => member.id === proj.superuser).username}</h5>
+              <h5>Duration: {proj.minDuration * 0.5} hrs</h5>
+              <h5>Deadline: {proj.deadline}</h5>
+            </Panel>
           </Link>
         </div>
       );
@@ -23,7 +26,7 @@ class voteList extends Component {
       return (
         <ListGroupItem key={proj.id} >
           <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`}>
-            <h5><strong>{proj.title}</strong> Location: {proj.location} 時程：{proj.minDuration*0.5} 小時</h5>
+            <h5>{proj.finaldate.date} {(`00${proj.finaldate.timeblocks[0] * 30}`).slice(-4)} <strong>{proj.title},</strong> Location: {proj.location}, Duration：{proj.minDuration * 0.5} hrs</h5>
           </Link>
         </ListGroupItem>
       );
