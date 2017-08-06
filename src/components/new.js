@@ -3,8 +3,47 @@ import axios from 'axios';
 import uuid from 'uuid/v4';
 import { Link } from 'react-router-dom';
 import { Col, FormGroup, FormControl, Button } from 'react-bootstrap';
+import DatePicker from 'react-datetime';
+import moment from 'moment';
 // import _ from 'lodash';
 import '../scss/title.scss';
+import '../scss/react-datetime.scss';
+
+function getData() {
+  return [axios.get('/api/profile'), axios.get('/api/team/select')];
+}
+
+function renderDuration() {
+  const hourArr = [];
+  for (let i = 1; i < 16; i += 1) hourArr.push(<option value={i} key={i}>{i * 0.5} hrs</option>);
+  hourArr.push(<option value={48} key={48}>1 day</option>);
+  return hourArr;
+}
+
+const defaultVotes = [
+  {
+    userid: '5794283116',
+    dates: [
+      {
+        date: 20171007,
+        timeblocks: [2, 6, 7, 8, 13, 14, 15],
+      },
+    ],
+  },
+  {
+    userid: 'nvifnvbnbrnobnorenobmey',
+    dates: [
+      {
+        date: 20170930,
+        timeblocks: [2, 6, 7, 8, 13, 14, 15],
+      },
+      {
+        date: 20171007,
+        timeblocks: [2, 3, 7, 8, 14, 15],
+      },
+    ],
+  },
+];
 
 class New extends Component {
   constructor(props) {
@@ -13,6 +52,7 @@ class New extends Component {
       user: {},
       teams: [],
       newProject: {},
+      selectedTeam: {},
     };
     this.saveNewProject = this.saveNewProject.bind(this);
     this.syncData = this.syncData.bind(this);
@@ -23,22 +63,22 @@ class New extends Component {
     this.fetchuser();
   }
   fetchuser = () => {
-    axios.get('/api/profile')
+    axios.all(getData())
       .then((res) => {
         this.setState({
-          user: res.data.user,
-          teams: res.data.teams,
+          user: res[0].data.user,
+          teams: res[0].data.teams,
           newProject: {
             id: uuid(),
             finaldate: 0,
             ended: false,
-            team: '',
-            superuser: res.data.user.id,
+            team: res[1].data.id,
+            superuser: res[0].data.user.id,
             normaluser: ['5794283116'],
             optionaluser: ['nvifnvbnbrnobnorenobmey', 'asd'],
             votes: [
               {
-                userid: res.data.user.id,
+                userid: res[0].data.user.id,
                 dates: [
                   {
                     date: 20171007,
@@ -50,30 +90,9 @@ class New extends Component {
                   },
                 ],
               },
-              {
-                userid: '5794283116',
-                dates: [
-                  {
-                    date: 20171007,
-                    timeblocks: [2, 6, 7, 8, 13, 14, 15],
-                  },
-                ],
-              },
-              {
-                userid: 'nvifnvbnbrnobnorenobmey',
-                dates: [
-                  {
-                    date: 20170930,
-                    timeblocks: [2, 6, 7, 8, 13, 14, 15],
-                  },
-                  {
-                    date: 20171007,
-                    timeblocks: [2, 3, 7, 8, 14, 15],
-                  },
-                ],
-              },
-            ],
+            ].concat(defaultVotes),
           },
+          selectedTeam: res[1].data,
         });
       })
       .catch((err) => {
@@ -135,14 +154,6 @@ class New extends Component {
     }
   }
 
-  renderTeamList() {
-    if (typeof this.state.user.team === 'undefined' || this.state.user.team.length === 0) {
-      return <option>You are a single dog!</option>;
-    } else {
-      return this.state.user.team.map(item => <option value={item} key={item}>{this.state.teams.find(team => team.id === item).name}</option>);
-    }
-  }
-
   render() {
     return (
       <div className="new-proj-container">
@@ -156,7 +167,10 @@ class New extends Component {
             </Col>
             <Col md={6}>
               <FormGroup>
-                <h4>Duration:</h4><FormControl type="number" min="1" onChange={event => this.syncData('minDuration', event.target.value)} />
+                <h4>Duration:</h4>
+                <FormControl componentClass="select" type="number" min="1" onChange={event => this.syncData('minDuration', event.target.value)}>
+                  {renderDuration()}
+                </FormControl>
               </FormGroup>
             </Col>
             <Col md={6}>
@@ -166,17 +180,17 @@ class New extends Component {
             </Col>
             <Col md={12}>
               <FormGroup>
-                <h4>Description:</h4><FormControl type="text" onChange={event => this.syncData('description', event.target.value)} />
+                <h4>Description:</h4>
+                <FormControl componentClass="textarea" type="text" onChange={event => this.syncData('description', event.target.value)} />
               </FormGroup>
             </Col>
-            <p>deadline</p><input type="number" onChange={event => this.syncData('deadline', event.target.value)} />
+            <Col md={6}>
+              <h4>Voting Deadline:</h4>
+              <DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} onChange={data => this.syncData('deadline', moment(data).format('YYYYMMDD'))} />
+            </Col>
           </Col>
           <Col md={6}>
-            <p>Team</p>
-            <select onChange={event => this.syncData('team', event.target.value)}>
-              <option value="" key="0" />
-              {this.renderTeamList()}
-            </select>
+            <h4>Team: {this.state.selectedTeam.name}</h4>
             <ul>
               {this.renderMemberList()}
             </ul>
