@@ -5,209 +5,336 @@
   <title>login</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <style>
-    .wave-one {
-      width: 700px;
-      height: 819px;
-      background: url("http://www.katharinefriedgen.com/wp-content/uploads/2015/06/waves_one.png");
-      background-repeat: repeat-y;
-      float: left;
-      position: relative;
-      top: 0;
-      left: 0;
-      z-index: 7;
-      overflow: hidden;
+    .label {
+      color: white;
+      font-size: 24px;
     }
 
-    .wave-two {
-      width: 700px;
-      height: 819px;
-      background: url("http://www.katharinefriedgen.com/wp-content/uploads/2015/06/waves_two.png") no-repeat;
-      float: left;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 5;
-      overflow: hidden;
+    body {
+      background-color: #0a1930;
     }
 
-    .wave-three {
-      width: 700px;
-      height: 819px;
-      background: url("http://www.katharinefriedgen.com/wp-content/uploads/2015/06/waves_three.png") no-repeat;
-      position: absolute;
-      z-index: 2;
+    body {
+      height: 100%;
       top: 0px;
-      left: 0px;
-      z-index: 5;
-      overflow: hidden;
+      bottom: 0px;
     }
 
-    .wave-threeb {
+    @keyframes spinsun {
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+
+    @keyframes shadow {
+      0% {
+        background-position: 130% 0%;
+      }
+      33% {
+        background-position: 50% 0%;
+      }
+      55% {
+        background-position: 0% 0%;
+      }
+      80% {
+        background-position: -50% 0%;
+      }
+      100% {
+        background-position: -50% 0%;
+      }
+    }
+
+    @keyframes orbitmercury {
+      0% {
+        z-index: 2;
+        transform: rotateY(0);
+      }
+      49% {
+        z-index: 2;
+      }
+      50% {
+        z-index: -2;
+      }
+      99% {
+        z-index: -2;
+      }
+      100% {
+        z-index: 2;
+        transform: rotateY(360deg);
+      }
+    }
+
+    @keyframes orbitvenus {
+      0% {
+        z-index: 3;
+        transform: rotateY(0);
+      }
+      49% {
+        z-index: 3;
+      }
+      50% {
+        z-index: -3;
+      }
+      99% {
+        z-index: -3;
+      }
+      100% {
+        z-index: 3;
+        transform: rotateY(360deg);
+      }
+    }
+
+    @keyframes orbitearth {
+      0% {
+        z-index: 4;
+        transform: rotateY(0);
+      }
+      49% {
+        z-index: 4;
+      }
+      50% {
+        z-index: -4;
+      }
+      99% {
+        z-index: -4;
+      }
+      100% {
+        z-index: 4;
+        transform: rotateY(360deg);
+      }
+    }
+
+    @keyframes orbitmars {
+      0% {
+        z-index: 5;
+        transform: rotateY(0);
+      }
+      49% {
+        z-index: 5;
+      }
+      50% {
+        z-index: -5;
+      }
+      99% {
+        z-index: -5;
+      }
+      100% {
+        z-index: 5;
+        transform: rotateY(360deg);
+      }
+    }
+
+    @keyframes orbitjupiter {
+      0% {
+        z-index: 6;
+        transform: rotateY(270);
+      }
+      49% {
+        z-index: 6;
+      }
+      50% {
+        z-index: -6;
+      }
+      99% {
+        z-index: -6;
+      }
+      100% {
+        z-index: 6;
+        transform: rotateY(360deg);
+      }
+    }
+
+    @keyframes orbitsaturn {
+      0% {
+        z-index: 7;
+        transform: rotateY(270);
+      }
+      49% {
+        z-index: 7;
+      }
+      50% {
+        z-index: -7;
+      }
+      99% {
+        z-index: -7;
+      }
+      100% {
+        z-index: 7;
+        transform: rotateY(360deg);
+      }
+    }
+    /* Keep planet image flat */
+
+    @keyframes anti-spin {
+      from {
+        transform: rotateY(0);
+      }
+      to {
+        transform: rotateY(-360deg);
+      }
+    }
+
+    @keyframes anti-spin-rings {
+      from {
+        transform: rotateY(0) rotateX(73deg);
+      }
+      to {
+        transform: rotateY(-360deg) rotateX(73deg);
+      }
+    }
+    /* scene wrapper */
+
+    .wrapper {
+      position: relative;
+      margin: 0 auto;
+      display: block;
+      margin-top: 200px;
+      perspective: 1000px;
+      perspective-origin: 60% 50%;
+      transform: rotate(-10deg);
+    }
+
+    .wrapper>div {
+      position: relative;
+      margin: 0 auto;
+      transform-style: preserve-3d;
+      height: 0px;
+    }
+
+    .sun {
+      width: 250px;
       position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 2;
-      float: left;
+      top: 0px;
+      z-index: 1;
+      height: 125px !important;
+    }
+
+    .sun .star {
+      width: 250px;
+      height: 250px;
+      background: url(http://www.waynedunkley.com/img/solar_system/sun.png) no-repeat;
+      background-size: cover;
+      border-radius: 250px;
+      margin: 0 auto;
+      animation: spinsun 40s infinite linear;
+    }
+
+    .planet {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      animation-iteration-count: infinite;
       overflow: hidden;
-      background: url("http://www.katharinefriedgen.com/wp-content/uploads/2015/06/waves_three.png") no-repeat;
     }
 
-    .floating {
-      animation-name: floating;
-      -webkit-animation-name: floating;
-
-      animation-duration: 10s;
-      -webkit-animation-duration: 10s;
-
-      animation-iteration-count: infinite;
-      -webkit-animation-iteration-count: infinite;
+    .shadow {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      top: 0px;
+      bottom: 0px;
+      background: transparent url(http://www.waynedunkley.com/img/solar_system/shadow.png) 0% 0% no-repeat;
+      background-size: cover;
+      border-radius: 100%;
     }
 
-    @keyframes floating {
-      0% {
-        transform: translateX(0%);
-      }
-      20% {
-        transform: translateX(60%);
-      }
-      80% {
-        transform: translateX(20%)
-      }
-      100% {
-        transform: translateX(0%);
-      }
+    .mercury {
+      position: absolute;
+      width: 400px;
+      z-index: 2;
+      animation: orbitmercury 12s infinite linear;
+      top: -7.5px;
+      /* half of planets height to keep orbits in line */
     }
 
-    @-webkit-keyframes floating {
-      0% {
-        -webkit-transform: translateX(0%);
-      }
-      50% {
-        transform: translateX(100%);
-      }
-      80% {
-        transform: translateX(150%);
-      }
-      100% {
-        -webkit-transform: translateX(0%);
-      }
+    .mercury .planet {
+      width: 15px;
+      height: 15px;
+      background-image: url(http://www.waynedunkley.com/img/solar_system/mercury.png);
+      animation: anti-spin 12s infinite linear;
     }
 
-    .floating2 {
-      animation-name: floating;
-      -webkit-animation-name: floating;
-
-      animation-duration: 12s;
-      -webkit-animation-duration: 12s;
-
-      animation-iteration-count: infinite;
-      -webkit-animation-iteration-count: infinite;
+    .mercury .shadow {
+      animation: shadow 12s infinite linear;
     }
 
-    @keyframes floating2 {
-      0% {
-        transform: translateX(0%);
-      }
-      20% {
-        transform: translateX(80%);
-      }
-      80% {
-        transform: translateX(40%)
-      }
-      100% {
-        transform: translateX(0%);
-      }
+    .venus {
+      position: absolute;
+      width: 506px;
+      z-index: 3;
+      animation: orbitvenus 15s infinite linear;
+      top: -19px;
     }
 
-    @-webkit-keyframes floating2 {
-      0% {
-        -webkit-transform: translateX(0%);
-      }
-      20% {
-        transform: translateX(80%);
-      }
-      80% {
-        transform: translateX(40%);
-      }
-      100% {
-        -webkit-transform: translateX(0%);
-      }
+    .venus .planet {
+      width: 38px;
+      height: 38px;
+      background-image: url(http://www.waynedunkley.com/img/solar_system/venus.png);
+      animation: anti-spin 15s infinite linear;
     }
 
-    .floating3 {
-      animation-name: floating;
-      -webkit-animation-name: floating;
-
-      animation-duration: 8s;
-      -webkit-animation-duration: 8s;
-
-      animation-iteration-count: infinite;
-      -webkit-animation-iteration-count: infinite;
+    .venus .shadow {
+      animation: shadow 15s infinite linear;
     }
 
-    @keyframes floating3 {
-      0% {
-        transform: translateX(0%);
-      }
-      40% {
-        transform: translateX(50%);
-      }
-      80% {
-        transform: translateX(100%)
-      }
-      100% {
-        transform: translateX(0%);
-      }
+    .earth {
+      position: absolute;
+      width: 610px;
+      z-index: 4;
+      animation: orbitearth 20s infinite linear;
+      top: -20px;
     }
 
-    @-webkit-keyframes floating3 {
-      0% {
-        -webkit-transform: translateX(0%);
-      }
-      40% {
-        transform: translateX(50%);
-      }
-      80% {
-        transform: translateX(100%);
-      }
-      100% {
-        -webkit-transform: translateX(0%);
-      }
+    .earth .planet {
+      width: 40px;
+      height: 40px;
+      background-image: url(http://www.waynedunkley.com/img/solar_system/earth.png?v=2);
+      animation: anti-spin 20s infinite linear;
     }
 
-    .floating4 {
-      animation-name: floating;
-      -webkit-animation-name: floating;
-
-      animation-duration: 25s;
-      -webkit-animation-duration: 25s;
-
-      animation-iteration-count: infinite;
-      -webkit-animation-iteration-count: infinite;
+    .earth .shadow {
+      animation: shadow 20s infinite linear;
     }
 
-    @keyframes floating4 {
-      0% {
-        transform: translateX(0%);
-      }
-      50% {
-        transform: translateX(100%)
-      }
-      100% {
-        transform: translateX(0%);
-      }
+    .mars {
+      position: absolute;
+      width: 706px;
+      z-index: 5;
+      animation: orbitmars 30s infinite linear;
+      top: -11px;
     }
 
-    @-webkit-keyframes floating4 {
-      0% {
-        -webkit-transform: translateX(0%);
-      }
-      50% {
-        transform: translateX(50%);
-      }
-      100% {
-        -webkit-transform: translateX(0%);
-      }
+    .mars .planet {
+      width: 22px;
+      height: 22px;
+      background-image: url(http://www.waynedunkley.com/img/solar_system/mars.png);
+      animation: anti-spin 30s infinite linear;
+    }
+
+    .mars .shadow {
+      animation: shadow 30s infinite linear;
+    }
+
+    .jupiter {
+      position: absolute;
+      width: 1100px;
+      z-index: 6;
+      animation: orbitjupiter 50s infinite linear;
+      top: -64px;
+    }
+
+    .jupiter .planet {
+      width: 128px;
+      height: 128px;
+      background-image: url(http://www.waynedunkley.com/img/solar_system/jupiter.png);
+      animation: anti-spin 50s infinite linear;
+    }
+
+    .jupiter .shadow {
+      animation: shadow 50s infinite linear;
     }
   </style>
 </head>
@@ -215,23 +342,50 @@
 <body>
   <form action="/login" method="post" class="form">
     <div>
-      <label>Username:</label>
+      <label class="label">Username</label>
       <br />
-      <input type="text" name="username"/>
+      <input type="text" name="username" />
     </div>
     <div>
-      <label>Password:</label>
+      <label class="label">Password</label>
       <br />
-      <input type="password" name="password"/>
+      <input type="password" name="password" />
     </div>
     <br />
     <div>
       <input type="submit" value="Log In" class="btn btn-primary" />
     </div>
   </form>
-  <div class="wave-one floating"></div>
-  <div class="wave-two floating3"></div>
-  <div class="wave-three floating4"></div>
+  <ul class="wrapper">
+    <div class="sun">
+      <div class="star"></div>
+    </div>
+    <div class="mercury">
+      <div class="planet">
+        <div class="shadow"></div>
+      </div>
+    </div>
+    <div class="venus">
+      <div class="planet">
+        <div class="shadow"></div>
+      </div>
+    </div>
+    <div class="earth">
+      <div class="planet">
+        <div class="shadow"></div>
+      </div>
+    </div>
+    <div class="mars">
+      <div class="planet">
+        <div class="shadow"></div>
+      </div>
+    </div>
+    <div class="jupiter">
+      <div class="planet">
+        <div class="shadow"></div>
+      </div>
+    </div>
+  </ul>
 </body>
 
 </html>
