@@ -66,7 +66,7 @@ class Navbar extends Component {
   }
   render() {
     return (
-      <div className="row text-center">
+      <div className="row text-center nav">
         <div className="col-md-3">
           <h2>
             <span className="logo">
