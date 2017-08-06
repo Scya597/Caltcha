@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import uuid from 'uuid/v4';
 import { Link } from 'react-router-dom';
+import { Col, FormGroup, FormControl, Button } from 'react-bootstrap';
 // import _ from 'lodash';
 import '../scss/title.scss';
-
 
 class New extends Component {
   constructor(props) {
@@ -125,25 +125,49 @@ class New extends Component {
 
   render() {
     return (
-      <div>
+      <div className="all-proj-container">
+        <h2>New Project</h2>
         <form onSubmit={this.saveNewProject}>
-          <h2>New Project</h2>
-          <p>Title</p><input type="text" onChange={event => this.syncData('title', event.target.value)} />
-          <p>Description</p><textarea onChange={event => this.syncData('description', event.target.value)} />
-          <p>minDuration</p><input type="number" name="minDuration" min="1" onChange={event => this.syncData('minDuration', event.target.value)} />
-          <p>deadline</p><input type="number" onChange={event => this.syncData('deadline', event.target.value)} />
-          <p>location</p><input type="text" onChange={event => this.syncData('location', event.target.value)} />
-          <p>Team</p>
-          <select onChange={event => this.syncData('team', event.target.value)}>
-            <option value="" key="0" />
-            {this.renderTeamList()}
-          </select>
-          <ul>
-            {this.renderMemberList()}
-          </ul>
-          <button type="submit">OK</button>
+          <Col md={6}>
+            <Col md={12}>
+              <FormGroup>
+                <h4>Event Name:</h4><FormControl type="text" onChange={event => this.syncData('title', event.target.value)} />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <h4>Duration:</h4><FormControl type="number" min="1" onChange={event => this.syncData('minDuration', event.target.value)} />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <h4>Location:</h4><FormControl type="text" onChange={event => this.syncData('location', event.target.value)} />
+              </FormGroup>
+            </Col>
+            <Col md={12}>
+              <FormGroup>
+                <h4>Description:</h4><FormControl type="text" onChange={event => this.syncData('description', event.target.value)} />
+              </FormGroup>
+            </Col>
+            <p>deadline</p><input type="number" onChange={event => this.syncData('deadline', event.target.value)} />
+          </Col>
+          <Col md={6}>
+            <p>Team</p>
+            <select onChange={event => this.syncData('team', event.target.value)}>
+              <option value="" key="0" />
+              {this.renderTeamList()}
+            </select>
+            <ul>
+              {this.renderMemberList()}
+            </ul>
+            <Col md={6}>
+              <Link to="/"><Button>Cancel</Button></Link>
+            </Col>
+            <Col md={6}>
+              <Button bsStyle="danger" type="submit">OK</Button>
+            </Col>
+          </Col>
         </form>
-        <Link to="/">Back</Link>
       </div>
     );
   }
