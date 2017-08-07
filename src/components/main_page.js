@@ -27,29 +27,29 @@ class MainPage extends Component {
   }
   componentDidMount() {
     this.fetchuser();
-    this.fetchprojects();
-    this.setinitteam();
+    // this.fetchprojects();
+    // this.setinitteam();
   }
   setSelectedTeam(teamObj) {
-    const selectedpjs = [];
-    for (let i = 0; i < this.state.projects.length; i += 1) {
-      if (this.state.projects[i].team === teamObj.id) {
-        selectedpjs.push(this.state.projects[i]);
-      }
-    }
-    const superselectedpjs = [];
-    const otherselectedpjs = [];
-    for (let i = 0; i < selectedpjs.length; i += 1) {
-      if (this.state.user.id === selectedpjs[i].superuser) {
-        superselectedpjs.push(selectedpjs[i]);
-      } else {
-        otherselectedpjs.push(selectedpjs[i]);
-      }
-    }
-    this.setState({ selectedTeam: teamObj, superselectedpjs, otherselectedpjs });
     axios.post('/api/team/select', teamObj)
       .then((res) => {
         console.log(res);
+        const selectedpjs = [];
+        for (let i = 0; i < this.state.projects.length; i += 1) {
+          if (this.state.projects[i].team === teamObj.id) {
+            selectedpjs.push(this.state.projects[i]);
+          }
+        }
+        const superselectedpjs = [];
+        const otherselectedpjs = [];
+        for (let i = 0; i < selectedpjs.length; i += 1) {
+          if (this.state.user.id === selectedpjs[i].superuser) {
+            superselectedpjs.push(selectedpjs[i]);
+          } else {
+            otherselectedpjs.push(selectedpjs[i]);
+          }
+        }
+        this.setState({ selectedTeam: teamObj, superselectedpjs, otherselectedpjs });
       })
       .catch((err) => {
         console.log(err);
@@ -88,6 +88,7 @@ class MainPage extends Component {
       .catch((err) => {
         console.log(err);
       });
+    this.setinitteam();
   }
   fetchuser = () => {
     axios.get('/api/profile')
@@ -104,6 +105,7 @@ class MainPage extends Component {
       .catch((err) => {
         console.log(err);
       });
+    this.fetchprojects();
   }
   render() {
     return (

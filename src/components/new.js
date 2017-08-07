@@ -15,7 +15,7 @@ function getData() {
 
 function renderDuration() {
   const hourArr = [];
-  for (let i = 1; i < 16; i += 1) hourArr.push(<option value={i} key={i}>{i * 0.5} hrs</option>);
+  for (let i = 1; i < 17; i += 1) hourArr.push(<option value={i} key={i}>{i * 0.5} hrs</option>);
   hourArr.push(<option value={48} key={48}>1 day</option>);
   return hourArr;
 }
@@ -53,6 +53,7 @@ class New extends Component {
       teams: [],
       newProject: {},
       selectedTeam: {},
+      warn: 0,
     };
     this.saveNewProject = this.saveNewProject.bind(this);
     this.syncData = this.syncData.bind(this);
@@ -100,36 +101,45 @@ class New extends Component {
       });
   }
 
-  saveNewProject() {
-    axios.get('/api/profile')
+  saveNewProject(event) {
+    // axios.get('/api/profile')
+    //   .then((res) => {
+    //     const teamid = this.state.newProject.team;
+    //     const teams = res.data.teams;
+    //     let teamname;
+    //     for (let i = 0; i < teams.length; i += 1) {
+    //       if (teams[i].id === teamid) {
+    //         teamname = teams[i].name;
+    //       }
+    //     }
+    //     axios.post('/api/team/select', { id: teamid, name: teamname })
+    //       .then((resp) => {
+    //         console.log(resp);
+    //       })
+    //       .catch((erro) => {
+    //         console.log(erro);
+    //       });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    if (
+      this.state.newProject.title !== undefined && this.state.newProject.location !== undefined &&
+      this.state.newProject.description !== undefined && this.state.newProject.deadline !== undefined &&
+      this.state.newProject.minDuration !== undefined
+    ) {
+      axios.post('/api/project/new', this.state.newProject)
       .then((res) => {
-        const teamid = this.state.newProject.team;
-        const teams = res.data.teams;
-        let teamname;
-        for (let i = 0; i < teams.length; i += 1) {
-          if (teams[i].id === teamid) {
-            teamname = teams[i].name;
-          }
-        }
-        axios.post('/api/team/select', { id: teamid, name: teamname })
-          .then((resp) => {
-            console.log(resp);
-          })
-          .catch((erro) => {
-            console.log(erro);
-          });
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
-    axios.post('/api/project/new', this.state.newProject)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-    this.props.history.push('/');
+      this.props.history.push('/');
+    } else {
+      event.preventDefault();
+      this.setState({ warn: 1 });
+    }
   }
 
   getDateValidationState() {
@@ -158,6 +168,11 @@ class New extends Component {
     } else {
       const selectedTeamObj =  this.state.teams.find(team => team.id === this.state.newProject.team);
       return selectedTeamObj.members.map(item => <li key={item.id}>{item.username}</li>);
+    }
+  }
+  renderwarn = (b) => {
+    if (b) {
+      return <h2 id="red">You have to type in every item</h2>;
     }
   }
 
@@ -197,6 +212,7 @@ class New extends Component {
                 <FormControl componentClass="textarea" type="text" onChange={event => this.syncData('description', event.target.value)} />
               </FormGroup>
             </Col>
+            {this.renderwarn(this.state.warn)}
           </Col>
           <Col md={6}>
             <h4>Team: {this.state.selectedTeam.name}</h4>
