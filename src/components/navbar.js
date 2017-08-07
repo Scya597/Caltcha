@@ -20,18 +20,28 @@ class navbar extends Component {
     if (typeof this.props.teams === 'undefined' || this.props.teams.length === 0) {
       axios.get('/api/team/select')
         .then((res) => {
-          const teamid = res.data.id;
+          const selectedteam = res.data;
           axios.get('/api/profile')
             .then((resp) => {
-              const teams = resp.data.teams;
-              for (let i = 0; i < teams.length; i += 1) {
-                if (teamid === teams[i].id) {
-                  const teamMemberCnt = teams[i].members.length;
-                  this.popover = (
-                    <Popover id="popover-trigger-click-root-close" title={`${teamMemberCnt} members`}>
-                      {teams[i].members.map(this.renderemail)}
-                    </Popover>
-                  );
+              if (selectedteam.id.length === 0) {
+                const team = resp.data.teams[0];
+                const teamMemberCnt = team.members.length;
+                this.popover = (
+                  <Popover id="popover-trigger-click-root-close" title={`${teamMemberCnt} members`}>
+                    {team.members.map(this.renderemail)}
+                  </Popover>
+                );
+              } else {
+                const teams = resp.data.teams;
+                for (let i = 0; i < teams.length; i += 1) {
+                  if (selectedteam.id === teams[i].id) {
+                    const teamMemberCnt = teams[i].members.length;
+                    this.popover = (
+                      <Popover id="popover-trigger-click-root-close" title={`${teamMemberCnt} members`}>
+                        {teams[i].members.map(this.renderemail)}
+                      </Popover>
+                    );
+                  }
                 }
               }
             })

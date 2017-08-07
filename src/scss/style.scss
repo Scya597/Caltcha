@@ -1,5 +1,11 @@
+.size {
+  width: 100%;
+}
+
 .status-bar {
   font-size: 20px;
+  text-align: center;
+  padding-top: 1%;
 }
 
 .deadline {
@@ -13,8 +19,7 @@
   font-size: 50px;
   padding-left: 27px;
   text-shadow: -1.5px 1.5px 0.5px #424242;
-  font-family: 'Nunito', sans-serif;
-  padding-top: 18px;
+  padding-top: 15px;
   font-weight: bold;
 }
 
