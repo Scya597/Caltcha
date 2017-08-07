@@ -132,6 +132,13 @@ class New extends Component {
     this.props.history.push('/');
   }
 
+  getDateValidationState() {
+    const deadline = this.state.newProject.deadline;
+    const dateValid = deadline !== 'Invalid date';
+    const formatValid = (typeof deadline !== 'undefined') ? deadline.length === 8 : false;
+    return (dateValid && formatValid) ? 'success' : 'error';
+  }
+
   syncData(field, data) {
     const proj = this.state.newProject;
     Object.defineProperty(proj, field, {
@@ -178,15 +185,17 @@ class New extends Component {
                 <h4>Location:</h4><FormControl type="text" onChange={event => this.syncData('location', event.target.value)} />
               </FormGroup>
             </Col>
+            <Col md={6}>
+              <h4>Voting Deadline:</h4>
+              <FormGroup validationState={this.getDateValidationState()}>
+                <DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} onChange={data => this.syncData('deadline', moment(data).format('YYYYMMDD'))} />
+              </FormGroup>
+            </Col>
             <Col md={12}>
               <FormGroup>
                 <h4>Description:</h4>
                 <FormControl componentClass="textarea" type="text" onChange={event => this.syncData('description', event.target.value)} />
               </FormGroup>
-            </Col>
-            <Col md={6}>
-              <h4>Voting Deadline:</h4>
-              <DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} onChange={data => this.syncData('deadline', moment(data).format('YYYYMMDD'))} />
             </Col>
           </Col>
           <Col md={6}>
