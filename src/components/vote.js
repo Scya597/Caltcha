@@ -114,7 +114,6 @@ export default class Vote extends Component {
         </div>
       );
     } else {
-      console.log(this.state.project);
       return (
         <div>
           <div className="col-md-6">
@@ -124,7 +123,12 @@ export default class Vote extends Component {
             </button>
           </div>
           <div className="col-md-6">
-            <VoteAction project={this.state.project} vote={this.vote} voteData={this.state.votesituation} />
+            <VoteAction
+              project={this.state.project}
+              vote={this.vote}
+              voteData={this.state.votesituation}
+              myId={userid}
+            />
           </div>
         </div>
       );
