@@ -10,7 +10,6 @@ export default class EventData extends Component{
     return (
       <div className="list-border">
         <div>
-          <h1 className="list-border">Title: Fuck you</h1>
           <div className="row">
             <div className="col-xs-7 deadline">
               <span>deadline: 2017/08/28</span>
@@ -21,6 +20,7 @@ export default class EventData extends Component{
               <DatePicker value="new deadline" />
             </div>
           </div>
+          <h1 className="list-border">Title: Fuck you</h1>
           <h3>Location: Friend zone</h3>
           <h3>Duration: 3 hours</h3>
           <p>

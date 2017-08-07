@@ -1,3 +1,7 @@
+.status-bar {
+  font-size: 20px;
+}
+
 .deadline {
   color: red;
   text-align: center;
@@ -32,6 +36,7 @@
 .list-border {
   border: solid 2px #eee;
   border-radius: 3px;
+  text-align: center;
 }
 
 .letter-width {
