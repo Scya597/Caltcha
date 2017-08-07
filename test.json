@@ -74,10 +74,10 @@
     {
       "team": "00",
       "id": "ngovednrgiofjmoi",
-      "title": "Meeting",
+      "title": "幹掉巨寶寶",
       "minDuration": 5,
       "description": "Discuss Proj",
-      "location": "Park",
+      "location": "Palo Auto",
       "finaldate": {
         "date": 0,
         "timeblocks": []
@@ -103,10 +103,10 @@
     {
       "team": "00",
       "id": "projectid",
-      "title": "testproject",
+      "title": "吃炸彈",
       "minDuration": 3,
       "description": "testdescription",
-      "location": "moon",
+      "location": "我家的廚房",
       "finaldate": {
         "date": 20170831,
         "timeblocks": [1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17]

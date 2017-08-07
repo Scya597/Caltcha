@@ -129,7 +129,7 @@ class navbar extends Component {
             <NavItem>
               <ButtonGroup>
                 <Button>{this.props.user.username}</Button>
-                <Button onClick={this.handleNavLink} bsStyle="danger">Logout</Button>
+                <Button onClick={this.handleNavLink} bsStyle="danger"><Glyphicon glyph="log-out" /> Logout</Button>
               </ButtonGroup>
             </NavItem>
           </Nav>

@@ -13,7 +13,7 @@ class voteList extends Component {
       return (
         <div className="col-md-3" key={proj.id}>
           <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`}>
-            <Panel bsStyle="danger" header={proj.title}>
+            <Panel bsStyle="danger" header={proj.title} className="btn-shadow">
               <h5>Created by @{this.props.teams.find(team => team.id === proj.team).members.find(member => member.id === proj.superuser).username}</h5>
               <h5>Duration: {proj.minDuration * 0.5} hrs</h5>
               <h5>Deadline: {proj.deadline}</h5>
