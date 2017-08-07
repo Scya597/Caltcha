@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Col } from 'react-bootstrap';
 
 import EventData from './eventData';
 import VoteAction from './voteAction';
@@ -100,30 +101,19 @@ export default class Vote extends Component {
   render() {
     const { userid } = this.props.match.params;
     const { superid } = this.props.match.params;
-    if (userid === superid) {
-      return (
-        <div>
-          <EventData project={this.state.project} />
-          <button className="btn btn-danger col-md-6">
-            Delete this Event
-          </button>
-        </div>
-      );
-    } else {
-      console.log(this.state.project);
-      return (
-        <div>
-          <div className="col-md-6">
-            <EventData project={this.state.project} days={this.state.hourstoline} />
-            <button className="btn btn-danger col-md-6">
-              I do NOT feel like joining this event
-            </button>
-          </div>
-          <div className="col-md-6">
+    return (
+      <div className="full-page-container">
+        <Col md={6}>
+          <EventData userId={userid} project={this.state.project} hours={this.state.hourstoline} />
+        </Col>
+        <Col md={6}>
+          {
+            (userid === superid) ?
+            <h3>No Component Here.</h3> :
             <VoteAction project={this.state.project} vote={this.vote}/>
-          </div>
-        </div>
-      );
-    }
+          }
+        </Col>
+      </div>
+    );
   }
 }

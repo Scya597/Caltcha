@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datetime';
 import { Link } from 'react-router-dom';
+import { Col, Button, ButtonGroup, Glyphicon, Label } from 'react-bootstrap';
 
 export default class EventData extends Component{
   constructor(props) {
@@ -8,46 +9,83 @@ export default class EventData extends Component{
   }
 
   render() {
+    const deadlineBtn = (
+      <ButtonGroup>
+        <Button bsStyle="warning">
+          {
+            (this.props.hours > 0) ?
+            <h3>{`Voting Deadline: ${this.props.project.deadline}`}</h3> :
+            <h3>{`Event Starts From: ${this.props.project.finaldate} hours left`}</h3>
+          }
+        </Button>
+        <Button bsStyle="warning">
+          <h3><DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} inputProps={{ placeholder: 'YYYY / MM / DD', required: true }} /></h3>
+        </Button>
+      </ButtonGroup>
+    );
+
     return (
       <div className="list-border">
-        <div className="row">
-          <Link className="btn btn-default back-button" to="/">
-            ㄑ Back
+        <Col md={3}>
+          <Link to="/">
+            <h3><Button><Glyphicon glyph="chevron-left" />Back</Button></h3>
           </Link>
-        </div>
-        <div>
-          <div className="row noti-center">
-            <div className="noti-div">
-              <label className="noti-label">{`${this.props.days} hours left`}</label>
-            </div>
-          </div>
+        </Col>
+        <Col md={6}>
+          {
+            (this.props.hours >= 24) ?
+            <h3><Label bsStyle="danger">{`${Math.round(this.props.hours/24)} days left`}</Label></h3> :
+              (this.props.hours > 0) ?
+              <h3><Label bsStyle="danger">{`${this.props.hours} hours left`}</Label></h3> :
+              <h3><Label bsStyle="danger">Voting Ended</Label></h3>
+          }
+        </Col>
+        <Col md={12}>
           <h1>{this.props.project.title}</h1>
-          <div className="row">
-            <div className="col-xs-7 deadline">
-              <span>deadline: 2017/08/28</span>
-              <br />
-              <span>starts from: 2107/09/11 17:30</span>
-            </div>
-            <div className="col-xs-3">
-              <DatePicker value="new deadline" />
-            </div>
-          </div>
-          <h3>Location: Friend zone</h3>
-          <h3>Duration: 3 hours</h3>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-          </p>
-        </div>
+        </Col>
+        <Col md={3} />
+        <Col md={6}>
+          {
+            (this.props.hours > 0) ?
+            <h3><Label bsStyle="warning">{`Voting Deadline: ${this.props.project.deadline}`}</Label></h3> :
+            <h3><Label bsStyle="warning">{`Event Starts From: ${this.props.project.finaldate}`}</Label></h3>
+          }
+        </Col>
+        <Col md={3}>
+          {
+            (this.props.project.superuser === this.props.userId) ?
+            <h3><DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} inputProps={{ placeholder: 'YYYY / MM / DD', required: true }} /></h3> :
+            <h3 />
+          }
+        </Col>
+        <Col md={12}>
+          <h4 className="h4-left">Duration: {this.props.project.minDuration * 0.5} hours</h4>
+        </Col>
+        <Col md={12}>
+          <p>{this.props.project.description}</p>
+        </Col>
+        <Col md={12}>
+          <h4 className="h4-left">Location: {this.props.project.location}</h4>
+        </Col>
         <iframe
-          width="100%"
-          height="500"
-          frameborder="0"
+          width="95%"
+          height="300px"
+          frameBorder="0px"
           scrolling="no"
-          marginheight="0"
-          marginwidth="0"
-          src="http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=新竹市交通大學&z=16&output=embed&t="
-        >
-        </iframe>
+          marginHeight="0px"
+          marginWidth="0px"
+          src={`http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=${this.props.project.location}&z=16&output=embed&t=`}
+        />
+        <Col md={6}>
+          <Button bsStyle="danger">I don&rsquo;t feel like joining this event.</Button>
+        </Col>
+        <Col md={6}>
+          {
+            (this.props.project.superuser === this.props.userId) ?
+            <Button bsStyle="danger">Delete this event.</Button> :
+            <h3 />
+          }
+        </Col>
       </div>
     );
   }
