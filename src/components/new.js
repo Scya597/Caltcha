@@ -15,12 +15,8 @@ function getData() {
 
 function renderDuration() {
   const hourArr = [];
-<<<<<<< HEAD
-  for (let i = 1; i < 17; i += 1) hourArr.push(<option value={i} key={i}>{i * 0.5} hrs</option>);
-=======
   hourArr.push(<option key={0}>Select...</option>);
   for (let i = 1; i <= 16; i += 1) hourArr.push(<option value={i} key={i}>{i * 0.5} hrs</option>);
->>>>>>> atest
   hourArr.push(<option value={48} key={48}>1 day</option>);
   return hourArr;
 }
@@ -232,7 +228,6 @@ class New extends Component {
                 <FormControl componentClass="textarea" type="text" onChange={event => this.syncData('description', event.target.value)} />
               </FormGroup>
             </Col>
-<<<<<<< HEAD
             {this.renderwarn(this.state.warn)}
           </Col>
           <Col md={6}>
@@ -240,8 +235,6 @@ class New extends Component {
             <ul>
               {this.renderMemberList()}
             </ul>
-=======
->>>>>>> atest
             <Col md={6}>
               <Link to="/"><Button block>Cancel</Button></Link>
             </Col>
