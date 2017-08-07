@@ -16,7 +16,11 @@ export default class Vote extends Component {
     this.state = {
       project: {},
       hourstoline: 0,
-      votesituation: {},
+      votesituation: {
+        normaluser: { vote: [], nvote: [] },
+        optionaluser: { vote: [], nvote: [] },
+        closeduser: [],
+      },
     };
 
     this.fetchpj = this.fetchpj.bind(this);

@@ -30,5 +30,6 @@ module.exports = (obj) => {
   return {
     normaluser: { vote: nuvote, nvote: nunvote },
     optionaluser: { vote: ouvote, nvote: ounvote },
+    closeduser: obj.closeduser,
   };
 };

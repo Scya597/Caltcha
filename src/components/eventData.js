@@ -3,7 +3,7 @@ import DatePicker from 'react-datetime';
 import { Link } from 'react-router-dom';
 import { Col, Button, ButtonGroup, Glyphicon, Label } from 'react-bootstrap';
 
-export default class EventData extends Component{
+export default class EventData extends Component {
   constructor(props) {
     super(props);
   }
