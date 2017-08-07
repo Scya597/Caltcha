@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import uuid from 'uuid/v4';
 import { Link } from 'react-router-dom';
-import { Col, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Col, FormGroup, FormControl, Button, ListGroup, ListGroupItem, Glyphicon } from 'react-bootstrap';
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 // import _ from 'lodash';
@@ -15,7 +15,8 @@ function getData() {
 
 function renderDuration() {
   const hourArr = [];
-  for (let i = 1; i < 16; i += 1) hourArr.push(<option value={i} key={i}>{i * 0.5} hrs</option>);
+  hourArr.push(<option key={0}>Select...</option>);
+  for (let i = 1; i <= 16; i += 1) hourArr.push(<option value={i} key={i}>{i * 0.5} hrs</option>);
   hourArr.push(<option value={48} key={48}>1 day</option>);
   return hourArr;
 }
@@ -62,6 +63,14 @@ class New extends Component {
   componentDidMount() {
     this.fetchuser();
   }
+
+  getDateValidationState() {
+    const deadline = this.state.newProject.deadline;
+    const dateValid = deadline !== 'Invalid date';
+    const formatValid = (typeof deadline !== 'undefined') ? deadline.length === 8 : false;
+    return (dateValid && formatValid) ? 'success' : 'error';
+  }
+
   fetchuser = () => {
     axios.all(getData())
       .then((res) => {
@@ -74,8 +83,8 @@ class New extends Component {
             ended: false,
             team: res[1].data.id,
             superuser: res[0].data.user.id,
-            normaluser: ['5794283116'],
-            optionaluser: ['nvifnvbnbrnobnorenobmey', 'asd'],
+            normaluser: [],
+            optionaluser: res[0].data.teams.find(team => team.id === res[1].data.id).members.map(member => member.id),
             votes: [
               {
                 userid: res[0].data.user.id,
@@ -132,13 +141,6 @@ class New extends Component {
     this.props.history.push('/');
   }
 
-  getDateValidationState() {
-    const deadline = this.state.newProject.deadline;
-    const dateValid = deadline !== 'Invalid date';
-    const formatValid = (typeof deadline !== 'undefined') ? deadline.length === 8 : false;
-    return (dateValid && formatValid) ? 'success' : 'error';
-  }
-
   syncData(field, data) {
     const proj = this.state.newProject;
     Object.defineProperty(proj, field, {
@@ -156,8 +158,22 @@ class New extends Component {
     if (typeof this.state.newProject.team === 'undefined' || this.state.newProject.team === '') {
       return <option>Select a team first!</option>;
     } else {
-      const selectedTeamObj =  this.state.teams.find(team => team.id === this.state.newProject.team);
-      return selectedTeamObj.members.map(item => <li key={item.id}>{item.username}</li>);
+      const selectedTeamObj = this.state.teams.find(team => team.id === this.state.newProject.team);
+      return selectedTeamObj.members.map((item) => {
+        return (
+          <ListGroupItem key={item.id}>
+            <div className="row">
+              <div className="col-xs-1">
+                <Button><Glyphicon glyph="ok" /></Button>
+              </div>
+              <div className="col-xs-9"><h5>{item.username}</h5></div>
+              <div className="col-xs-1">
+                <Button bsStyle="danger"><Glyphicon glyph="ban-circle" /></Button>
+              </div>
+            </div>
+          </ListGroupItem>
+        );
+      });
     }
   }
 
@@ -188,7 +204,7 @@ class New extends Component {
             <Col md={6}>
               <h4>Voting Deadline:</h4>
               <FormGroup validationState={this.getDateValidationState()}>
-                <DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} onChange={data => this.syncData('deadline', moment(data).format('YYYYMMDD'))} />
+                <DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} inputProps={{ placeholder: 'Open DatePicker...' }} onChange={data => this.syncData('deadline', moment(data).format('YYYYMMDD'))} />
               </FormGroup>
             </Col>
             <Col md={12}>
@@ -197,18 +213,18 @@ class New extends Component {
                 <FormControl componentClass="textarea" type="text" onChange={event => this.syncData('description', event.target.value)} />
               </FormGroup>
             </Col>
+            <Col md={6}>
+              <Link to="/"><Button block>Cancel</Button></Link>
+            </Col>
+            <Col md={6}>
+              <Button bsStyle="danger" type="submit" block>OK</Button>
+            </Col>
           </Col>
           <Col md={6}>
             <h4>Team: {this.state.selectedTeam.name}</h4>
-            <ul>
+            <ListGroup>
               {this.renderMemberList()}
-            </ul>
-            <Col md={6}>
-              <Link to="/"><Button>Cancel</Button></Link>
-            </Col>
-            <Col md={6}>
-              <Button bsStyle="danger" type="submit">OK</Button>
-            </Col>
+            </ListGroup>
           </Col>
         </form>
       </div>
