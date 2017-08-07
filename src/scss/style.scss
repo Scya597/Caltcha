@@ -48,6 +48,7 @@
 .list-border {
   border: solid 2px #eee;
   border-radius: 3px;
+  text-align: center;
 }
 
 .letter-width {
@@ -56,27 +57,27 @@
 }
 
 .nav-not-react {
-  background-color: #424242;
-  border: solid #212121;
+  background-color: #303030;
+  border: solid #303030;
 }
 
 .wtf {
-  color: white;//#FF9800;
+  color: #FF9100;
   vertical-align: middle;
 }
 
 .letter {
-  color: white;//#03A9F4;
+  color: #00b0ff;
   vertical-align: middle;
 }
 
 .cool {
-  color: white;//#D50000;
+  color: #FF1744;
   vertical-align: middle;
 }
 
 .awesome {
-  color: white;//#64DD17;
+  color: #76ff03;
   vertical-align: middle;
 }
 
@@ -85,7 +86,10 @@
 }
 
 div {
-  font-family: sans-serif;
+  font-family: 'Averia Sans Libre', cursive;
+  // font-family: 'Sniglet', cursive;
+  // font-family: 'Cabin Sketch', cursive;
+  // font-family: sans-serif;
 }
 
 h2 {
@@ -111,10 +115,13 @@ a .navbar-form {
 }
 
 .btn-shadow {
-  font-family: 'Bree Serif', serif;
   transition: 0.3s;
 }
 
 .btn-shadow:hover {
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.15), 0 6px 10px 0 rgba(0,0,0,0.15);
+}
+
+textarea {
+  resize: vertical;
 }
