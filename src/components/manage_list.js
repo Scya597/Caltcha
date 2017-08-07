@@ -12,7 +12,7 @@ class manageList extends Component {
     const superProjJSX = this.props.superProj.map((proj) => {
       return (
         <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`} key={proj.id}>
-          <Panel bsStyle="primary">
+          <Panel bsStyle="primary" className="btn-shadow">
               <h3>{proj.title}</h3>
               <h5>Duration: {proj.minDuration*0.5} hrs</h5>
               <h5>Location: {proj.location}</h5>
@@ -24,7 +24,7 @@ class manageList extends Component {
     return (
       <div>
         <h3>Your Projects</h3>
-        <Link to="/new"><Button bsStyle="primary" bsSize="large" block>Add Event</Button></Link>
+        <Link to="/new"><Button bsStyle="primary" bsSize="large" className="btn-shadow" block>Add Event</Button></Link>
         <div className="manage-list-container">
           {superProjJSX}
         </div>
