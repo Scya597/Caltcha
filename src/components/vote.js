@@ -11,6 +11,7 @@ const ifvote = require('../utils/functions/ifvote');
 export default class Vote extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       project: {},
       hourstoline: 0,
@@ -105,6 +106,9 @@ export default class Vote extends Component {
       return (
         <div>
           <EventData project={this.state.project} />
+          <button className="btn btn-danger col-md-6">
+            Delete this Event
+          </button>
         </div>
       );
     } else {
@@ -112,9 +116,12 @@ export default class Vote extends Component {
         <div>
           <div className="col-md-6">
             <EventData project={this.state.project} />
+            <button className="btn btn-danger col-md-6">
+              I do NOT feel like joining this event
+            </button>
           </div>
           <div className="col-md-6">
-            <VoteAction project={this.state.project} />
+            <VoteAction project={this.state.project} vote={this.vote}/>
           </div>
         </div>
       );

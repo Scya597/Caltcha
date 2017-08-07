@@ -284,7 +284,7 @@ class New extends Component {
             <Col md={6}>
               <h4>Voting Deadline:</h4>
               <FormGroup validationState={this.getDateValidationState()}>
-                <DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} inputProps={{ placeholder: 'Open DatePicker...', required: true }} onChange={data => this.syncData('deadline', moment(data).format('YYYYMMDD'))} />
+                <DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} inputProps={{ placeholder: 'YYYY / MM / DD', required: true }} onChange={data => this.syncData('deadline', moment(data).format('YYYYMMDD'))} />
               </FormGroup>
             </Col>
             <Col md={12}>

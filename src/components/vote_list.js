@@ -34,7 +34,7 @@ class voteList extends Component {
     return (
       <div>
         <h3>Remember to vote!</h3>
-        <div className="row">
+        <div className="row list-border">
           {unvotedProjJSX}
         </div>
         <h3>You have voted!</h3>

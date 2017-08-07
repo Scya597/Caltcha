@@ -11,11 +11,11 @@ export default class EventData extends Component{
     return (
       <div className="list-border">
         <div className="row">
-          <Link className="btn btn-default col-md-4 back-button" to="/">
+          <Link className="btn btn-default col-md-2 back-button" to="/">
             ㄑ Back
           </Link>
-          <div className="col-md-8">
-            {'3 days left'}
+          <div className="col-md-4 noti-div">
+            <label className="noti-label">{'3 days left'}</label>
           </div>
         </div>
         <div>
@@ -46,12 +46,6 @@ export default class EventData extends Component{
           src="http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=新竹市交通大學&z=16&output=embed&t="
         >
         </iframe>
-        <button className="btn btn-danger col-md-6">
-          I do NOT feel like joining this event
-        </button>
-        <button className="btn btn-danger col-md-6">
-          Delete this Event
-        </button>
       </div>
     );
   }

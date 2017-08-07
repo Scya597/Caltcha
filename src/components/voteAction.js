@@ -7,12 +7,12 @@ export default class VoteAction extends Component {
 
   render() {
     return (
-      <div className="list-border col-md-6">
+      <div className="list-border col-md-12">
         <div className="list-border row status-bar">
           <p className="col-md-8">{'pick your time' || 'you have picked your time'}</p>
           <button className="btn btn-warning pull-xs-right">edit users</button>
         </div>
-        <button className="btn btn-default row" onClick={this.vote}>VOTE</button>
+        <button className="btn btn-default row" onClick={this.props.vote}>VOTE</button>
         <div className="row list-border">
           <h4>statistics</h4>
         </div>
