@@ -1,3 +1,7 @@
+.centify {
+  text-align: center;
+}
+
 .size {
   width: 100%;
 }
@@ -18,15 +22,18 @@
 .logo {
   font-size: 50px;
   padding-left: 27px;
-  text-shadow: -1.5px 1.5px 0.5px #424242;
+  text-shadow: -1.5px 1.5px 0.5px black;
   padding-top: 15px;
   font-weight: bold;
 }
 
+.noti-center {
+  margin-left: 150px;
+}
+
 .noti-div {
   text-align: center;
-  margin-top: 0.5%;
-  margin-left: 17%;
+  width: 42%;
 }
 
 .noti-label {
@@ -49,27 +56,27 @@
 }
 
 .nav-not-react {
-  background-color: #00BFA5;
-  border: solid #26A69A;
+  background-color: #424242;
+  border: solid #212121;
 }
 
 .wtf {
-  color: #FF9800;
+  color: white;//#FF9800;
   vertical-align: middle;
 }
 
 .letter {
-  color: #651FFF;
+  color: white;//#03A9F4;
   vertical-align: middle;
 }
 
 .cool {
-  color: #FF0000;
+  color: white;//#D50000;
   vertical-align: middle;
 }
 
 .awesome {
-  color: #C6FF00;
+  color: white;//#64DD17;
   vertical-align: middle;
 }
 

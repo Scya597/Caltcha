@@ -11,14 +11,17 @@ export default class EventData extends Component{
     return (
       <div className="list-border">
         <div className="row">
-          <Link className="btn btn-default col-md-2 back-button" to="/">
+          <Link className="btn btn-default back-button" to="/">
             ㄑ Back
           </Link>
-          <div className="col-md-4 noti-div">
-            <label className="noti-label">{'3 days left'}</label>
-          </div>
         </div>
         <div>
+          <div className="row noti-center">
+            <div className="noti-div">
+              <label className="noti-label">{`${this.props.days} hours left`}</label>
+            </div>
+          </div>
+          <h1>{this.props.project.title}</h1>
           <div className="row">
             <div className="col-xs-7 deadline">
               <span>deadline: 2017/08/28</span>
@@ -29,7 +32,6 @@ export default class EventData extends Component{
               <DatePicker value="new deadline" />
             </div>
           </div>
-          <h1 className="list-border">Title: Fuck you</h1>
           <h3>Location: Friend zone</h3>
           <h3>Duration: 3 hours</h3>
           <p>

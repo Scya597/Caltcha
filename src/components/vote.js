@@ -112,10 +112,11 @@ export default class Vote extends Component {
         </div>
       );
     } else {
+      console.log(this.state.project);
       return (
         <div>
           <div className="col-md-6">
-            <EventData project={this.state.project} />
+            <EventData project={this.state.project} days={this.state.hourstoline} />
             <button className="btn btn-danger col-md-6">
               I do NOT feel like joining this event
             </button>
