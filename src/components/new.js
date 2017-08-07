@@ -293,6 +293,13 @@ class New extends Component {
                 <FormControl componentClass="textarea" type="text" onChange={event => this.syncData('description', event.target.value)} required />
               </FormGroup>
             </Col>
+          </Col>
+          <Col md={6}>
+            <h4>Team: {this.state.selectedTeam.name}</h4>
+            <ListGroup>
+              {this.renderMemberList()}
+              {this.renderClosedList()}
+            </ListGroup>
             <Col md={12}>
               {this.renderwarn(this.state.warn)}
             </Col>
@@ -302,13 +309,6 @@ class New extends Component {
             <Col md={6}>
               <Button bsStyle="danger" type="submit" block>OK</Button>
             </Col>
-          </Col>
-          <Col md={6}>
-            <h4>Team: {this.state.selectedTeam.name}</h4>
-            <ListGroup>
-              {this.renderMemberList()}
-              {this.renderClosedList()}
-            </ListGroup>
           </Col>
         </form>
       </div>
