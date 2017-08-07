@@ -25,11 +25,12 @@ const UserSchema = new Schema({
   selectedteam: [Object], //UserSelectedSchema
 });
 const ProjectVoteDateSchema = new Schema({
-
+  date: Number,
+  timeblocks: [String],
 });
 const ProjectVoteSchema = new Schema({
   userid: String,
-  dates: [Object]
+  dates: [Object], //ProjectVoteDateSchema
 });
 const ProjectSchema = new Schema({
   team: String,
@@ -48,17 +49,16 @@ const ProjectSchema = new Schema({
   normaluser: [String],
   optionaluser: [String],
   closeduser: [String],
-  votes: [Object],
+  votes: [Object], //ProjectSchema
 });
 
 
 const CaltchaSchema = new Schema({
-  teams: [Object],
-  users: [Object],
-  projects: [Object],
+  teams: [Object], //TeamSchema
+  users: [Object], //UserSchema
+  projects: [Object], //ProjectSchema
 });
 
+const Caltcha = mongoose.model('caltcha', CaltchaSchema);
 
-const Post = mongoose.model('post', CaltchaSchema);
-
-module.exports = Post;
+module.exports = Caltcha;
