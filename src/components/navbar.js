@@ -18,16 +18,26 @@ class navbar extends Component {
 
   selectTeam = (teamId) => {
     if (typeof this.props.teams === 'undefined' || this.props.teams.length === 0) {
-      axios.get('/api/profile')
+      axios.get('/api/team/select')
         .then((res) => {
-          let team;
-          team = res.data.teams[0];
-          const teamMemberCnt = res.data.teams[0].members.length;
-          this.popover = (
-            <Popover id="popover-trigger-click-root-close" title={`${teamMemberCnt} members`}>
-              {team.members.map(this.renderemail)}
-            </Popover>
-          );
+          const teamid = res.data.id;
+          axios.get('/api/profile')
+            .then((resp) => {
+              const teams = resp.data.teams;
+              for (let i = 0; i < teams.length; i += 1) {
+                if (teamid === teams[i].id) {
+                  const teamMemberCnt = teams[i].members.length;
+                  this.popover = (
+                    <Popover id="popover-trigger-click-root-close" title={`${teamMemberCnt} members`}>
+                      {teams[i].members.map(this.renderemail)}
+                    </Popover>
+                  );
+                }
+              }
+            })
+            .catch((erro) => {
+              console.log(erro);
+            });
         })
         .catch((err) => {
           console.log(err);
