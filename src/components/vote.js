@@ -15,8 +15,7 @@ export default class Vote extends Component {
     this.state = {
       project: {},
       hourstoline: 0,
-      normaluser: { vote: [], nvote: [] },
-      optionaluser: { vote: [], nvote: [] },
+      votesituation: {},
     };
 
     this.fetchpj = this.fetchpj.bind(this);
@@ -35,8 +34,7 @@ export default class Vote extends Component {
         this.setState({
           project: res.data,
           hourstoline: deadline(res.data.deadline),
-          normaluser: ifvote(res.data).normaluser,
-          optionaluser: ifvote(res.data).optionaluser,
+          votesituation: ifvote(res.data),
         });
       })
       .catch((err) => {

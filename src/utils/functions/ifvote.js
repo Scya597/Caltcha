@@ -1,8 +1,6 @@
 module.exports = (obj) => {
   const nuvote = [];
   const nunvote = [];
-  const ouvote = [];
-  const ounvote = [];
   for (let i = 0; i < obj.normaluser.length; i += 1) {
     let b = 1;
     for (let j = 0; j < obj.votes.length; j += 1) {
@@ -15,15 +13,17 @@ module.exports = (obj) => {
       nunvote.push(obj.normaluser[i]);
     }
   }
+  const ouvote = [];
+  const ounvote = [];
   for (let i = 0; i < obj.optionaluser.length; i += 1) {
-    let b = 1;
+    let c = 1;
     for (let j = 0; j < obj.votes.length; j += 1) {
       if (obj.optionaluser[i] === obj.votes[j].userid) {
         ouvote.push(obj.optionaluser[i]);
-        b = 0;
+        c = 0;
       }
     }
-    if (b) {
+    if (c) {
       ounvote.push(obj.optionaluser[i]);
     }
   }

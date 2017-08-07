@@ -1,9 +1,11 @@
-import Post from '../models/Post';
+import Caltcha from '../models/Post';
 
 const tdtn = require('./functions/tdtn');
 const tntd = require('./functions/tntd');
 const conti = require('./functions/conti');
 const test = require('../../../test.json');
+
+
 
 const teams = test.team;
 const users = test.user;
