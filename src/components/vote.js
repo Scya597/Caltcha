@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Super from './super';
 import EventData from './eventData';
+import VoteAction from './voteAction';
 import '../scss/title.scss';
 
 export default class Vote extends Component {
@@ -47,13 +48,7 @@ export default class Vote extends Component {
   checkSuper(user) {
     if (user.userId !== user.superUserId) {
       return (
-        <div>
-          <div className="list-border status-bar">
-            {'pick your time' || 'you have picked your time'}
-            <button className="btn btn-warning">edit users</button>
-          </div>
-          <button className="btn btn-default" onClick={this.vote}>VOTE</button>
-        </div>
+        <VoteAction />
       );
     } else {
       return (
@@ -76,7 +71,7 @@ export default class Vote extends Component {
           </div>
           <EventData />
         </div>
-        <div className="col-md-6 list-border">
+        <div>
           {this.checkSuper(this.state)}
         </div>
       </div>
