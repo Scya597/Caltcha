@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datetime';
 import { Link } from 'react-router-dom';
 
-export default class EventData extends Component{
+export default class EventData extends Component {
   constructor(props) {
     super(props);
   }
@@ -41,13 +41,12 @@ export default class EventData extends Component{
         <iframe
           width="100%"
           height="500"
-          frameborder="0"
+          frameBorder="0"
           scrolling="no"
-          marginheight="0"
-          marginwidth="0"
+          marginHeight="0"
+          marginWidth="0"
           src="http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=新竹市交通大學&z=16&output=embed&t="
-        >
-        </iframe>
+        />
       </div>
     );
   }

@@ -103,7 +103,7 @@ export default class Vote extends Component {
     if (userid === superid) {
       return (
         <div>
-          <EventData project={this.state.project} />
+          <EventData project={this.state.project} days={this.state.hourstoline} />
           <button className="btn btn-danger col-md-6">
             Delete this Event
           </button>
