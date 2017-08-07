@@ -4,6 +4,15 @@ const tdtn = require('./functions/tdtn');
 const tntd = require('./functions/tntd');
 const conti = require('./functions/conti');
 const test = require('../../../test.json');
+const clone = require('./functions/clone');
+
+UserSelected.create({ id: '00', name: 'Autumn' });
+const teammember = [];
+UserSelected.find((err, a) => {
+  a.forEach((b) => {
+    teammember.push(b);
+  });
+});
 
 const teams = test.team;
 const users = test.user;
@@ -11,6 +20,8 @@ const projects = test.project;
 
 module.exports = {
   getteamanduser(req, res) {
+    console.log('fgh');
+    console.log(teammember);
     console.log(`${req.user.id} call /api/profile`);
     const sendteam = teams.filter((team) => {
       return (typeof req.user.team.find(item => (item === team.id)) !== 'undefined');
