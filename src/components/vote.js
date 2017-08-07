@@ -64,9 +64,11 @@ export default class Vote extends Component {
         <div className="col-md-6 list-border">
           <div className="row">
             <Link className="btn btn-default col-md-2 back-button" to="/">
-              Back
+              ㄑ Back
             </Link>
-            <label className="col-md-4">3 days left</label>
+            <div className="col-md-5 noti-div">
+              <label className="noti-label">3 days left</label>
+            </div>
           </div>
           <EventData />
         </div>

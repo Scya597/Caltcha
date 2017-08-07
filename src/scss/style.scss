@@ -1,3 +1,10 @@
+.deadline {
+  color: red;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 0.8%;
+}
+
 .logo {
   font-size: 50px;
   padding-left: 27px;
@@ -5,6 +12,21 @@
   font-family: 'Nunito', sans-serif;
   padding-top: 18px;
   font-weight: bold;
+}
+
+.noti-div {
+  text-align: center;
+  margin-top: 0.5%;
+  margin-left: 17%;
+}
+
+.noti-label {
+  vertical-align: middle;
+  border: 2px #ff3333 solid;
+  text-align: center;
+  border-radius: 5px;
+  width: 70%;
+  color: #ff3333;
 }
 
 .list-border {
