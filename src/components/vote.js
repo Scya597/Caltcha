@@ -15,7 +15,10 @@ export default class Vote extends Component {
     this.state = {
       project: {},
       hourstoline: 0,
-      votesituation: {},
+      votesituation: {
+        normaluser: { vote: [], nvote: [] },
+        optionaluser: { vote: [], nvote: [] },
+      },
     };
 
     this.fetchpj = this.fetchpj.bind(this);
@@ -120,7 +123,7 @@ export default class Vote extends Component {
             </button>
           </div>
           <div className="col-md-6">
-            <VoteAction project={this.state.project} vote={this.vote}/>
+            <VoteAction project={this.state.project} vote={this.vote} voteData={this.state.votesituation} />
           </div>
         </div>
       );
