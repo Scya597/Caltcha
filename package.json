@@ -11,7 +11,7 @@
     "build": "npm-run-all build:*",
     "dev": "NODE_ENV=dev webpack-dashboard -- nodemon --exec babel-node server/server.js --ignore public/ --ignore src/"
   },
-  "author": "Chan Yu An",
+  "author": "PlusUltra",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.16.1",
