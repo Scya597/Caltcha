@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+
 import deadline from '../utils/functions/deadline';
 import EventData from './eventData';
 import VoteAction from './voteAction';
@@ -15,11 +15,11 @@ export default class Vote extends Component {
     this.vote = this.vote.bind(this);
     this.updatepj = this.updatepj.bind(this);
     this.removepj = this.removepj.bind(this);
-    //this.checkSuper = this.checkSuper.bind(this);
   }
   componentDidMount() {
     this.fetchpj();
   }
+
   fetchpj() {
     const { pjid } = this.props.match.params;
     axios.get(`/api/project/${pjid}`)
@@ -30,6 +30,7 @@ export default class Vote extends Component {
         console.log(err);
       });
   }
+
   vote() {
     const { pjid } = this.props.match.params;
     const tmpDates = [
@@ -54,6 +55,7 @@ export default class Vote extends Component {
     });
     this.props.history.push('/');
   }
+
   updatepj() {
     const { pjid } = this.props.match.params;
     axios.post('/api/project/update', {
@@ -69,6 +71,7 @@ export default class Vote extends Component {
       });
     this.fetchpj();
   }
+
   removepj() {
     const { pjid } = this.props.match.params;
     axios.post('/api/project/remove', {
@@ -107,15 +110,18 @@ export default class Vote extends Component {
     if (userid === superid) {
       return (
         <div>
-          {this.state.project.title}
-          <p>you are superuser</p>
+          <EventData project={this.state.project} />
         </div>
       );
     } else {
       return (
         <div>
-          {this.state.project.title}
-          <p>you are not superuser</p>
+          <div className="col-md-6">
+            <EventData project={this.state.project} />
+          </div>
+          <div className="col-md-6">
+            <VoteAction project={this.state.project} />
+          </div>
         </div>
       );
     }

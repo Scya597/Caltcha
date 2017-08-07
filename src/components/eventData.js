@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datetime';
+import { Link } from 'react-router-dom';
 
 export default class EventData extends Component{
   constructor(props) {
@@ -9,6 +10,9 @@ export default class EventData extends Component{
   render() {
     return (
       <div className="list-border">
+        <Link className="btn btn-default col-md-2 back-button" to="/">
+          ㄑ Back
+        </Link>
         <div>
           <div className="row">
             <div className="col-xs-7 deadline">
