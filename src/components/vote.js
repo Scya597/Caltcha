@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import deadline from '../utils/functions/deadline';
 import EventData from './eventData';
 import VoteAction from './voteAction';
 import '../scss/title.scss';
 
+const deadline = require('../utils/functions/deadline');
+const ifvote = require('../utils/functions/ifvote');
+
 export default class Vote extends Component {
   constructor(props) {
     super(props);
-    this.state = { project: {}, hourstoline: 0 };
+    this.state = {
+      project: {},
+      hourstoline: 0,
+      normaluser: { vote: [], nvote: [] },
+      optionaluser: { vote: [], nvote: [] },
+    };
 
     this.fetchpj = this.fetchpj.bind(this);
     this.vote = this.vote.bind(this);
@@ -24,7 +31,12 @@ export default class Vote extends Component {
     const { pjid } = this.props.match.params;
     axios.get(`/api/project/${pjid}`)
       .then((res) => {
-        this.setState({ project: res.data, hourstoline: deadline(res.data.deadline) });
+        this.setState({
+          project: res.data,
+          hourstoline: deadline(res.data.deadline),
+          normaluser: ifvote(res.data).normaluser,
+          optionaluser: ifvote(res.data).optionaluser,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -85,24 +97,6 @@ export default class Vote extends Component {
       });
     this.props.history.push('/');
   }
-
-  // checkSuper(user) {
-  //   if (user.userId !== user.superId) {
-  //     return (
-  //       <div>
-  //         <div className="list-border status-bar">
-  //           {'pick your time' || 'you have picked your time'}
-  //           <button className="btn btn-warning">edit users</button>
-  //         </div>
-  //         <button className="btn btn-default" onClick={this.vote}>VOTE</button>
-  //       </div>
-  //     );
-  //   } else {
-  //     return (
-  //       <Super projectId={user.projectId} history={this.props.history} match={this.props.match} />
-  //     );
-  //   }
-  // }
 
   render() {
     const { userid } = this.props.match.params;

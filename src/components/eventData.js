@@ -10,9 +10,14 @@ export default class EventData extends Component{
   render() {
     return (
       <div className="list-border">
-        <Link className="btn btn-default col-md-2 back-button" to="/">
-          ㄑ Back
-        </Link>
+        <div className="row">
+          <Link className="btn btn-default col-md-4 back-button" to="/">
+            ㄑ Back
+          </Link>
+          <div className="col-md-8">
+            {'3 days left'}
+          </div>
+        </div>
         <div>
           <div className="row">
             <div className="col-xs-7 deadline">
