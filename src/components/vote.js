@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import deadline from '../utils/functions/deadline';
 import EventData from './eventData';
 import VoteAction from './voteAction';
 import '../scss/title.scss';
 
+const deadline = require('../utils/functions/deadline');
+const ifvote = require('../utils/functions/ifvote');
+
 export default class Vote extends Component {
   constructor(props) {
     super(props);
-    this.state = { project: {}, hourstoline: 0 };
+    this.state = {
+      project: {},
+      hourstoline: 0,
+      normaluser: { vote: [], nvote: [] },
+      optionaluser: { vote: [], nvote: [] },
+    };
 
     this.fetchpj = this.fetchpj.bind(this);
     this.vote = this.vote.bind(this);
@@ -24,7 +31,12 @@ export default class Vote extends Component {
     const { pjid } = this.props.match.params;
     axios.get(`/api/project/${pjid}`)
       .then((res) => {
-        this.setState({ project: res.data, hourstoline: deadline(res.data.deadline) });
+        this.setState({
+          project: res.data,
+          hourstoline: deadline(res.data.deadline),
+          normaluser: ifvote(res.data).normaluser,
+          optionaluser: ifvote(res.data).optionaluser,
+        });
       })
       .catch((err) => {
         console.log(err);
