@@ -18,6 +18,7 @@ export default class Vote extends Component {
       votesituation: {
         normaluser: { vote: [], nvote: [] },
         optionaluser: { vote: [], nvote: [] },
+        closeduser: [],
       },
     };
 

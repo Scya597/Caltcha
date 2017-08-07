@@ -52,13 +52,22 @@ const ProjectSchema = new Schema({
   votes: [Object], //ProjectSchema
 });
 
-
 const CaltchaSchema = new Schema({
   teams: [Object], //TeamSchema
   users: [Object], //UserSchema
   projects: [Object], //ProjectSchema
 });
 
+const TeamMember = mongoose.model('teammember', TeamMemberSchema);
+const Team = mongoose.model('team', TeamSchema);
+
+const UserSelected = mongoose.model('userselected', UserSelectedSchema);
+const User = mongoose.model('user', UserSchema);
+
+const ProjectVoteDate = mongoose.model('projectvotedate', ProjectVoteDateSchema);
+const ProjectVote = mongoose.model('projectvote', ProjectVoteSchema);
+const Project = mongoose.model('project', ProjectSchema);
+
 const Caltcha = mongoose.model('caltcha', CaltchaSchema);
 
-module.exports = Caltcha;
+module.exports = { TeamMember, Team, UserSelected, User, ProjectVoteDate, ProjectVote, Project, Caltcha };
