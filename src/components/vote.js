@@ -107,17 +107,46 @@ export default class Vote extends Component {
     const { superid } = this.props.match.params;
     return (
       <div className="full-page-container">
-        <Col md={6}>
+        <Col md={6} className="centify">
           <EventData userId={userid} project={this.state.project} hours={this.state.hourstoline} />
         </Col>
         <Col md={6}>
           {
             (userid === superid) ?
             <h3>No Component Here.</h3> :
-            <VoteAction project={this.state.project} vote={this.vote}/>
+            <VoteAction project={this.state.project} vote={this.vote} voteData={this.state.votesituation} myId={userid} />
           }
         </Col>
       </div>
     );
+    if (userid === superid) {
+      return (
+        <div>
+          <EventData project={this.state.project} days={this.state.hourstoline} />
+          <button className="btn btn-danger col-md-6">
+            Delete this Event
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div className="col-md-6">
+            <EventData project={this.state.project} days={this.state.hourstoline} />
+            <button className="btn btn-danger col-md-6">
+              I do NOT feel like joining this event
+            </button>
+          </div>
+          <div className="col-md-6">
+            <VoteAction
+              project={this.state.project}
+              vote={this.vote}
+              voteData={this.state.votesituation}
+              myId={userid}
+            />
+          </div>
+        </div>
+      );
+    }
   }
 }
