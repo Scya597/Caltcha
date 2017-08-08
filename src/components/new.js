@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Col, FormGroup, FormControl, Button, ListGroup, ListGroupItem, Glyphicon, Panel } from 'react-bootstrap';
 import DatePicker from 'react-datetime';
 import moment from 'moment';
-// import _ from 'lodash';
+
 import NavbarSimple from './navbar_simple';
 import '../scss/title.scss';
 import '../scss/react-datetime.scss';

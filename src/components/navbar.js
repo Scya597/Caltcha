@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { SplitButton, MenuItem, Popover, OverlayTrigger, Navbar, NavItem, Nav, Button, ButtonGroup, Glyphicon, InputGroup, FormGroup, FormControl } from 'react-bootstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class navbar extends Component {
   constructor(props) {
     super(props);
+
     this.state = {};
     this.popover = (
       <Popover id="popover-trigger-click-root-close" title="No Team Selected" />
     );
+
     this.selectTeam = this.selectTeam.bind(this);
   }
-
   componentDidMount() {
     this.selectTeam(this.props.selectedTeam.id);
   }
@@ -79,8 +81,8 @@ class navbar extends Component {
   renderMemberList(teamId) {
     const selectedTeamObj = this.props.teams.find(team => team.id === teamId);
     return selectedTeamObj.members.map(item => <li key={item.id}>{item.username} <a href={`mailto:${item.email}`}><u>{item.email}</u></a></li>);
-
   }
+
   renderemail = (item) => {
     return <li key={item.id}>{item.username} <a href={`mailto:${item.email}`}><u>{item.email}</u></a></li>;
   }
@@ -117,10 +119,10 @@ class navbar extends Component {
             </NavItem>
           </Nav>
           <Nav pullRight>
-            <NavItem>
+            <NavItem className="search">
               <Navbar.Form>
                 <FormGroup>
-                  <InputGroup>
+                  <InputGroup className="input">
                     <InputGroup.Addon><Glyphicon glyph="search" /></InputGroup.Addon>
                     <FormControl type="text" placeholder="Search" />
                   </InputGroup>

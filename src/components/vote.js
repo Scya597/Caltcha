@@ -59,7 +59,6 @@ export default class Vote extends Component {
       });
   }
 
-
   fetchpj() {
     const { pjid } = this.props.match.params;
     axios.get(`/api/project/${pjid}`)

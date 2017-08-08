@@ -1,3 +1,22 @@
+a {
+  text-decoration: none !important;
+}
+
+.pj-title {
+  color: black;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
+
+.search {
+  margin-left: -27%;
+  margin-right: 25%;
+}
+
+.input:hover {
+  width: 150%;
+}
+
 .team {
   margin-left: 37%;
 }
@@ -6,8 +25,8 @@
   color: red;
   border: red 2px solid;
   border-radius: 5px;
-  margin-left: 30%;
-  margin-right: 30%
+  margin-left: 25%;
+  margin-right: 25%
 }
 
 .centify {
@@ -38,10 +57,10 @@
 
 .logo {
   font-size: 50px;
-  padding-left: 30px;
-  text-shadow: -1.5px 1.5px 0.5px black;
-  padding-top: 13px;
+  padding-left: 17%;
+  text-shadow: -3px 3px 0.5px black;
   font-weight: bold;
+  padding-top: 7%;
 }
 
 .noti-center {
@@ -102,7 +121,7 @@
 }
 
 div {
-  font-family: 'Averia Sans Libre', cursive;
+  font-family: 'Averia Sans Libre', san-serif;
   // font-family: 'Sniglet', cursive;
   // font-family: 'Cabin Sketch', cursive;
   // font-family: sans-serif;
