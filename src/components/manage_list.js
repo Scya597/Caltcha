@@ -11,7 +11,25 @@ class manageList extends Component {
     this.state = {};
 
   }
-
+  rendervote = (proj) => {
+    if (proj.normaluser.length === 0) {
+      return (
+        <ProgressBar
+          now={Math.round((ifvote(proj).optionaluser.vote.length/proj.optionaluser.length) * 100)}
+          label={`${Math.round((ifvote(proj).optionaluser.vote.length/proj.optionaluser.length) * 100)}%`}
+          bsStyle="danger"
+        />
+      );
+    } else {
+      return (
+        <ProgressBar
+          now={Math.round((ifvote(proj).normaluser.vote.length/proj.normaluser.length) * 100)}
+          label={`${Math.round((ifvote(proj).normaluser.vote.length/proj.normaluser.length) * 100)}%`}
+          bsStyle="danger"
+        />
+      );
+    }
+  }
 
   render() {
     const superProjJSX = this.props.superProj.map((proj) => {
@@ -22,11 +40,7 @@ class manageList extends Component {
               <div className="manage-list">
                 <h4>Duration: {proj.minDuration * 0.5} hrs</h4>
                 <h4>Location: {proj.location}</h4>
-                <ProgressBar
-                  now={Math.round((ifvote(proj).normaluser.vote.length/proj.normaluser.length) * 100)}
-                  label={`${Math.round((ifvote(proj).normaluser.vote.length/proj.normaluser.length) * 100)}%`}
-                  bsStyle="danger"
-                />
+                {this.rendervote(proj)}
               </div>
               <div className="danger">
                 <h5>Deadline: {proj.deadline}</h5>
