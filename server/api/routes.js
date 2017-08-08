@@ -1,5 +1,6 @@
 import server from 'express';
 import PostsController from './controllers/posts_controller';
+//import PostsController from './controllers/dbcontroller';
 
 function isAuth(req, res, next) {
   if (req.isAuthenticated()) {
