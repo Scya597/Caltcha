@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import uuid from 'uuid/v4';
 import { Link } from 'react-router-dom';
-import { Col, FormGroup, FormControl, Button, ListGroup, ListGroupItem, Glyphicon, Panel } from 'react-bootstrap';
+import { Col, FormGroup, FormControl, Button, ListGroup, ListGroupItem, Glyphicon, Panel, Badge } from 'react-bootstrap';
 import DatePicker from 'react-datetime';
+import DayPicker, { DateUtils } from 'react-day-picker';
 import moment from 'moment';
 // import _ from 'lodash';
 import NavbarSimple from './navbar_simple';
+import TimeblocksPicker from './timeblocks_picker';
 import '../scss/title.scss';
 import '../scss/react-datetime.scss';
+import '../scss/react-day-picker.scss';
 
 function getData() {
   return [axios.get('/api/profile'), axios.get('/api/team/select')];
@@ -55,6 +58,8 @@ class New extends Component {
       teams: [],
       newProject: {},
       selectedTeam: {},
+      showDayPicker: false,
+      dayPickerRaw: [],
       warn: 0,
     };
     this.saveNewProject = this.saveNewProject.bind(this);
@@ -72,7 +77,7 @@ class New extends Component {
     const formatValid = (typeof deadline !== 'undefined') ? deadline.length === 8 : false;
     return (dateValid && formatValid) ? 'success' : 'error';
   }
-
+// Init
   fetchuser = () => {
     axios.all(getData())
       .then((res) => {
@@ -89,21 +94,7 @@ class New extends Component {
             normaluser: [],
             closeduser: [],
             optionaluser: defaultOptionalUsers.filter(userId => (userId !== res[0].data.user.id)),
-            votes: [
-              {
-                userid: res[0].data.user.id,
-                dates: [
-                  {
-                    date: '20171007',
-                    timeblocks: [2, 3, 6, 7, 8, 13, 14, 15],
-                  },
-                  {
-                    date: '20170930',
-                    timeblocks: [1, 2, 3, 8, 9, 10, 14, 15, 16],
-                  },
-                ],
-              },
-            ].concat(defaultVotes),
+            votes: [],
           },
           selectedTeam: res[1].data,
         });
@@ -112,7 +103,11 @@ class New extends Component {
         console.log(err);
       });
   }
+// Vote Creator
+  createVote() {
 
+  }
+// Save data to server
   saveNewProject(event) {
     // axios.get('/api/profile')
     //   .then((res) => {
@@ -140,7 +135,13 @@ class New extends Component {
       this.state.newProject.description !== undefined && this.state.newProject.deadline !== 'Invalid date' &&
       this.state.newProject.minDuration !== undefined
     ) {
-      axios.post('/api/project/new', this.state.newProject)
+      const newProjectTmp = this.state.newProject;
+      const suVote = {
+        userid: newProjectTmp.superuser,
+        dates: this.state.dayPickerRaw.map(),
+      };
+      newProjectTmp.votes.push(suVote);
+      axios.post('/api/project/new', newProjectTmp)
       .then((res) => {
         console.log(res);
       })
@@ -153,7 +154,7 @@ class New extends Component {
       this.setState({ warn: 1 });
     }
   }
-
+// Sync Form with state
   syncData(field, data) {
     const proj = this.state.newProject;
     Object.defineProperty(proj, field, {
@@ -166,7 +167,7 @@ class New extends Component {
       newProject: proj,
     });
   }
-
+// Member List Manipulation
   isNormaluser(id) {
     return typeof this.state.newProject.normaluser.find(userId => id === userId) !== 'undefined';
   }
@@ -252,7 +253,28 @@ class New extends Component {
       });
     }
   }
+// Day Picker Related
+  toggleDayPicker() {
+    this.setState({ showDayPicker: !this.state.showDayPicker });
+  }
 
+  handleDayClick = (day, { selected }) => {
+    const { dayPickerRaw } = this.state;
+    if (selected) {
+      const selectedIndex = dayPickerRaw.findIndex(selectedDay =>
+        DateUtils.isSameDay(selectedDay, day)
+      );
+      dayPickerRaw.splice(selectedIndex, 1);
+    } else {
+      dayPickerRaw.push(day);
+    }
+    this.setState({ dayPickerRaw });
+  };
+
+  renderSelectedDays() {
+    return this.state.dayPickerRaw.map(rawDay => <Badge key={rawDay}>{moment(rawDay).format('M/DD')}</Badge>);
+  }
+// Form Validation
   renderwarn = (b) => {
     if (b) {
       return <Panel header="Deadline is invalid." bsStyle="danger" />;
@@ -284,6 +306,12 @@ class New extends Component {
                 <FormGroup>
                   <h4>Location:</h4><FormControl type="text" onChange={event => this.syncData('location', event.target.value)} required />
                 </FormGroup>
+              </Col>
+              <Col md={12}>
+                <h4>Date Picker:</h4>
+                <Col md={12}>{this.state.showDayPicker ? this.renderSelectedDays() : <TimeblocksPicker selectedBlocks={[1, 5, 34]} /> }</Col>
+                <Button onClick={() => this.toggleDayPicker()}><Glyphicon glyph={this.state.showDayPicker ? 'ok-sign' : 'plus-sign'} /></Button>
+                {this.state.showDayPicker ? <DayPicker selectedDays={this.state.dayPickerRaw} onDayClick={this.handleDayClick} /> : <div />}
               </Col>
               <Col md={6}>
                 <h4>Voting Deadline:</h4>
