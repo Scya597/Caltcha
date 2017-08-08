@@ -76,6 +76,7 @@ class New extends Component {
   fetchuser = () => {
     axios.all(getData())
       .then((res) => {
+        const defaultOptionalUsers = res[0].data.teams.find(team => team.id === res[1].data.id).members.map(member => member.id);
         this.setState({
           user: res[0].data.user,
           teams: res[0].data.teams,
@@ -87,7 +88,7 @@ class New extends Component {
             superuser: res[0].data.user.id,
             normaluser: [],
             closeduser: [],
-            optionaluser: res[0].data.teams.find(team => team.id === res[1].data.id).members.map(member => member.id),
+            optionaluser: defaultOptionalUsers.filter(userId => (userId !== res[0].data.user.id)),
             votes: [
               {
                 userid: res[0].data.user.id,
