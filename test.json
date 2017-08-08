@@ -40,7 +40,7 @@
       "realname": "Superman",
       "email": "superman@gmail.com",
       "team": ["00", "01"],
-      "selectedteam" : { "id": "01", "name": "Facebook" }
+      "selectedteam" : { "id": "", "name": "" }
     },
     {
       "id": "8948983993",

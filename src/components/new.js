@@ -26,7 +26,7 @@ const defaultVotes = [
     userid: '5794283116',
     dates: [
       {
-        date: 20171007,
+        date: '20171007',
         timeblocks: [2, 6, 7, 8, 13, 14, 15],
       },
     ],
@@ -35,11 +35,11 @@ const defaultVotes = [
     userid: 'nvifnvbnbrnobnorenobmey',
     dates: [
       {
-        date: 20170930,
+        date: '20170930',
         timeblocks: [2, 6, 7, 8, 13, 14, 15],
       },
       {
-        date: 20171007,
+        date: '20171007',
         timeblocks: [2, 3, 7, 8, 14, 15],
       },
     ],
@@ -92,11 +92,11 @@ class New extends Component {
                 userid: res[0].data.user.id,
                 dates: [
                   {
-                    date: 20171007,
+                    date: '20171007',
                     timeblocks: [2, 3, 6, 7, 8, 13, 14, 15],
                   },
                   {
-                    date: 20170930,
+                    date: '20170930',
                     timeblocks: [1, 2, 3, 8, 9, 10, 14, 15, 16],
                   },
                 ],
