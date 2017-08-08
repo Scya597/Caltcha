@@ -8,32 +8,13 @@ class manageList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { sProj: [] };
+    this.state = {};
 
-    this.getnormalvote = this.getnormalvote.bind(this);
-  }
-  componentDidMount() {
-    const b = [];
-    b.push(this.props.superProj.map(this.getnormalvote));
-    this.setState({ sProj: b });
   }
 
-  getnormalvote = (obj) => {
-    const a = [];
-    a.push({
-      superuser: obj.superuser,
-      minDuration: obj.minDuration,
-      location: obj.location,
-      id: obj.id,
-      title: obj.title,
-      sum: obj.normaluser.length,
-      vote: ifvote(obj).normaluser.vote.length,
-      deadline: obj.deadline,
-    });
-  }
 
   render() {
-    const superProjJSX = this.state.sProj.map((proj) => {
+    const superProjJSX = this.props.superProj.map((proj) => {
       return (
         <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`} key={proj.id}>
           <Panel bsStyle="primary" className="btn-shadow">
@@ -42,8 +23,8 @@ class manageList extends Component {
                 <h4>Duration: {proj.minDuration * 0.5} hrs</h4>
                 <h4>Location: {proj.location}</h4>
                 <ProgressBar
-                  now={60}
-                  label={`${60}%`}
+                  now={Math.round((ifvote(proj).normaluser.vote.length/proj.normaluser.length) * 100)}
+                  label={`${Math.round((ifvote(proj).normaluser.vote.length/proj.normaluser.length) * 100)}%`}
                   bsStyle="danger"
                 />
               </div>

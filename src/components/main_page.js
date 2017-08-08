@@ -61,7 +61,6 @@ class MainPage extends Component {
       .then((res) => {
         const selectedteam = res.data;
         if (selectedteam.id === '') {
-          console.log('asd')
           axios.get('/api/profile')
             .then((resp) => {
               const team = resp.data.teams[0];
@@ -71,7 +70,6 @@ class MainPage extends Component {
               console.log(erro);
             });
         } else {
-          console.log('sdf');
           this.setSelectedTeam(selectedteam);
         }
       })

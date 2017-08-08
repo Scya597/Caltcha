@@ -1,64 +1,59 @@
 import mongoose, { Schema } from 'mongoose';
 
 const TeamSchema = new Schema({
-  id: String,
-  name: String,
+  id: { type: String, required: true },
+  name: { type: String, required: true },
   members: [{
-    username: String,
-    id: String,
+    username: { type: String, required: true },
+    id: { type: String, required: true },
   }],
   projects: [String],
 });
 
 const UserSchema = new Schema({
-  id: String,
-  username: String,
-  password: String,
-  realname: String,
-  email: String,
+  id: { type: String, required: true },
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  realname: { type: String, required: true },
+  email: { type: String, required: true },
   team: [String],
   selectedteam: {
-    id: String,
-    name: String,
+    id: { type: String, required: true },
+    name: { type: String, required: true },
   },
 });
 
 const ProjectSchema = new Schema({
-  team: String,
-  id: String,
-  title: String,
-  minDuration: String,
-  description: String,
-  location: String,
+  team: { type: String, required: true },
+  id: { type: String, required: true },
+  title: { type: String, required: true },
+  minDuration: { type: String, required: true },
+  description: { type: String, required: true },
+  location: { type: String, required: true },
   finaldate: {
-    date: String,
+    date: { type: String, required: true },
     timeblocks: [Number],
   },
-  deadline: String,
-  ended: Boolean,
-  superuser: String,
+  deadline: { type: String, required: true },
+  ended: { type: Boolean, required: true },
+  superuser: { type: String, required: true },
   normaluser: [String],
   optionaluser: [String],
   closeduser: [String],
   votes: [{
-    userid: String,
+    userid: { type: String, required: true },
     dates: [{
-      date: String,
+      date: { type: String, required: true },
       timeblocks: [Number],
     }],
   }],
 });
 
-//const TeamMember = mongoose.model('teammember', TeamMemberSchema);
+
 const Team = mongoose.model('team', TeamSchema);
 
-//const UserSelected = mongoose.model('userselected', UserSelectedSchema);
 const User = mongoose.model('user', UserSchema);
 
-//const ProjectVoteDate = mongoose.model('projectvotedate', ProjectVoteDateSchema);
-//const ProjectVote = mongoose.model('projectvote', ProjectVoteSchema);
 const Project = mongoose.model('project', ProjectSchema);
-
-//const Caltcha = mongoose.model('caltcha', CaltchaSchema);
 
 module.exports = { Team, User, Project };
