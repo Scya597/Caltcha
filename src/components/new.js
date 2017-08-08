@@ -80,7 +80,7 @@ class New extends Component {
           teams: res[0].data.teams,
           newProject: {
             id: uuid(),
-            finaldate: 0,
+            finaldate: {},
             ended: false,
             team: res[1].data.id,
             superuser: res[0].data.user.id,

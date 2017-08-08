@@ -11,14 +11,14 @@ export default class VoteAction extends Component {
 
   checkNormal() {
     this.props.voteData.normaluser.vote.forEach(id => {
-      if (id === myId) return true;
+      if (id === this.props.myId) return true;
       else return false;
     });
   }
 
   checkOptional() {
     this.props.voteData.optionaluser.vote.forEach(id => {
-      if (id === myId) return true;
+      if (id === this.props.myId) return true;
       else return false;
     });
   }
