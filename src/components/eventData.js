@@ -42,7 +42,7 @@ export default class EventData extends Component {
         <Col md={6}>
           {
             (this.props.hours >= 24) ?
-            <h3><Label bsStyle="danger">{`${Math.round(this.props.hours/24)} days left`}</Label></h3> :
+            <h3><Label bsStyle="danger">{`${Math.round(this.props.hours / 24)} days left`}</Label></h3> :
               (this.props.hours > 0) ?
               <h3><Label bsStyle="danger">{`${this.props.hours} hours left`}</Label></h3> :
               <h3><Label bsStyle="danger">Voting Ended</Label></h3>

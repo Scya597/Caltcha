@@ -6,7 +6,7 @@ import { Col, FormGroup, FormControl, Button, ListGroup, ListGroupItem, Glyphico
 import DatePicker from 'react-datetime';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import moment from 'moment';
-// import _ from 'lodash';
+
 import NavbarSimple from './navbar_simple';
 import TimeblocksPicker from './timeblocks_picker';
 import '../scss/title.scss';
