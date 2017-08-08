@@ -34,7 +34,6 @@ class MainPage extends Component {
     axios.post('/api/team/select', teamObj)
       .then((res) => {
         console.log('(main_page.js)[POST /api/team/select]');
-        console.log(res);
         const selectedpjs = [];
         for (let i = 0; i < this.state.projects.length; i += 1) {
           if (this.state.projects[i].team === teamObj.id) {

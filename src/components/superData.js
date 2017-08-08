@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Col, Button } from 'react-bootstrap';
 
 export default class SuperData extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   render() {
     const { normaluser, optionaluser, closeduser } = this.props.voteData;
     const all = normaluser.vote.length + normaluser.nvote.length + optionaluser.vote.length + optionaluser.nvote.length;
-
+    console.log(normaluser);
     return(
       <div className="list-border col-md-6">
         <div>

@@ -301,8 +301,19 @@ module.exports = {
       if (userId === users[i].id) {
         users[i].selectedteam = request;
         res.send('update selectedteam success');
-        console.log('post');
-        console.log(users[i].selectedteam);
+      }
+    }
+  },
+  getuserinfo(req, res) {
+    const userId = req.params.id;
+    console.log('fds');
+    for (let i = 0; i < users.length; i += 1) {
+      if (userId === users[i].id) {
+        res.send({
+          username: users[i].username,
+          realname: users[i].realname,
+          email: users[i].email,
+        });
       }
     }
   },

@@ -24,5 +24,6 @@ router.post('/project/remove', isAuth, PostsController.rmproject);
 router.get('/project/:projectId', isAuth, PostsController.getproject);
 router.get('/team/select', isAuth, PostsController.getselectedteam);
 router.post('/team/select', isAuth, PostsController.postselectedteam);
+router.get('/user/:id', isAuth, PostsController.getuserinfo);
 
 module.exports = router;
