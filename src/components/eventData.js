@@ -25,7 +25,7 @@ export default class EventData extends Component {
     );
 
     return (
-      <div className="list-border">
+      <div className="list-border col-md-6">
         <Col md={3}>
           <Link to="/">
             <h3><Button><Glyphicon glyph="chevron-left" />Back</Button></h3>
@@ -69,21 +69,18 @@ export default class EventData extends Component {
         </Col>
         <iframe
           width="95%"
-          height="300px"
+          height="350px"
           frameBorder="0px"
           scrolling="no"
           marginHeight="0px"
           marginWidth="0px"
           src={`http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=${this.props.project.location}&z=16&output=embed&t=`}
         />
-        <Col md={6}>
-          <Button bsStyle="danger">I don&rsquo;t feel like joining this event.</Button>
-        </Col>
-        <Col md={6}>
+        <Col md={3}>
           {
             (this.props.project.superuser === this.props.userId) ?
-            <Button bsStyle="danger">Delete this event.</Button> :
-            <h3 />
+              <Button bsStyle="danger" className="pull-xs-left">Delete this event</Button> :
+              <Button bsStyle="danger" className="pull-xs-left">I don&rsquo;t feel like joining this event</Button>
           }
         </Col>
       </div>
