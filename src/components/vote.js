@@ -124,6 +124,7 @@ export default class Vote extends Component {
               />
               :
               <VoteAction
+                vote={this.vote}
                 all={this.all}
                 voted={this.voted}
               />
