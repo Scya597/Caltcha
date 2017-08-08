@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Panel } from 'react-bootstrap';
+import { Button, Panel, ProgressBar } from 'react-bootstrap';
 
 class manageList extends Component {
   constructor(props) {
@@ -13,10 +13,15 @@ class manageList extends Component {
       return (
         <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`} key={proj.id}>
           <Panel bsStyle="primary" className="btn-shadow">
-              <h3>{proj.title}</h3>
-              <h5>Duration: {proj.minDuration*0.5} hrs</h5>
-              <h5>Location: {proj.location}</h5>
-              <h5>Deadline: {proj.deadline}</h5>
+              <h1>{proj.title}</h1>
+              <div className="manage-list">
+                <h4>Duration: {proj.minDuration*0.5} hrs</h4>
+                <h4>Location: {proj.location}</h4>
+                <ProgressBar now={60} label={`${60}%`} bsStyle="danger"/>
+              </div>
+              <div className="danger">
+                <h5>Deadline: {proj.deadline}</h5>
+              </div>
           </Panel>
         </Link>
       );
