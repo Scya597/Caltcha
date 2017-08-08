@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datetime';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Col, Button, ButtonGroup, Glyphicon, Label } from 'react-bootstrap';
+import { Col, Button, Glyphicon, Label } from 'react-bootstrap';
 
 function finaldateFormat(finaldate) {
   if (typeof finaldate === 'undefined' || typeof finaldate.date === 'undefined') {
@@ -15,6 +16,19 @@ function finaldateFormat(finaldate) {
 export default class EventData extends Component {
   constructor(props) {
     super(props);
+  }
+
+  deleteProject() {
+    axios.post('/api/project/remove/', {
+      projectId: this.props.project.id,
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    window.location = '/';
   }
 
   render() {
@@ -73,7 +87,7 @@ export default class EventData extends Component {
         <Col md={3}>
           {
             (this.props.project.superuser === this.props.userId) ?
-              <Button bsStyle="danger" className="pull-xs-left">Delete this event</Button> :
+              <Button bsStyle="danger" className="pull-xs-left" onClick={() => this.deleteProject()}>Delete this event</Button> :
               <Button bsStyle="danger" className="pull-xs-left">I don&rsquo;t feel like joining this event</Button>
           }
         </Col>

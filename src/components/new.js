@@ -6,6 +6,7 @@ import { Col, FormGroup, FormControl, Button, ListGroup, ListGroupItem, Glyphico
 import DatePicker from 'react-datetime';
 import moment from 'moment';
 // import _ from 'lodash';
+import NavbarSimple from './navbar_simple';
 import '../scss/title.scss';
 import '../scss/react-datetime.scss';
 
@@ -259,58 +260,61 @@ class New extends Component {
 
   render() {
     return (
-      <div className="full-page-container">
-        <h2>New Project</h2>
-        <form onSubmit={this.saveNewProject}>
-          <Col md={6}>
-            <Col md={12}>
-              <FormGroup>
-                <h4>Event Name:</h4><FormControl type="text" onChange={event => this.syncData('title', event.target.value)} required />
-              </FormGroup>
+      <div>
+        <NavbarSimple teamName={this.state.selectedTeam.name} userName={this.state.user.username} />
+        <div className="full-page-container">
+          <h2>New Project</h2>
+          <form onSubmit={this.saveNewProject}>
+            <Col md={6}>
+              <Col md={12}>
+                <FormGroup>
+                  <h4>Event Name:</h4><FormControl type="text" onChange={event => this.syncData('title', event.target.value)} required />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <h4>Duration:</h4>
+                  <FormControl componentClass="select" type="number" min="1" onChange={event => this.syncData('minDuration', event.target.value)} required >
+                    {renderDuration()}
+                  </FormControl>
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <h4>Location:</h4><FormControl type="text" onChange={event => this.syncData('location', event.target.value)} required />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <h4>Voting Deadline:</h4>
+                <FormGroup validationState={this.getDateValidationState()}>
+                  <DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} inputProps={{ placeholder: 'YYYY / MM / DD', required: true }} onChange={data => this.syncData('deadline', moment(data).format('YYYYMMDD'))} />
+                </FormGroup>
+              </Col>
+              <Col md={12}>
+                <FormGroup>
+                  <h4>Description:</h4>
+                  <FormControl componentClass="textarea" type="text" onChange={event => this.syncData('description', event.target.value)} required />
+                </FormGroup>
+              </Col>
             </Col>
             <Col md={6}>
-              <FormGroup>
-                <h4>Duration:</h4>
-                <FormControl componentClass="select" type="number" min="1" onChange={event => this.syncData('minDuration', event.target.value)} required >
-                  {renderDuration()}
-                </FormControl>
-              </FormGroup>
+              <h4>Team: {this.state.selectedTeam.name}</h4>
+              <ListGroup>
+                {this.renderMemberList()}
+                {this.renderClosedList()}
+              </ListGroup>
+              <Col md={12}>
+                {this.renderwarn(this.state.warn)}
+              </Col>
+              <Col md={6}>
+                <Link to="/"><Button block>Cancel</Button></Link>
+              </Col>
+              <Col md={6}>
+                <Button bsStyle="danger" type="submit" block>OK</Button>
+              </Col>
             </Col>
-            <Col md={6}>
-              <FormGroup>
-                <h4>Location:</h4><FormControl type="text" onChange={event => this.syncData('location', event.target.value)} required />
-              </FormGroup>
-            </Col>
-            <Col md={6}>
-              <h4>Voting Deadline:</h4>
-              <FormGroup validationState={this.getDateValidationState()}>
-                <DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} inputProps={{ placeholder: 'YYYY / MM / DD', required: true }} onChange={data => this.syncData('deadline', moment(data).format('YYYYMMDD'))} />
-              </FormGroup>
-            </Col>
-            <Col md={12}>
-              <FormGroup>
-                <h4>Description:</h4>
-                <FormControl componentClass="textarea" type="text" onChange={event => this.syncData('description', event.target.value)} required />
-              </FormGroup>
-            </Col>
-          </Col>
-          <Col md={6}>
-            <h4>Team: {this.state.selectedTeam.name}</h4>
-            <ListGroup>
-              {this.renderMemberList()}
-              {this.renderClosedList()}
-            </ListGroup>
-            <Col md={12}>
-              {this.renderwarn(this.state.warn)}
-            </Col>
-            <Col md={6}>
-              <Link to="/"><Button block>Cancel</Button></Link>
-            </Col>
-            <Col md={6}>
-              <Button bsStyle="danger" type="submit" block>OK</Button>
-            </Col>
-          </Col>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }
