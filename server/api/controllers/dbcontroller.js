@@ -3,9 +3,7 @@ import { Team, User, Project } from '../models/Post';
 const tdtn = require('./functions/tdtn');
 const tntd = require('./functions/tntd');
 const conti = require('./functions/conti');
-const test = require('../../../test.json');
-const clone = require('./functions/clone');
-
+//const test = require('../../../test.json');
 
 // const dbteams = [];
 // Team.find((err, a) => {
@@ -28,9 +26,9 @@ const clone = require('./functions/clone');
 
 
 
-const teams = test.team;
-const users = test.user;
-const projects = test.project;
+// const teams = test.team;
+// const users = test.user;
+// const projects = test.project;
 
 module.exports = {
   getteamanduser(req, res) {

@@ -1,4 +1,4 @@
-import { TeamMember, Team, UserSelected, User, ProjectVoteDate, ProjectVote, Project, Caltcha } from '../models/Post';
+
 
 const tdtn = require('./functions/tdtn');
 const tntd = require('./functions/tntd');
@@ -23,21 +23,6 @@ module.exports = {
       configurable: true,
       enumerable: true,
     })));
-    /*
-    console.log(userId);
-    for (let i = 0; i < teams.length; i += 1) {
-      for (let j = 0; j < teams[i].members.length; j += 1) {
-        if (userId === teams[i].members[j]) {
-          sendteam.push(teams[i]);
-        }
-      }
-    }
-    for (let i = 0; i < users.length; i += 1) {
-      if (userId === users[i].id) {
-        senduser = users[i];
-      }
-    }
-    */
     res.send({ teams: sendteam, user: senduser });
   },
 
