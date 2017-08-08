@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavItem, Nav, Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function handleNavLink() {
   window.location = '/logout';
@@ -29,7 +30,7 @@ class navbarSimple extends Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav>
+          <Nav className="team">
             <NavItem>
               <div id="nav-simple-team-label">{this.props.teamName || 'Error'}</div>
             </NavItem>
@@ -37,7 +38,7 @@ class navbarSimple extends Component {
           <Nav pullRight>
             <NavItem>
               <ButtonGroup>
-                <Button>{this.props.userName}</Button>
+                <Button><Link to="/">{this.props.userName}</Link></Button>
                 <Button onClick={() => handleNavLink()} bsStyle="danger"><Glyphicon glyph="log-out" /> Logout</Button>
               </ButtonGroup>
             </NavItem>

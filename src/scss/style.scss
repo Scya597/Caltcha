@@ -1,3 +1,7 @@
+.team {
+  margin-left: 37%;
+}
+
 .danger {
   color: red;
   border: red 2px solid;
@@ -36,7 +40,7 @@
   font-size: 50px;
   padding-left: 30px;
   text-shadow: -1.5px 1.5px 0.5px black;
-  padding-top: 12px;
+  padding-top: 13px;
   font-weight: bold;
 }
 
@@ -148,8 +152,8 @@ textarea {
 
 #nav-simple-team-label {
   padding: 4px 7px;
-  color: #fefefe;
+  color: #eee;
   font-size: 18px;
-  border: 2px #fefefe solid;
-  border-radius: 3px;
+  border: 2px #eee solid;
+  border-radius: 5px;
 }
