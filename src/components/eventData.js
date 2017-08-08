@@ -3,27 +3,21 @@ import DatePicker from 'react-datetime';
 import { Link } from 'react-router-dom';
 import { Col, Button, ButtonGroup, Glyphicon, Label } from 'react-bootstrap';
 
+function finaldateFormat(finaldate) {
+  if (typeof finaldate === 'undefined' || typeof finaldate.date === 'undefined') {
+    return 'Not Chosen';
+  } else {
+    const formattedTime = (`00${finaldate.timeblocks[0] * 30}`).slice(-4);
+    return `${finaldate.date} ${formattedTime}`;
+  }
+}
+
 export default class EventData extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const deadlineBtn = (
-      <ButtonGroup>
-        <Button bsStyle="warning">
-          {
-            (this.props.hours > 0) ?
-            <h3>{`Voting Deadline: ${this.props.project.deadline}`}</h3> :
-            <h3>{`Event Starts From: ${this.props.project.finaldate} hours left`}</h3>
-          }
-        </Button>
-        <Button bsStyle="warning">
-          <h3><DatePicker dateFormat="YYYY / MM / DD" timeFormat={false} inputProps={{ placeholder: 'YYYY / MM / DD', required: true }} /></h3>
-        </Button>
-      </ButtonGroup>
-    );
-
     return (
       <div className="list-border col-md-6">
         <Col md={3}>
@@ -48,7 +42,7 @@ export default class EventData extends Component {
           {
             (this.props.hours > 0) ?
             <h3><Label bsStyle="warning">{`Voting Deadline: ${this.props.project.deadline}`}</Label></h3> :
-            <h3><Label bsStyle="warning">{`Event Starts From: ${this.props.project.finaldate}`}</Label></h3>
+            <h3><Label bsStyle="warning">{`Event Starts From: ${finaldateFormat(this.props.project.finaldate)}`}</Label></h3>
           }
         </Col>
         <Col md={3}>
