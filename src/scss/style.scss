@@ -1,9 +1,24 @@
+.danger {
+  color: red;
+  border: red 2px solid;
+  border-radius: 5px;
+  margin-left: 30%;
+  margin-right: 30%
+}
+
 .centify {
   text-align: center;
 }
 
+.manage-list {
+  text-align: left;
+  width: 70%;
+  margin-left: 15%;
+}
+
 .size {
-  width: 100%;
+  width: 96%;
+  margin-left: 2%;
 }
 
 .status-bar {
@@ -129,4 +144,12 @@ textarea {
 
 .h4-left {
   text-align: left;
+}
+
+#nav-simple-team-label {
+  padding: 4px 7px;
+  color: #fefefe;
+  font-size: 18px;
+  border: 2px #fefefe solid;
+  border-radius: 3px;
 }

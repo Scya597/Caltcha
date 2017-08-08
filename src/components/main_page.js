@@ -33,6 +33,7 @@ class MainPage extends Component {
   setSelectedTeam(teamObj) {
     axios.post('/api/team/select', teamObj)
       .then((res) => {
+        console.log('(main_page.js)[POST /api/team/select]');
         console.log(res);
         const selectedpjs = [];
         for (let i = 0; i < this.state.projects.length; i += 1) {
@@ -60,7 +61,7 @@ class MainPage extends Component {
       .then((res) => {
         const selectedteam = res.data;
         if (selectedteam.id === '') {
-          console.log('asd');
+          console.log('asd')
           axios.get('/api/profile')
             .then((resp) => {
               const team = resp.data.teams[0];

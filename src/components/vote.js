@@ -4,16 +4,24 @@ import { Col } from 'react-bootstrap';
 
 import EventData from './eventData';
 import VoteAction from './voteAction';
+import SuperData from './superData';
+import NavbarSimple from './navbar_simple';
 import '../scss/title.scss';
 
 const deadline = require('../utils/functions/deadline');
 const ifvote = require('../utils/functions/ifvote');
+
+function getData() {
+  return [axios.get('/api/profile'), axios.get('/api/team/select')];
+}
 
 export default class Vote extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      username: '',
+      teamName: '',
       project: {},
       hourstoline: 0,
       votesituation: {
@@ -22,15 +30,35 @@ export default class Vote extends Component {
         closeduser: [],
       },
     };
+    const { normaluser, optionaluser } = this.state.votesituation;
+    this.all = normaluser.vote.length + normaluser.nvote.length
+      + optionaluser.vote.length + optionaluser.nvote.length + 1;
+    this.voted = normaluser.vote.length + optionaluser.vote.length + 1;
 
     this.fetchpj = this.fetchpj.bind(this);
     this.vote = this.vote.bind(this);
     this.updatepj = this.updatepj.bind(this);
     this.removepj = this.removepj.bind(this);
+    this.fetchNavInfo = this.fetchNavInfo.bind(this);
   }
   componentDidMount() {
     this.fetchpj();
+    this.fetchNavInfo();
   }
+
+  fetchNavInfo = () => {
+    axios.all(getData())
+      .then((res) => {
+        this.setState({
+          username: res[0].data.user.username,
+          teamName: res[1].data.name,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
 
   fetchpj() {
     const { pjid } = this.props.match.params;
@@ -106,47 +134,29 @@ export default class Vote extends Component {
     const { userid } = this.props.match.params;
     const { superid } = this.props.match.params;
     return (
-      <div className="full-page-container">
-        <Col md={6} className="centify">
-          <EventData userId={userid} project={this.state.project} hours={this.state.hourstoline} />
-        </Col>
-        <Col md={6}>
-          {
-            (userid === superid) ?
-            <h3>No Component Here.</h3> :
-            <VoteAction project={this.state.project} vote={this.vote} voteData={this.state.votesituation} myId={userid} />
-          }
-        </Col>
+      <div>
+        <NavbarSimple teamName={this.state.teamName} userName={this.state.username} />
+        <div className="full-page-container">
+          <Col className="centify">
+            <EventData userId={userid} project={this.state.project} hours={this.state.hourstoline} />
+          </Col>
+          <Col>
+            {
+              (userid === superid) ?
+                <SuperData
+                  voteData={this.state.votesituation}
+                  myId={userid}
+                />
+                :
+                <VoteAction
+                  vote={this.vote}
+                  all={this.all}
+                  voted={this.voted}
+                />
+            }
+          </Col>
+        </div>
       </div>
     );
-    if (userid === superid) {
-      return (
-        <div>
-          <EventData project={this.state.project} days={this.state.hourstoline} />
-          <button className="btn btn-danger col-md-6">
-            Delete this Event
-          </button>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <div className="col-md-6">
-            <EventData project={this.state.project} days={this.state.hourstoline} />
-            <button className="btn btn-danger col-md-6">
-              I do NOT feel like joining this event
-            </button>
-          </div>
-          <div className="col-md-6">
-            <VoteAction
-              project={this.state.project}
-              vote={this.vote}
-              voteData={this.state.votesituation}
-              myId={userid}
-            />
-          </div>
-        </div>
-      );
-    }
   }
 }

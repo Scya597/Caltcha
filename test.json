@@ -78,10 +78,7 @@
       "minDuration": 5,
       "description": "天線寶寶（Teletubbies），官方名稱為癡線低低B，基本上是資本主義之下唯利是圖的商業廠商創造出來的一種能夠吸引智商不足的小孩子(又稱智障兒童)，並讓那些小孩子的父母親掏出錢來貢獻給那些商業廠商的一種妖怪。據稱此片其實是早年有人研發出來破壞世界用的東西，後來被包裝成兒童節目以更順利地達成目的！",
       "location": "Palo Auto",
-      "finaldate": {
-        "date": 0,
-        "timeblocks": []
-      },
+      "finaldate": {},
       "deadline": 20170920,
       "ended": false,
       "superuser": "7724465649",
