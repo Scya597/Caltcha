@@ -23,9 +23,10 @@ class navbar extends Component {
           const selectedteam = res.data;
           axios.get('/api/profile')
             .then((resp) => {
-              if (selectedteam.id.length === 0) {
+              if (selectedteam.id === '') {
                 const team = resp.data.teams[0];
                 const teamMemberCnt = team.members.length;
+                //console.log('asd');
                 this.popover = (
                   <Popover id="popover-trigger-click-root-close" title={`${teamMemberCnt} members`}>
                     {team.members.map(this.renderemail)}

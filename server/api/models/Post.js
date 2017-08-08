@@ -1,20 +1,15 @@
 import mongoose, { Schema } from 'mongoose';
 
-const TeamMemberSchema = new Schema({
-  username: String,
-  id: String,
-});
 const TeamSchema = new Schema({
   id: String,
   name: String,
-  members: [Object], //TeamMemberSchema
+  members: [{
+    username: String,
+    id: String,
+  }],
   projects: [String],
 });
 
-const UserSelectedSchema = new Schema({
-  id: String,
-  name: String,
-});
 const UserSchema = new Schema({
   id: String,
   username: String,
@@ -22,52 +17,48 @@ const UserSchema = new Schema({
   realname: String,
   email: String,
   team: [String],
-  selectedteam: [Object], //UserSelectedSchema
+  selectedteam: {
+    id: String,
+    name: String,
+  },
 });
-const ProjectVoteDateSchema = new Schema({
-  date: Number,
-  timeblocks: [String],
-});
-const ProjectVoteSchema = new Schema({
-  userid: String,
-  dates: [Object], //ProjectVoteDateSchema
-});
+
 const ProjectSchema = new Schema({
   team: String,
   id: String,
   title: String,
-  minDuration: Number,
+  minDuration: String,
   description: String,
   location: String,
   finaldate: {
-    date: Number,
+    date: String,
     timeblocks: [Number],
   },
-  deadline: Number,
+  deadline: String,
   ended: Boolean,
   superuser: String,
   normaluser: [String],
   optionaluser: [String],
   closeduser: [String],
-  votes: [Object], //ProjectSchema
+  votes: [{
+    userid: String,
+    dates: [{
+      date: String,
+      timeblocks: [Number],
+    }],
+  }],
 });
 
-const CaltchaSchema = new Schema({
-  teams: [Object], //TeamSchema
-  users: [Object], //UserSchema
-  projects: [Object], //ProjectSchema
-});
-
-const TeamMember = mongoose.model('teammember', TeamMemberSchema);
+//const TeamMember = mongoose.model('teammember', TeamMemberSchema);
 const Team = mongoose.model('team', TeamSchema);
 
-const UserSelected = mongoose.model('userselected', UserSelectedSchema);
+//const UserSelected = mongoose.model('userselected', UserSelectedSchema);
 const User = mongoose.model('user', UserSchema);
 
-const ProjectVoteDate = mongoose.model('projectvotedate', ProjectVoteDateSchema);
-const ProjectVote = mongoose.model('projectvote', ProjectVoteSchema);
+//const ProjectVoteDate = mongoose.model('projectvotedate', ProjectVoteDateSchema);
+//const ProjectVote = mongoose.model('projectvote', ProjectVoteSchema);
 const Project = mongoose.model('project', ProjectSchema);
 
-const Caltcha = mongoose.model('caltcha', CaltchaSchema);
+//const Caltcha = mongoose.model('caltcha', CaltchaSchema);
 
-module.exports = { TeamMember, Team, UserSelected, User, ProjectVoteDate, ProjectVote, Project, Caltcha };
+module.exports = { Team, User, Project };

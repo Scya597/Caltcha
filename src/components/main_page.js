@@ -18,7 +18,7 @@ class MainPage extends Component {
       projects: [],
       superselectedpjs: [],
       otherselectedpjs: [],
-      selectedTeam: {},
+      selectedTeam: { id: '', name: '' },
     };
     this.fetchuser = this.fetchuser.bind(this);
     this.fetchprojects = this.fetchprojects.bind(this);
@@ -60,9 +60,8 @@ class MainPage extends Component {
     axios.get('/api/team/select')
       .then((res) => {
         const selectedteam = res.data;
-        console.log('(main_page.js)[GET /api/team/select]');
-        console.log(selectedteam);
-        if (selectedteam.id.length === 0) {
+        if (selectedteam.id === '') {
+          console.log('asd')
           axios.get('/api/profile')
             .then((resp) => {
               const team = resp.data.teams[0];
@@ -72,6 +71,7 @@ class MainPage extends Component {
               console.log(erro);
             });
         } else {
+          console.log('sdf');
           this.setSelectedTeam(selectedteam);
         }
       })
