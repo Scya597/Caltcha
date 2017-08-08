@@ -4,6 +4,7 @@ import { Col } from 'react-bootstrap';
 
 import EventData from './eventData';
 import VoteAction from './voteAction';
+import SuperData from './superData';
 import '../scss/title.scss';
 
 const deadline = require('../utils/functions/deadline');
@@ -22,6 +23,10 @@ export default class Vote extends Component {
         closeduser: [],
       },
     };
+    const { normaluser, optionaluser } = this.state.votesituation;
+    this.all = normaluser.vote.length + normaluser.nvote.length
+      + optionaluser.vote.length + optionaluser.nvote.length + 1;
+    this.voted = normaluser.vote.length + optionaluser.vote.length + 1;
 
     this.fetchpj = this.fetchpj.bind(this);
     this.vote = this.vote.bind(this);
@@ -110,11 +115,18 @@ export default class Vote extends Component {
         <Col className="centify">
           <EventData userId={userid} project={this.state.project} hours={this.state.hourstoline} />
         </Col>
-        <Col md={6}>
+        <Col>
           {
             (userid === superid) ?
-              <h3>No Component Here.</h3> :
-              <VoteAction project={this.state.project} vote={this.vote} voteData={this.state.votesituation} myId={userid} />
+              <SuperData
+                voteData={this.state.votesituation}
+                myId={userid}
+              />
+              :
+              <VoteAction
+                all={this.all}
+                voted={this.voted}
+              />
           }
         </Col>
       </div>

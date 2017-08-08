@@ -61,7 +61,7 @@ export default class EventData extends Component {
         <Col md={12}>
           <h4 className="h4-left">Duration: {this.props.project.minDuration * 0.5} hours</h4>
         </Col>
-        <Col md={12}>
+        <Col md={12} className="list-border">
           <p>{this.props.project.description}</p>
         </Col>
         <Col md={12}>
