@@ -28,19 +28,6 @@ class voteList extends Component {
           <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`}>
             <Panel bsStyle="danger" header={proj.title} className="btn-shadow vote-title">
               <div>
-                <div className="danger">
-                  <h7>
-                    {
-                      (deadline(proj.deadline) >= 24) ?
-                        <h7>{`剩下 ${Math.round(deadline(proj.deadline) / 24)} 天`}</h7>
-                      :
-                        (deadline(proj.deadline) > 0) ?
-                          <h7>{`剩下 ${deadline(proj.deadline)} 小時`}</h7>
-                        :
-                          <h7>Voting Ended</h7>
-                    }
-                  </h7>
-                </div>
                 <div className="vote-list">
                   <h7 className="vote-left">預計時長：
                     {
@@ -53,16 +40,25 @@ class voteList extends Component {
                   <br />
                   <h7>地點：{proj.location}</h7>
                   <h5 className="vote-owner">發起人：{this.props.teams.find(team => team.id === proj.team).members.find(member => member.id === proj.superuser).username}</h5>
-                  <br />
-                </div>
-                <div className="centify">
                   <h7>日期選擇期限：</h7>
-                  <br />
+                </div>
+                <h7 className="vote-owner">
+                  {
+                    `${(proj.deadline).toString().substring(0, 4)}年`
+                      + `${(proj.deadline).toString().substring(4, 6)}月`
+                      + `${(proj.deadline).toString().substring(6, 8)}日`
+                  }
+                </h7>
+                <div className="vote-count">
                   <h7>
                     {
-                      `${(proj.deadline).toString().substring(0, 4)}年`
-                        + `${(proj.deadline).toString().substring(4, 6)}月`
-                        + `${(proj.deadline).toString().substring(6, 8)}日`
+                      (deadline(proj.deadline) >= 24) ?
+                        <h7>{`決定時間剩下 ${Math.round(deadline(proj.deadline) / 24)} 天`}</h7>
+                      :
+                        (deadline(proj.deadline) > 0) ?
+                          <h7>{`決定時間剩下 ${deadline(proj.deadline)} 小時`}</h7>
+                        :
+                          <h7>Voting Ended</h7>
                     }
                   </h7>
                 </div>
