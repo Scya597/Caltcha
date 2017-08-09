@@ -1,7 +1,15 @@
 .timeblock-empty {
-  transition: 0.2s;
+  transition: 0.1s;
   padding-top: 7px;
   padding-right: 2.2px;
   padding-bottom: 7px;
   padding-left: 2.2px;
+}
+
+.timeblock-expand {
+  transition: 0.1s;
+  padding-top: 7px;
+  padding-right: 5.5px;
+  padding-bottom: 7px;
+  padding-left: 5.5px;
 }
