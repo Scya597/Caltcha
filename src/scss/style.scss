@@ -1,5 +1,5 @@
 body {
-  background-color: #42A5F5;
+  background-color: white;
 }
 
 .label-white {
@@ -8,6 +8,7 @@ body {
 
 .manage-background {
   background-color: #01579B;
+  border-radius: 7px;
 }
 
 .vote-title {
@@ -20,13 +21,13 @@ body {
   border: red 2px solid;
   border-radius: 5px;
   margin-top: 7%;
-  margin-left: 7%;
-  margin-right: 7%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .vote-count-ended {
-  color: #eee;
-  border: white 2px solid;
+  margin-top: 7.5%;
+  color: #616161;
   font-family: 'Roboto', sans-serif;
   font-size: 120%;
   font-weight: bolder;
@@ -65,12 +66,16 @@ a {
   margin-right: 25%;
 }
 
+.input {
+  transition: 0.3s;
+}
+
 .input:hover {
   width: 150%;
 }
 
 .team {
-  margin-left: 37%;
+  margin-left: 35%;
 }
 
 .danger-label {
@@ -82,16 +87,16 @@ a {
   color: red;
   border: red 2px solid;
   border-radius: 5px;
-  margin-left: 33%;
-  margin-right: 33%
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
 .danger-end {
-  color: #eee;
-  border: white 2px solid;
-  font-family: 'Roboto', sans-serif;
-  font-size: 120%;
-  font-weight: bolder;
+  color: #616161;
+  border: #616161 2px solid;
+  margin-left: 30%;
+  margin-right: 30%;
+  border-radius: 5px;
 }
 
 .centify {
@@ -149,8 +154,8 @@ a {
 }
 
 .list-border {
-  border: solid 2px #eee;
-  border-radius: 3px;
+  border: solid 2px #D32F2F;
+  border-radius: 7px;
 }
 
 .letter-width {
@@ -242,4 +247,10 @@ textarea {
   font-size: 18px;
   border: 2px #eee solid;
   border-radius: 5px;
+}
+
+.manage-panel {
+  border-radius: 9px;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }

@@ -55,23 +55,27 @@ class voteList extends Component {
                       + `${(proj.deadline).toString().substring(6, 8)}日`
                   }
                 </h7>
-                <div className="vote-count">
-                  <h7>
-                    {
-                      (deadline(proj.deadline) >= 24) ?
+                <div>
+                  {
+                    (deadline(proj.deadline) >= 24) ?
+                      <div className="vote-count">
                         <h7>{`決定時間剩下 ${Math.round(deadline(proj.deadline) / 24)} 天`}</h7>
-                      :
-                        (deadline(proj.deadline) > 0) ?
+                      </div>
+                    :
+                      (deadline(proj.deadline) > 0) ?
+                        <div className="vote-count">
                           <h7>{`決定時間剩下 ${deadline(proj.deadline)} 小時`}</h7>
-                        :
-                          <h7 className="vote-count-ended">
+                        </div>
+                      :
+                        <div className="vote-count-ended">
+                          <h7>
                             {
                               `已於${(proj.deadline).toString().substring(4, 6)}月`
                                 + `${(proj.deadline).toString().substring(6, 8)}日結束`
                             }
                           </h7>
-                    }
-                  </h7>
+                        </div>
+                  }
                 </div>
               </div>
             </Panel>
@@ -91,11 +95,11 @@ class voteList extends Component {
 
     return (
       <div>
-        <h3 className="label-white">我要選擇日期的活動</h3>
-        <div className="row list-border">
+        <h3>我要選擇日期的活動</h3>
+        <div className="row list-border vote-background">
           {unvotedProjJSX}
         </div>
-        <h3 className="label-white">日期已選擇的活動</h3>
+        <h3>日期已選擇的活動</h3>
         <ListGroup>
           {votedProjJSX}
         </ListGroup>

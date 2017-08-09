@@ -50,7 +50,7 @@ class manageList extends Component {
     const superProjJSX = this.props.superProj.map((proj) => {
       return (
         <Link to={`/vote/${proj.id}/${this.props.user.id}/${proj.superuser}`} key={proj.id}>
-          <Panel bsStyle="primary" className="btn-shadow">
+          <Panel bsStyle="primary" className="btn-shadow manage-panel">
             <h1 className="pj-title">{proj.title}</h1>
             <div className="manage-list">
               <h4>預計時長：
@@ -73,23 +73,27 @@ class manageList extends Component {
                 }
               </h5>
             </div>
-            <div className="danger">
-              <h5>
-                {
-                  (deadline(proj.deadline) >= 24) ?
+            <div>
+              {
+                (deadline(proj.deadline) >= 24) ?
+                  <div className="danger">
                     <h5>{`剩下 ${Math.round(deadline(proj.deadline) / 24)} 天`}</h5>
-                  :
-                    (deadline(proj.deadline) > 0) ?
+                  </div>
+                :
+                  (deadline(proj.deadline) > 0) ?
+                    <div className="danger">
                       <h5>{`剩下 ${deadline(proj.deadline)} 小時`}</h5>
-                    :
-                      <h5 className="danger-end">
+                    </div>
+                  :
+                    <div className="danger-end">
+                      <h5>
                         {
                           `已於${(proj.deadline).toString().substring(4, 6)}月`
                             + `${(proj.deadline).toString().substring(6, 8)}日結束`
                         }
                       </h5>
-                }
-              </h5>
+                    </div>
+              }
             </div>
           </Panel>
         </Link>
@@ -99,7 +103,7 @@ class manageList extends Component {
       <div>
         <h3 className="label-white">我管理的活動</h3>
         <Link to="/new"><Button bsStyle="success" bsSize="large" className="btn-shadow" block>新增活動</Button></Link>
-        <div className="manage-list-container manage-background">
+        <div className="manage-list-container">
           {superProjJSX}
         </div>
       </div>

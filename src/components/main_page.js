@@ -113,7 +113,7 @@ class MainPage extends Component {
           selectedTeam={this.state.selectedTeam}
           setSelectedTeam={this.setSelectedTeam}
         />
-        <Col md={4}>
+        <Col md={4} className="manage-background">
           <ManageList
             superProj={this.state.superselectedpjs}
             user={this.state.user}
