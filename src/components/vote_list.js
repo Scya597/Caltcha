@@ -58,7 +58,12 @@ class voteList extends Component {
                         (deadline(proj.deadline) > 0) ?
                           <h7>{`決定時間剩下 ${deadline(proj.deadline)} 小時`}</h7>
                         :
-                          <h7>Voting Ended</h7>
+                          <h7 className="vote-count-ended">
+                            {
+                              `已於${(proj.deadline).toString().substring(4, 6)}月`
+                                + `${(proj.deadline).toString().substring(6, 8)}日結束`
+                            }
+                          </h7>
                     }
                   </h7>
                 </div>
@@ -80,11 +85,11 @@ class voteList extends Component {
 
     return (
       <div>
-        <h3>我要選擇日期的活動</h3>
+        <h3 className="label-white">我要選擇日期的活動</h3>
         <div className="row list-border">
           {unvotedProjJSX}
         </div>
-        <h3>日期已選擇的活動</h3>
+        <h3 className="label-white">日期已選擇的活動</h3>
         <ListGroup>
           {votedProjJSX}
         </ListGroup>

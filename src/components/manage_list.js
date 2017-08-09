@@ -82,7 +82,12 @@ class manageList extends Component {
                     (deadline(proj.deadline) > 0) ?
                       <h5>{`剩下 ${deadline(proj.deadline)} 小時`}</h5>
                     :
-                      <h3>Voting Ended</h3>
+                      <h5 className="danger-end">
+                        {
+                          `已於${(proj.deadline).toString().substring(4, 6)}月`
+                            + `${(proj.deadline).toString().substring(6, 8)}日結束`
+                        }
+                      </h5>
                 }
               </h5>
             </div>
@@ -92,9 +97,9 @@ class manageList extends Component {
     });
     return (
       <div>
-        <h3>我管理的活動</h3>
+        <h3 className="label-white">我管理的活動</h3>
         <Link to="/new"><Button bsStyle="success" bsSize="large" className="btn-shadow" block>新增活動</Button></Link>
-        <div className="manage-list-container list-border">
+        <div className="manage-list-container manage-background">
           {superProjJSX}
         </div>
       </div>

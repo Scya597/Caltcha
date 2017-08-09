@@ -1,3 +1,15 @@
+body {
+  background-color: #42A5F5;
+}
+
+.label-white {
+  color: white;
+}
+
+.manage-background {
+  background-color: #01579B;
+}
+
 .vote-title {
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
@@ -10,6 +22,14 @@
   margin-top: 7%;
   margin-left: 7%;
   margin-right: 7%;
+}
+
+.vote-count-ended {
+  color: #eee;
+  border: white 2px solid;
+  font-family: 'Roboto', sans-serif;
+  font-size: 120%;
+  font-weight: bolder;
 }
 
 .vote-owner {
@@ -64,6 +84,14 @@ a {
   border-radius: 5px;
   margin-left: 33%;
   margin-right: 33%
+}
+
+.danger-end {
+  color: #eee;
+  border: white 2px solid;
+  font-family: 'Roboto', sans-serif;
+  font-size: 120%;
+  font-weight: bolder;
 }
 
 .centify {
