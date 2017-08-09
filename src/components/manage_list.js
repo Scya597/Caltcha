@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Panel, ProgressBar, Label } from 'react-bootstrap';
+import { Button, Panel, ProgressBar } from 'react-bootstrap';
 
 const deadline = require('../utils/functions/deadline');
 const ifvote = require('../utils/functions/ifvote');
@@ -15,20 +15,32 @@ class manageList extends Component {
   rendervote = (proj) => {
     if (proj.normaluser.length === 0) {
       return (
-        <ProgressBar
-          now={Math.round((ifvote(proj).optionaluser.vote.length/proj.optionaluser.length) * 100)}
-          label={`${Math.round((ifvote(proj).optionaluser.vote.length/proj.optionaluser.length) * 100)}%`}
-          bsStyle="success"
-        />
+        <div>
+          <div className="row centify">
+            投票比例(成員非必須參加)
+          </div>
+          <div className="row">
+            <ProgressBar
+              now={Math.round((ifvote(proj).optionaluser.vote.length / proj.optionaluser.length) * 100)}
+              label={`${Math.round((ifvote(proj).optionaluser.vote.length / proj.optionaluser.length) * 100)}%`}
+              bsStyle="success"
+            />
+          </div>
+        </div>
       );
     } else {
       return (
-        <div className="row">
-          <ProgressBar
-            now={Math.round((ifvote(proj).normaluser.vote.length/proj.normaluser.length) * 100)}
-            label={`${Math.round((ifvote(proj).normaluser.vote.length/proj.normaluser.length) * 100)}%`}
-            bsStyle="danger"
-          />
+        <div>
+          <div className="row centify">
+            投票比例(必要參與成員)
+          </div>
+          <div className="row">
+            <ProgressBar
+              now={Math.round((ifvote(proj).normaluser.vote.length / proj.normaluser.length) * 100)}
+              label={`${Math.round((ifvote(proj).normaluser.vote.length / proj.normaluser.length) * 100)}%`}
+              bsStyle="danger"
+            />
+          </div>
         </div>
       );
     }
@@ -52,17 +64,23 @@ class manageList extends Component {
               <h4>地點： {proj.location}</h4>
               {this.rendervote(proj)}
             </div>
-            <div className="danger">
-              <h5>票選結束日期： {proj.deadline}</h5>
+            <div>
+              <h5>
+                {
+                  `日期選擇期限：${(proj.deadline).toString().substring(0, 4)}年`
+                    + `${(proj.deadline).toString().substring(4, 6)}月`
+                    + `${(proj.deadline).toString().substring(6, 8)}日`
+                }
+              </h5>
             </div>
             <div className="danger">
               <h5>
                 {
                   (deadline(proj.deadline) >= 24) ?
-                    <h5>{`${Math.round(deadline(proj.deadline) / 24)} days left`}</h5>
+                    <h5>{`剩下 ${Math.round(deadline(proj.deadline) / 24)} 天`}</h5>
                   :
                     (deadline(proj.deadline) > 0) ?
-                      <h5>{`${deadline(proj.deadline)} hours left`}</h5>
+                      <h5>{`剩下 ${deadline(proj.deadline)} 小時`}</h5>
                     :
                       <h3>Voting Ended</h3>
                 }
@@ -75,7 +93,7 @@ class manageList extends Component {
     return (
       <div>
         <h3>我管理的活動</h3>
-        <Link to="/new"><Button bsStyle="primary" bsSize="large" className="btn-shadow" block>新增活動</Button></Link>
+        <Link to="/new"><Button bsStyle="success" bsSize="large" className="btn-shadow" block>新增活動</Button></Link>
         <div className="manage-list-container list-border">
           {superProjJSX}
         </div>
