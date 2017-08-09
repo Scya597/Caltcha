@@ -1,3 +1,26 @@
+.vote-title {
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
+
+.vote-owner {
+  color: blue;
+}
+
+.vote-list {
+  text-align: left;
+  color: black;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  padding-left: 10%
+}
+
+.vote-left {
+  text-align: center;
+  padding-left: 0%;
+  width: 50%;
+}
+
 a {
   text-decoration: none !important;
 }
@@ -21,12 +44,21 @@ a {
   margin-left: 37%;
 }
 
+.danger-label {
+  color: red;
+  font-family: 'Roboto', sans-serif;
+}
+
 .danger {
   color: red;
   border: red 2px solid;
   border-radius: 5px;
-  margin-left: 25%;
-  margin-right: 25%
+  margin-left: 33%;
+  margin-right: 33%
+}
+
+.time {
+
 }
 
 .centify {
@@ -37,6 +69,8 @@ a {
   text-align: left;
   width: 70%;
   margin-left: 15%;
+  color: black;
+  font-family: 'Roboto', sans-serif;
 }
 
 .size {
