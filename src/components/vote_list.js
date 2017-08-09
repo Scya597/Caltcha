@@ -5,10 +5,16 @@ import { ListGroupItem, ListGroup, Panel } from 'react-bootstrap';
 const deadline = require('../utils/functions/deadline');
 
 function finaldateFormat(finaldate) {
-  if (typeof finaldate.date === 'undefined') {
+  if (typeof finaldate === 'undefined' || typeof finaldate.date === 'undefined') {
     return 'Final Date not announced.';
   } else {
-    const formattedTime = (`00${finaldate.timeblocks[0] * 30}`).slice(-4);
+    const hrs = finaldate.timeblocks[0] * 0.5;
+    let formattedTime = '';
+    if (Math.round(hrs) > hrs) {
+      formattedTime = `${Math.round(hrs) - 1}:30`;
+    } else {
+      formattedTime = `${Math.round(hrs)}:00`;
+    }
     return `${finaldate.date} ${formattedTime}`;
   }
 }

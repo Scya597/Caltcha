@@ -6,10 +6,16 @@ import { Col, Button, Glyphicon, Label } from 'react-bootstrap';
 
 function finaldateFormat(finaldate) {
   if (typeof finaldate === 'undefined' || typeof finaldate.date === 'undefined') {
-    return 'Not Chosen';
+    return 'Final Date not announced.';
   } else {
-    const formattedTime = (`00${finaldate.timeblocks[0] * 30}`).slice(-4);
-    return `${finaldate.date} ${formattedTime}`;
+    const hrs = finaldate.timeblocks[0] * 0.5;
+    let formattedTime = '';
+    if (Math.round(hrs) > hrs) {
+      formattedTime = `${Math.round(hrs) - 1}:30`;
+    } else {
+      formattedTime = `${Math.round(hrs)}:00`;
+    }
+    return `Event Starts From: ${finaldate.date} ${formattedTime}`;
   }
 }
 
@@ -56,7 +62,7 @@ export default class EventData extends Component {
           {
             (this.props.hours > 0) ?
             <h3><Label bsStyle="warning">{`Voting Deadline: ${this.props.project.deadline}`}</Label></h3> :
-            <h3><Label bsStyle="warning">{`Event Starts From: ${finaldateFormat(this.props.project.finaldate)}`}</Label></h3>
+            <h3><Label bsStyle="warning">{`${finaldateFormat(this.props.project.finaldate)}`}</Label></h3>
           }
         </Col>
         <Col md={3}>

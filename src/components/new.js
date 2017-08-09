@@ -60,11 +60,14 @@ class New extends Component {
       selectedTeam: {},
       showDayPicker: false,
       dayPickerRaw: [],
+      dayPickerProcessed: [],
+      selectedBlocks: [],
       warn: 0,
     };
     this.saveNewProject = this.saveNewProject.bind(this);
     this.syncData = this.syncData.bind(this);
     this.fetchuser = this.fetchuser.bind(this);
+    this.handleBlockClick = this.handleBlockClick.bind(this);
   }
 
   componentDidMount() {
@@ -109,37 +112,24 @@ class New extends Component {
   }
 // Save data to server
   saveNewProject(event) {
-    // axios.get('/api/profile')
-    //   .then((res) => {
-    //     const teamid = this.state.newProject.team;
-    //     const teams = res.data.teams;
-    //     let teamname;
-    //     for (let i = 0; i < teams.length; i += 1) {
-    //       if (teams[i].id === teamid) {
-    //         teamname = teams[i].name;
-    //       }
-    //     }
-    //     axios.post('/api/team/select', { id: teamid, name: teamname })
-    //       .then((resp) => {
-    //         console.log(resp);
-    //       })
-    //       .catch((erro) => {
-    //         console.log(erro);
-    //       });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
     if (
       this.state.newProject.title !== undefined && this.state.newProject.location !== undefined &&
       this.state.newProject.description !== undefined && this.state.newProject.deadline !== 'Invalid date' &&
       this.state.newProject.minDuration !== undefined
     ) {
       const newProjectTmp = this.state.newProject;
+      const formattedDates = [];
+      this.state.dayPickerProcessed.forEach(dayObj => formattedDates.push(Object.defineProperty(dayObj, 'date', {
+        value: moment(dayObj.date).format('YYYYMMDD'),
+        writable: true,
+        configurable: true,
+        enumerable: true,
+      })));
       const suVote = {
         userid: newProjectTmp.superuser,
-        dates: this.state.dayPickerRaw.map(),
+        dates: formattedDates,
       };
+      console.log(suVote);
       newProjectTmp.votes.push(suVote);
       axios.post('/api/project/new', newProjectTmp)
       .then((res) => {
@@ -260,19 +250,42 @@ class New extends Component {
 
   handleDayClick = (day, { selected }) => {
     const { dayPickerRaw } = this.state;
+    const { dayPickerProcessed } = this.state;
     if (selected) {
       const selectedIndex = dayPickerRaw.findIndex(selectedDay =>
         DateUtils.isSameDay(selectedDay, day)
       );
       dayPickerRaw.splice(selectedIndex, 1);
+      dayPickerProcessed.splice(selectedIndex, 1);
     } else {
       dayPickerRaw.push(day);
+      dayPickerProcessed.push({ date: day, timeblocks: [] });
     }
-    this.setState({ dayPickerRaw });
+    this.setState({ dayPickerRaw, dayPickerProcessed });
   };
+
+  handleBlockClick(day, selectedBlocks) {
+    console.log(selectedBlocks);
+    const { dayPickerProcessed } = this.state;
+    const selectedIndex = dayPickerProcessed.findIndex(dayObj => dayObj.date === day);
+    dayPickerProcessed[selectedIndex].timeblocks = selectedBlocks;
+    this.setState({ dayPickerProcessed });
+  }
 
   renderSelectedDays() {
     return this.state.dayPickerRaw.map(rawDay => <Badge key={rawDay}>{moment(rawDay).format('M/DD')}</Badge>);
+  }
+
+  renderTimeblocksPickers() {
+    return this.state.dayPickerProcessed.map(dayObj => (
+      <div key={dayObj.date}>
+        <h5>{moment(dayObj.date).format('M/DD')}</h5>
+        <TimeblocksPicker
+          selectedBlocks={dayObj.timeblocks}
+          onBlockClick={newBlocksArr => this.handleBlockClick(dayObj.date, newBlocksArr)}
+        />
+      </div>
+    ));
   }
 // Form Validation
   renderwarn = (b) => {
@@ -309,7 +322,13 @@ class New extends Component {
               </Col>
               <Col md={12}>
                 <h4>Date Picker:</h4>
-                <Col md={12}>{this.state.showDayPicker ? this.renderSelectedDays() : <TimeblocksPicker selectedBlocks={[1, 5, 34]} /> }</Col>
+                <Col md={12}>
+                  {
+                    this.state.showDayPicker ?
+                    this.renderSelectedDays() :
+                    this.renderTimeblocksPickers()
+                  }
+                </Col>
                 <Button onClick={() => this.toggleDayPicker()}><Glyphicon glyph={this.state.showDayPicker ? 'ok-sign' : 'plus-sign'} /></Button>
                 {this.state.showDayPicker ? <DayPicker selectedDays={this.state.dayPickerRaw} onDayClick={this.handleDayClick} /> : <div />}
               </Col>
